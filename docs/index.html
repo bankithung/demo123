@@ -303,39 +303,46 @@
   .endfoot{margin-top:auto;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;align-items:center;color:var(--muted);font-size:12px;border-top:1px solid var(--line);padding-top:14px}
   .endfoot .cta{gap:8px}
 
-  /* ============ ITINERARY OVERVIEW (3 day cards) ============ */
+  /* ============ ITINERARY OVERVIEW (single merged board) ============ */
   #s-over{background:var(--cream)}
-  #s-over .ov-head{display:flex;align-items:flex-end;justify-content:space-between;gap:18px;flex-wrap:wrap;margin-bottom:clamp(14px,2.4vh,26px)}
+  #s-over .ov-head{display:flex;align-items:flex-end;justify-content:space-between;gap:18px;flex-wrap:wrap;margin-bottom:clamp(12px,2vh,20px)}
   #s-over .ov-head .eyebrow{margin-bottom:6px}
   #s-over .ov-head h2{font-size:clamp(22px,3vw,38px);font-weight:800;letter-spacing:-.02em;color:var(--ink)}
   #s-over .ov-head .sub{color:var(--muted);font:500 13px "Inter";margin-top:6px}
   #s-over .ov-head .sub b{color:var(--ink);font-weight:700}
-  #s-over .ov-cols{flex:1;min-height:0;display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,1.6vw,24px)}
 
-  .ovcol{min-height:0;display:flex;flex-direction:column;border:1px solid var(--line);border-radius:12px;background:var(--paper);overflow:hidden;position:relative}
-  .ovcol::before{content:"";position:absolute;inset:0 0 auto;height:4px;background:var(--c);z-index:2}
-  .ovcol .cap{padding:16px 18px 13px;background:var(--cl)}
-  .ovcol .cap .top{display:flex;align-items:center;gap:12px}
-  .ovcol .cap .dn{flex:none;width:42px;height:42px;border-radius:11px;background:var(--c);color:#fff;display:grid;place-items:center;font:800 19px "Sora"}
-  .ovcol .cap .kd{font:700 10px "Inter";letter-spacing:.18em;text-transform:uppercase;color:var(--c)}
-  .ovcol .cap b{display:block;font:800 16.5px "Sora";color:var(--ink);margin-top:2px;line-height:1.1}
-  .ovcol .cap .meta{display:flex;gap:6px;margin-top:13px;flex-wrap:wrap}
-  .ovcol .cap .mchip{font:600 10.5px "Inter";color:var(--muted);background:var(--paper);border:1px solid var(--line);border-radius:20px;padding:3px 10px}
-  .ovcol .tl{flex:1;min-height:0;overflow:hidden;padding:12px 18px 16px;display:flex;flex-direction:column}
-  .tl .ev{position:relative;display:flex;gap:13px;padding:9px 0}
-  .tl .ev::before{content:"";position:absolute;left:18px;top:0;bottom:0;width:2px;background:var(--line)}
-  .tl .ev:first-child::before{top:19px}
-  .tl .ev:last-child::before{bottom:calc(100% - 19px)}
-  .tl .ev .mk{position:relative;z-index:1;flex:0 0 38px;width:38px;height:38px;border-radius:50%;background:var(--paper);border:2px solid var(--c);color:var(--c);display:grid;place-items:center}
-  .tl .ev .mk svg{width:17px;height:17px}
+  /* one board holding all three days, divided (not gapped) */
+  #s-over .ov-board{
+    flex:1;min-height:0;display:grid;grid-template-columns:repeat(3,1fr);
+    border:1px solid var(--line);border-radius:16px;background:var(--paper);overflow:hidden}
+  .ovcol{min-height:0;display:flex;flex-direction:column;position:relative;border-left:1px solid var(--line)}
+  .ovcol:first-child{border-left:none}
+  .ovcol::before{content:"";position:absolute;inset:0 0 auto;height:4px;background:var(--c);z-index:3} /* continuous top ribbon */
+
+  .ovcol .cap{padding:15px 18px 14px;background:var(--cl);border-bottom:1px solid var(--line)}
+  .ovcol .cap .top{display:flex;align-items:center;gap:11px}
+  .ovcol .cap .dn{flex:none;width:40px;height:40px;border-radius:11px;background:var(--c);color:#fff;display:grid;place-items:center;font:800 18px "Sora"}
+  .ovcol .cap .kd{font:700 9.5px "Inter";letter-spacing:.2em;text-transform:uppercase;color:var(--c)}
+  .ovcol .cap b{display:block;font:800 16px "Sora";color:var(--ink);margin-top:1px;line-height:1.1}
+  .ovcol .cap .meta{margin-left:auto;display:flex;flex-direction:column;gap:4px;align-items:flex-end}
+  .ovcol .cap .mchip{font:700 10px "Inter";color:var(--c);background:var(--paper);border:1px solid var(--line);border-radius:20px;padding:2px 9px;white-space:nowrap}
+
+  .ovcol .tl{flex:1;min-height:0;overflow:hidden;padding:10px 18px 14px;display:flex;flex-direction:column}
+  .tl .ev{position:relative;display:flex;gap:13px;padding:8px 0}
+  .tl .ev::before{content:"";position:absolute;left:17px;top:0;bottom:0;width:2px;background:linear-gradient(var(--line),var(--line));z-index:0}
+  .tl .ev:first-child::before{top:18px}
+  .tl .ev:last-child::before{bottom:calc(100% - 18px)}
+  .tl .ev .mk{position:relative;z-index:1;flex:0 0 36px;width:36px;height:36px;border-radius:50%;background:var(--paper);border:2px solid var(--c);color:var(--c);display:grid;place-items:center;transition:transform var(--speed)}
+  .tl .ev .mk svg{width:16px;height:16px}
   .tl .ev .mk .no{position:absolute;right:-4px;bottom:-4px;min-width:17px;height:17px;padding:0 3px;border-radius:9px;background:var(--c);color:#fff;font:700 9.5px "Inter";display:grid;place-items:center;border:1.5px solid var(--paper)}
   .tl .ev.air .mk{background:var(--c);color:#fff}
-  .tl .ev .bd{flex:1;min-width:0;padding-top:2px}
+  .tl .ev .bd{flex:1;min-width:0;padding-top:1px}
   .tl .ev .bd .hd{display:flex;align-items:baseline;gap:8px}
   .tl .ev .bd .nm{flex:1;min-width:0;font:700 13px "Inter";color:var(--ink);line-height:1.3}
-  .tl .ev .bd .tm{flex:none;font:600 10px "Inter";color:var(--c);background:var(--cl);border-radius:5px;padding:2px 7px;white-space:nowrap}
-  .tl .ev .bd .nt{font-size:11px;color:var(--muted);margin-top:4px;line-height:1.45;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .tl .ev .bd .tm{flex:none;font:600 9.5px "Inter";color:var(--c);background:var(--cl);border-radius:5px;padding:2px 7px;white-space:nowrap}
+  .tl .ev .bd .nt{font-size:11px;color:var(--muted);margin-top:3px;line-height:1.42;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
   .tl .ev.air .bd .nm{color:var(--c)}
+  .tl .ev:hover .mk{transform:scale(1.08)}
 
   /* toast */
   .toast{
@@ -354,7 +361,10 @@
     .incl{grid-template-columns:repeat(2,1fr)}
     .slide{overflow-y:auto}
     #s-map,.day-slide{overflow:hidden}
-    #s-over .ov-cols{grid-template-columns:repeat(2,1fr);align-content:start}
+    #s-over .ov-board{grid-template-columns:1fr}
+    #s-over .ovcol{border-left:none;border-top:1px solid var(--line)}
+    #s-over .ovcol:first-child{border-top:none}
+    #s-over .ovcol::before{display:none}
     #s-over .tl{overflow:visible}
   }
   @media (max-width:560px){
@@ -364,7 +374,6 @@
     .incl{grid-template-columns:1fr}
     .rows{width:auto;right:var(--pad)}
     .detail{display:none}
-    #s-over .ov-cols{grid-template-columns:1fr}
   }
   @media (prefers-reduced-motion:reduce){
     html,#deck{scroll-behavior:auto}
@@ -390,9 +399,9 @@
     #s-cover{padding:0}
     .cover-bg img{position:absolute}
     #s-cover .cv{position:absolute;bottom:0;left:0;padding:0 16mm 16mm}
-    /* itinerary overview: keep 3 columns, compact for one page */
-    #s-over .ov-cols{gap:5mm}
-    #s-over .ovcol{break-inside:avoid;border-radius:2mm}
+    /* itinerary overview: merged board, compact for one page */
+    #s-over .ov-board{border-radius:2mm}
+    #s-over .ovcol{break-inside:avoid}
     #s-over .cap{padding:3mm 4mm 2.4mm}
     #s-over .cap .dn{width:8mm;height:8mm;border-radius:2mm;font-size:13px}
     #s-over .tl{overflow:hidden;padding:3mm 4mm 3mm}
@@ -505,7 +514,7 @@
       </div>
       <div class="sub" id="ovSub"></div>
     </div>
-    <div class="ov-cols" id="ovCols"></div>
+    <div class="ov-board" id="ovCols"></div>
   </section>
 
   <!-- 3 · FULL-SCREEN MAP -->
