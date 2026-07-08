@@ -1,0 +1,1100 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Nagaland Circuit · Dimapur–Chümoukedima · 3D/2N Itinerary</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"
+  integrity="sha384-c6Rcwz4e4CITMbu/NBmnNS8yN2sC3cUElMEMfP3vqqKFp7GOYaaBBCqmaWBjmkjb" crossorigin="anonymous" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"
+  integrity="sha384-NElt3Op+9NBMCYaef5HxeJmU4Xeard/Lku8ek6hoPTvYkQPh3zLIrJP7KiRocsxO" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" defer
+  integrity="sha384-ZZ1pncU3bQe8y31yfZdMFdSpttDoPmOZg2wguVK9almUodir1PghgT0eY7Mrty8H" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/pptxgenjs@3.12.0/dist/pptxgen.bundle.min.js" defer
+  integrity="sha384-hK7gX9u0oUco/pFqSXo84Uwh/YCSmg482hWVq97/wuhEZuQ7HJy3PirwvCEfDKk5" crossorigin="anonymous"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;450;500;600;700&display=swap" rel="stylesheet" />
+
+<style>
+  /* ============ FLAT DESIGN TOKENS — radius 5, no gradients, no shadows ============ */
+  :root{
+    --ink:#12211d; --teal:#0e6e62; --teal-d:#0a4f47; --teal-l:#e7f2f0;
+    --paper:#ffffff; --cream:#f6f8f7; --muted:#61736e; --line:#e0e7e4;
+    --d1:#0e6e62; --d2:#b45309; --d3:#6d28d9;
+    --d1-l:#e7f2f0; --d2-l:#fdf0e3; --d3-l:#f1eafd;
+    --r:5px; --speed:.18s; --topbar:52px;
+    --pad:clamp(20px,4vw,56px);
+  }
+  html[data-theme="dark"]{
+    --ink:#e8efec; --teal:#3fa08f; --teal-d:#67c2b2; --teal-l:#15302b;
+    --paper:#111715; --cream:#0d1311; --muted:#93a8a1; --line:#26312c;
+    --d1:#3fa08f; --d2:#d98a3d; --d3:#a583ee;
+    --d1-l:#14302b; --d2-l:#33230f; --d3-l:#241a3c;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  html,body{height:100%}
+  body{
+    font:15px/1.55 "Inter",system-ui,sans-serif;color:var(--ink);
+    background:var(--cream);overflow:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,h4{font-family:"Sora",sans-serif;line-height:1.15}
+  a{color:var(--teal);text-decoration:none}
+  button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+  img{display:block}
+  svg.ic{width:16px;height:16px;flex:none}
+  ::selection{background:var(--teal-l)}
+
+  /* ============ TOPBAR ============ */
+  .topbar{
+    position:fixed;inset:0 0 auto 0;z-index:1200;height:var(--topbar);
+    display:flex;align-items:center;gap:10px;padding:0 clamp(14px,2.5vw,32px);
+    background:var(--paper);border-bottom:1px solid var(--line);
+  }
+  .brand{display:flex;align-items:center;gap:9px;font:700 14px "Sora";letter-spacing:.01em}
+  .brand .dot{width:9px;height:9px;border-radius:50%;background:var(--teal);flex:none}
+  .brand small{font:600 10.5px "Inter";color:var(--muted);letter-spacing:.14em;text-transform:uppercase}
+  .topbar .sp{flex:1}
+  .tbtn{
+    display:inline-flex;align-items:center;gap:7px;padding:7px 13px;border-radius:var(--r);
+    border:1px solid var(--line);background:var(--paper);font:600 12.5px "Inter";
+    transition:border-color var(--speed),background var(--speed);white-space:nowrap;
+  }
+  .tbtn:hover{border-color:var(--teal)}
+  .tbtn.solid{background:var(--teal);border-color:var(--teal);color:#fff}
+  .tbtn.solid:hover{background:var(--teal-d);border-color:var(--teal-d)}
+  html[data-theme="dark"] .tbtn.solid{color:#08211c}
+  .tbtn.busy{opacity:.55;pointer-events:none}
+  .tbtn .spin{width:12px;height:12px;border:2px solid currentColor;border-top-color:transparent;border-radius:50%;display:none;animation:rot .7s linear infinite}
+  .tbtn.busy .spin{display:inline-block}
+  @keyframes rot{to{transform:rotate(360deg)}}
+
+  /* ============ DECK (scroll-snap slides) ============ */
+  #deck{height:100dvh;overflow-y:auto;scroll-snap-type:y mandatory;scroll-behavior:smooth}
+  .slide{
+    position:relative;min-height:100dvh;scroll-snap-align:start;scroll-snap-stop:always;
+    padding:calc(var(--topbar) + clamp(14px,2.6vh,30px)) var(--pad) clamp(18px,3.5vh,44px);
+    display:flex;flex-direction:column;
+  }
+  .slide{opacity:.35;transition:opacity .45s ease}
+  .slide.in{opacity:1}
+  .s-num{
+    font:700 11px "Inter";letter-spacing:.22em;color:var(--muted);text-transform:uppercase;
+    display:flex;align-items:center;gap:10px;margin-bottom:clamp(8px,1.6vh,18px);
+  }
+  .s-num::after{content:"";flex:0 0 46px;height:1px;background:var(--line)}
+
+  /* dots + arrows */
+  .dots{position:fixed;right:clamp(10px,1.6vw,22px);top:50%;transform:translateY(-50%);z-index:1100;display:flex;flex-direction:column;gap:10px}
+  .dots button{width:9px;height:9px;border-radius:50%;background:var(--line);padding:0;position:relative;transition:background var(--speed),transform var(--speed)}
+  .dots button.on{background:var(--teal);transform:scale(1.25)}
+  .dots button:hover::after{
+    content:attr(data-t);position:absolute;right:18px;top:50%;transform:translateY(-50%);
+    background:var(--ink);color:var(--paper);font:600 10.5px "Inter";padding:4px 9px;border-radius:var(--r);white-space:nowrap;
+  }
+  .deck-nav{
+    position:fixed;right:clamp(12px,2vw,28px);bottom:clamp(12px,2.4vh,24px);z-index:1100;
+    display:flex;align-items:center;gap:8px;
+  }
+  .deck-nav .cnt{font:700 11.5px "Inter";color:var(--muted);letter-spacing:.12em;margin-right:4px}
+  .deck-nav button{
+    width:34px;height:34px;border-radius:var(--r);border:1px solid var(--line);background:var(--paper);
+    display:grid;place-items:center;font-size:15px;transition:border-color var(--speed);
+  }
+  .deck-nav button:hover{border-color:var(--teal);color:var(--teal)}
+
+  /* ============ SLIDE 1 · COVER ============ */
+  #s-cover .cv{
+    flex:1;display:grid;grid-template-columns:1.08fr .92fr;gap:clamp(22px,4vw,64px);
+    align-items:center;min-height:0;
+  }
+  .eyebrow{font:700 11.5px "Inter";letter-spacing:.24em;color:var(--teal);text-transform:uppercase;margin-bottom:14px}
+  #s-cover h1{font-size:clamp(30px,4.6vw,62px);font-weight:800;letter-spacing:-.02em;margin-bottom:16px}
+  #s-cover h1 em{font-style:normal;color:var(--teal)}
+  #s-cover .lead{color:var(--muted);font-size:clamp(14px,1.15vw,17px);max-width:56ch;margin-bottom:26px}
+  .stats{
+    display:flex;border:1px solid var(--line);border-radius:var(--r);background:var(--paper);
+    width:max-content;max-width:100%;margin-bottom:26px;
+  }
+  .stats>div{padding:12px 20px;border-left:1px solid var(--line)}
+  .stats>div:first-child{border-left:0}
+  .stats b{display:block;font:700 clamp(16px,1.5vw,21px) "Sora"}
+  .stats span{font:600 9.5px "Inter";letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+  .cta{display:flex;gap:10px;flex-wrap:wrap}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;padding:11px 20px;border-radius:var(--r);
+    font:600 13.5px "Inter";border:1px solid var(--line);background:var(--paper);
+    transition:border-color var(--speed),background var(--speed),color var(--speed);
+  }
+  .btn:hover{border-color:var(--teal);color:var(--teal)}
+  .btn.solid{background:var(--teal);border-color:var(--teal);color:#fff}
+  .btn.solid:hover{background:var(--teal-d);border-color:var(--teal-d);color:#fff}
+  html[data-theme="dark"] .btn.solid,html[data-theme="dark"] .btn.solid:hover{color:#08211c}
+  .cover-ph{position:relative;min-height:0;height:min(62vh,560px)}
+  .cover-ph img{width:100%;height:100%;object-fit:cover;border-radius:var(--r);border:1px solid var(--line)}
+  .cover-ph figcaption{
+    position:absolute;left:10px;bottom:10px;background:var(--paper);border:1px solid var(--line);
+    border-radius:var(--r);padding:5px 10px;font:600 10.5px "Inter";color:var(--muted);
+  }
+  .day-pills{display:flex;gap:8px;margin-top:22px;flex-wrap:wrap}
+  .day-pill{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:var(--r);padding:7px 12px;font:600 12px "Inter";background:var(--paper)}
+  .day-pill i{width:8px;height:8px;border-radius:50%;flex:none}
+
+  /* ============ SLIDE 2 · FULL-SCREEN MAP ============ */
+  #s-map{padding:0}
+  #s-map .map-el{position:absolute;inset:0;z-index:1;background:var(--cream)}
+  .ovl{
+    position:absolute;z-index:900;background:var(--paper);border:1px solid var(--line);
+    border-radius:var(--r);
+  }
+  .ovl-head{left:var(--pad);top:calc(var(--topbar) + 14px);padding:14px 16px;max-width:340px}
+  .ovl-head .eyebrow{margin-bottom:4px}
+  .ovl-head h2{font-size:17px;margin-bottom:10px}
+  .seg{display:flex;gap:6px;flex-wrap:wrap}
+  .seg button{
+    padding:6px 12px;border-radius:var(--r);border:1px solid var(--line);font:600 12px "Inter";
+    background:var(--paper);transition:all var(--speed);
+  }
+  .seg button.on{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+  .seg button:hover:not(.on){border-color:var(--teal)}
+  .ovl-head .cnt{margin-top:10px;font:600 11.5px "Inter";color:var(--muted)}
+  .legend{left:var(--pad);bottom:clamp(14px,2.6vh,26px);padding:10px 14px;display:flex;gap:16px;flex-wrap:wrap}
+  .legend span{display:inline-flex;align-items:center;gap:7px;font:600 11px "Inter";color:var(--muted)}
+  .legend i{width:9px;height:9px;border-radius:50%}
+  .legend i.sq{border-radius:2px}
+  .ix{
+    right:clamp(34px,3vw,46px);top:calc(var(--topbar) + 14px);bottom:clamp(58px,9vh,74px);
+    width:min(304px,72vw);display:flex;flex-direction:column;overflow:hidden;
+  }
+  .ix h3{padding:12px 14px 8px;font:700 10.5px "Inter";letter-spacing:.18em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--line)}
+  .ix .list{overflow:auto;padding:6px;flex:1}
+  .ix .dh{font:700 10.5px "Inter";letter-spacing:.12em;text-transform:uppercase;padding:9px 8px 4px;display:flex;justify-content:space-between;align-items:baseline}
+  .ix .dh small{font:600 10px "Inter";color:var(--muted);letter-spacing:0;text-transform:none}
+  .ix-row{
+    display:flex;align-items:center;gap:9px;width:100%;text-align:left;padding:7px 8px;border-radius:var(--r);
+    transition:background var(--speed);border:1px solid transparent;
+  }
+  .ix-row:hover,.ix-row.hl{background:var(--cream);border-color:var(--line)}
+  .ix-row .num{width:22px;height:22px;border-radius:50%;color:#fff;display:grid;place-items:center;font:700 11px "Sora";flex:none}
+  .ix-row .nm{font:600 12.5px "Inter";line-height:1.25}
+  .ix-row .tm{font:500 10.5px "Inter";color:var(--muted)}
+  .ix-row.air .num{border-radius:var(--r);background:var(--ink)}
+  #printMapImg{display:none}
+
+  /* leaflet flat overrides */
+  .leaflet-container{font:inherit}
+  .leaflet-control-zoom{border:1px solid var(--line)!important;border-radius:var(--r)!important;overflow:hidden;box-shadow:none!important;margin-bottom:64px!important}
+  .leaflet-control-zoom a{background:var(--paper)!important;color:var(--ink)!important;border-color:var(--line)!important}
+  .leaflet-popup-content-wrapper{border-radius:var(--r);box-shadow:none;border:1px solid var(--line);background:var(--paper);color:var(--ink)}
+  .leaflet-popup-tip{box-shadow:none;background:var(--paper);border:1px solid var(--line)}
+  .leaflet-popup-content{margin:12px 14px;font:13px/1.5 "Inter"}
+  .leaflet-bar a{box-shadow:none}
+  .pop-n{display:inline-block;color:#fff;font:700 10px "Inter";letter-spacing:.08em;padding:3px 8px;border-radius:var(--r);margin-bottom:6px;text-transform:uppercase}
+  .pop-t{font:700 14px "Sora";margin-bottom:2px}
+  .pop-time{font:600 11.5px "Inter";color:var(--teal);margin-bottom:5px}
+  .pop-note{color:var(--muted);font-size:12px;max-width:230px}
+  .pop-link{display:inline-block;margin-top:7px;font:600 11.5px "Inter"}
+  .pin{
+    width:28px;height:28px;border-radius:50%;display:grid;place-items:center;color:#fff;
+    font:700 12.5px "Sora";border:2px solid #fff;transition:transform var(--speed);
+  }
+  .pin[data-day="1"]{background:var(--d1)} .pin[data-day="2"]{background:var(--d2)} .pin[data-day="3"]{background:var(--d3)}
+  .pin.air{background:var(--ink);border-radius:var(--r);font-size:13px}
+  .pin.hl{transform:scale(1.28)}
+  html[data-theme="dark"] .pin{border-color:#0d1311}
+
+  /* ============ SLIDES 3–5 · DAY DETAIL ============ */
+  .day-head{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:clamp(10px,2vh,20px)}
+  .chip{display:inline-block;background:var(--c);color:#fff;font:700 11.5px "Inter";letter-spacing:.1em;text-transform:uppercase;padding:5px 11px;border-radius:var(--r)}
+  .day-head h2{font-size:clamp(20px,2.4vw,30px)}
+  .day-head .meta{font:600 12.5px "Inter";color:var(--muted)}
+  .day-grid{flex:1;display:grid;grid-template-columns:minmax(300px,380px) 1fr;gap:clamp(14px,2vw,26px);min-height:0}
+  .rows{display:flex;flex-direction:column;gap:8px;overflow:auto;min-height:0;padding-right:2px}
+  .row{
+    display:flex;gap:11px;align-items:flex-start;text-align:left;width:100%;
+    border:1px solid var(--line);border-radius:var(--r);background:var(--paper);padding:11px 12px;
+    transition:border-color var(--speed),background var(--speed);
+  }
+  .row:hover{border-color:var(--c)}
+  .row.on{border-color:var(--c);background:var(--cl)}
+  .row .num{width:24px;height:24px;border-radius:50%;background:var(--c);color:#fff;display:grid;place-items:center;font:700 11.5px "Sora";flex:none;margin-top:1px}
+  .row .nm{font:700 13.5px "Sora";display:flex;align-items:center;gap:7px}
+  .row .nm svg.ic{color:var(--c)}
+  .row .tm{font:600 11.5px "Inter";color:var(--muted);margin-top:2px}
+  .row .note{display:none}
+  .detail{
+    border:1px solid var(--line);border-radius:var(--r);background:var(--paper);
+    display:flex;flex-direction:column;min-height:0;overflow:hidden;
+  }
+  .detail .ph{position:relative;flex:1;min-height:120px;background:var(--cl)}
+  .detail .ph img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+  .detail .ph .cred{
+    position:absolute;right:8px;bottom:8px;background:var(--paper);border:1px solid var(--line);
+    border-radius:var(--r);padding:3px 8px;font:600 10px "Inter";color:var(--muted);
+  }
+  .detail .ph .noimg{
+    position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;color:var(--c);
+  }
+  .detail .ph .noimg svg{width:44px;height:44px}
+  .detail .ph .noimg span{font:600 12px "Inter";color:var(--muted)}
+  .detail .d-body{padding:clamp(13px,1.6vh,20px) clamp(14px,1.6vw,22px)}
+  .detail .d-top{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap}
+  .detail h3{font-size:clamp(16px,1.6vw,21px)}
+  .detail .tm{font:700 12.5px "Inter";color:var(--c);white-space:nowrap}
+  .detail p{color:var(--muted);font-size:13.5px;margin-top:6px;max-width:78ch}
+  .detail .acts{display:flex;gap:9px;margin-top:13px;flex-wrap:wrap}
+  .detail .acts .btn{padding:8px 14px;font-size:12.5px}
+  .fadein{animation:fi .3s ease}
+  @keyframes fi{from{opacity:0}to{opacity:1}}
+  .pcollage{display:none}
+
+  /* ============ SLIDE 6 · WRAP-UP ============ */
+  .incl{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:clamp(10px,2vh,22px) 0}
+  .incl .i{border:1px solid var(--line);border-radius:var(--r);background:var(--paper);padding:16px}
+  .incl .ic{width:34px;height:34px;border-radius:var(--r);background:var(--teal-l);color:var(--teal);display:grid;place-items:center;margin-bottom:10px}
+  .incl .ic svg{width:17px;height:17px}
+  .incl h4{font-size:14px;margin-bottom:4px}
+  .incl p{color:var(--muted);font-size:12.5px}
+  .cost{
+    border-radius:var(--r);background:var(--teal);color:#fff;padding:clamp(16px,2.4vh,26px) clamp(16px,2vw,28px);
+    display:flex;gap:clamp(14px,2vw,30px);align-items:center;flex-wrap:wrap;
+  }
+  html[data-theme="dark"] .cost{color:#08211c}
+  .cost .lead{font:700 15px "Sora";display:flex;align-items:center;gap:9px}
+  .cost .box{border:1px dashed rgba(255,255,255,.55);border-radius:var(--r);padding:9px 16px}
+  html[data-theme="dark"] .cost .box{border-color:rgba(8,33,28,.5)}
+  .cost .box span{display:block;font:600 9.5px "Inter";letter-spacing:.14em;text-transform:uppercase;opacity:.85}
+  .cost .box b{font:700 15px "Sora"}
+  .cost .note{flex-basis:100%;font-size:12px;opacity:.9;max-width:90ch}
+  .endfoot{margin-top:auto;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;align-items:center;color:var(--muted);font-size:12px;border-top:1px solid var(--line);padding-top:14px}
+  .endfoot .cta{gap:8px}
+
+  /* toast */
+  .toast{
+    position:fixed;left:50%;bottom:22px;transform:translate(-50%,14px);z-index:1500;opacity:0;pointer-events:none;
+    background:var(--ink);color:var(--paper);font:600 12.5px "Inter";padding:11px 18px;border-radius:var(--r);
+    transition:opacity .25s,transform .25s;max-width:88vw;text-align:center;
+  }
+  .toast.show{opacity:1;transform:translate(-50%,0)}
+
+  /* ============ RESPONSIVE ============ */
+  @media (max-width:960px){
+    #s-cover .cv{grid-template-columns:1fr;align-content:start;gap:20px}
+    .cover-ph{height:32vh}
+    .day-grid{grid-template-columns:1fr;grid-template-rows:auto 1fr}
+    .detail{order:-1;min-height:44vh}
+    .rows{max-height:none}
+    .ix{display:none}
+    .dots{display:none}
+    .incl{grid-template-columns:repeat(2,1fr)}
+    .slide{overflow-y:auto}
+  }
+  @media (max-width:560px){
+    .brand small{display:none}
+    .tbtn .txt{display:none}
+    .stats>div{padding:9px 12px}
+    .incl{grid-template-columns:1fr}
+  }
+  @media (prefers-reduced-motion:reduce){
+    html,#deck{scroll-behavior:auto}
+    *{animation:none!important;transition:none!important}
+  }
+
+  /* ============ PRINT — A4 LANDSCAPE, ONE SLIDE PER PAGE ============ */
+  @page{size:A4 landscape;margin:0}
+  @media print{
+    html,body{height:auto;overflow:visible;background:#fff}
+    body{font-size:11.5px}
+    .topbar,.dots,.deck-nav,.toast,.leaflet-control-container,.cta,.detail .acts,.day-pills{display:none!important}
+    #deck{height:auto;overflow:visible;scroll-snap-type:none}
+    .slide{
+      opacity:1!important;width:297mm;height:209mm;min-height:0;overflow:hidden;
+      break-after:page;page-break-after:always;padding:11mm 13mm;
+    }
+    .slide:last-child{break-after:auto;page-break-after:auto}
+    *{print-color-adjust:exact;-webkit-print-color-adjust:exact}
+    /* cover */
+    #s-cover .cv{grid-template-columns:1.05fr .95fr;gap:12mm}
+    .cover-ph{height:150mm}
+    /* map page: swap live map for the captured snapshot, keep index + legend cards */
+    #s-map{padding:0}
+    #s-map .map-el{display:none!important}
+    #printMapImg{display:block!important;position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+    .ovl-head{top:9mm;left:9mm}
+    .seg{display:none}
+    .legend{bottom:9mm;left:9mm}
+    .ix{display:flex;top:9mm;right:9mm;bottom:9mm;width:74mm}
+    .ix .list{overflow:hidden}
+    /* day pages: full list with notes + photo collage */
+    .day-grid{grid-template-columns:1.45fr 1fr;gap:8mm}
+    .rows{overflow:hidden;gap:2.6mm}
+    .row{padding:2.8mm 3.2mm;break-inside:avoid}
+    .row .note{display:block;font-size:9.5px;color:var(--muted);margin-top:1mm}
+    .detail{display:none}
+    .pcollage{display:flex;flex-direction:column;gap:4mm;min-height:0}
+    .pcollage figure{position:relative;flex:1;min-height:0;overflow:hidden;border:1px solid var(--line);border-radius:var(--r)}
+    .pcollage img{width:100%;height:100%;object-fit:cover}
+    .pcollage figcaption{position:absolute;left:2mm;bottom:2mm;background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:1mm 2.4mm;font:600 8.5px "Inter";color:var(--muted)}
+    /* wrap-up */
+    .incl{grid-template-columns:repeat(4,1fr)}
+    .endfoot .cta{display:none}
+  }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <symbol id="i-plane" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3.5S18 3 16.5 4.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2Z"/></symbol>
+  <symbol id="i-bed" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 4v16"/><path d="M2 8h18a2 2 0 0 1 2 2v10"/><path d="M2 17h20"/><path d="M6 8v9"/></symbol>
+  <symbol id="i-bag" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></symbol>
+  <symbol id="i-weave" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="10.5" r="2.5"/><circle cx="8.5" cy="7.5" r="2.5"/><circle cx="6.5" cy="12.5" r="2.5"/><path d="M12 22a2 2 0 0 1-2-2c0-1 .5-2 2-3 1.5 1 2 2 2 3a2 2 0 0 1-2 2Z"/></symbol>
+  <symbol id="i-landmark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 22h18"/><path d="M6 18v-7"/><path d="M10 18v-7"/><path d="M14 18v-7"/><path d="M18 18v-7"/><path d="m12 2 8 6H4Z"/></symbol>
+  <symbol id="i-water" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22a7 7 0 0 0 7-7c0-2-1-4-3-6-1.5-1.5-3-4-4-6-1 2-2.5 4.5-4 6-2 2-3 4-3 6a7 7 0 0 0 7 7Z"/></symbol>
+  <symbol id="i-trees" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 10v.2A3 3 0 0 1 8.9 16H5a3 3 0 0 1-1-5.8V10a3 3 0 0 1 6 0Z"/><path d="M7 16v6"/><path d="M13 19v3"/><path d="M12 19h8.3a1 1 0 0 0 .7-1.7L18 14h.3a1 1 0 0 0 .7-1.7L16 9h.2a1 1 0 0 0 .8-1.7L13 3l-1.4 1.5"/></symbol>
+  <symbol id="i-camera" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3Z"/><circle cx="12" cy="13" r="3"/></symbol>
+  <symbol id="i-sunrise" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v6"/><path d="m4.9 10.9 1.4 1.4"/><path d="M2 18h2"/><path d="M20 18h2"/><path d="m17.7 12.3 1.4-1.4"/><path d="M22 22H2"/><path d="m8 6 4-4 4 4"/><path d="M16 18a4 4 0 0 0-8 0"/></symbol>
+  <symbol id="i-falls" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3v7"/><path d="M12 3v9"/><path d="M17 3v7"/><path d="M5 14c1.5 1 3 1 4.5 0M14.5 14c1.5 1 3 1 4.5 0M9.5 18c1.5 1 3 1 4.5 0"/></symbol>
+  <symbol id="i-boat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 21c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2s2.5 2 5 2 2.5-2 5-2c1.3 0 1.9.5 2.5 1"/><path d="M19.4 14 22 6c-2 0-4 .5-6 1.5"/><path d="M12 10V4"/><path d="M2 14 4.6 6C6 6.5 8 7 10 8"/><path d="m4 14 8-3 8 3"/></symbol>
+  <symbol id="i-leaf" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.5 19 2c1 2 2 4.2 2 8a7 7 0 0 1-7 7Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6"/></symbol>
+  <symbol id="i-fork" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2v7c0 1.1.9 2 2 2h0a2 2 0 0 0 2-2V2"/><path d="M5 2v20"/><path d="M17 2v20"/><path d="M21 15V2a5 5 0 0 0-4 5v6c0 1.1.9 2 2 2Z"/></symbol>
+  <symbol id="i-tag" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42Z"/><circle cx="7.5" cy="7.5" r=".5" fill="currentColor"/></symbol>
+</defs></svg>
+
+<header class="topbar">
+  <div class="brand"><span class="dot"></span>Nagaland Circuit&nbsp;<small>Dimapur–Chümoukedima · 3D/2N</small></div>
+  <span class="sp"></span>
+  <button class="tbtn" id="pdfBtn" onclick="exportPDF()"><span class="spin"></span>⤓ <span class="txt">Export PDF</span></button>
+  <button class="tbtn solid" id="exportBtn" onclick="exportPPT()"><span class="spin"></span>▤ <span class="txt">Export PPT</span></button>
+  <button class="tbtn" id="themeBtn" title="Toggle theme">🌙</button>
+</header>
+
+<main id="deck">
+
+  <!-- 1 · COVER -->
+  <section class="slide" id="s-cover" data-title="Intro">
+    <div class="s-num">01 · Tourist Circuit</div>
+    <div class="cv">
+      <div>
+        <div class="eyebrow">Nagaland · Northeast India</div>
+        <h1>Dimapur–<em>Chümoukedima</em><br>Circuit</h1>
+        <p class="lead">A 3-day, 2-night journey through Naga food and markets, megalithic heritage, forest waterfalls and a working pineapple valley — designed for a group of four.</p>
+        <div class="stats">
+          <div><b>3D / 2N</b><span>Duration</span></div>
+          <div><b>12 stops</b><span>Experiences</span></div>
+          <div><b>Group of 4</b><span>All tourists</span></div>
+          <div><b id="factKm">~64 km</b><span>Driving</span></div>
+        </div>
+        <div class="cta">
+          <button class="btn solid" onclick="goTo(1)">Start the tour ↓</button>
+          <button class="btn" onclick="exportPDF()">Export PDF</button>
+          <button class="btn" onclick="exportPPT()">Export PPT</button>
+        </div>
+        <div class="day-pills">
+          <span class="day-pill"><i style="background:var(--d1)"></i>Day 1 · Food &amp; Shopping</span>
+          <span class="day-pill"><i style="background:var(--d2)"></i>Day 2 · Heritage &amp; Nature</span>
+          <span class="day-pill"><i style="background:var(--d3)"></i>Day 3 · Adventure &amp; Farm</span>
+        </div>
+      </div>
+      <figure class="cover-ph">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Naga_Morung%2C_Kisama_heritage_village.jpg/960px-Naga_Morung%2C_Kisama_heritage_village.jpg"
+             alt="Traditional Naga morung, Kisama heritage village" loading="eager"
+             onerror="this.parentElement.style.display='none'">
+        <figcaption>Naga morung · Wikimedia Commons</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- 2 · FULL-SCREEN MAP -->
+  <section class="slide" id="s-map" data-title="Route map">
+    <div id="map" class="map-el" aria-label="Interactive route map"></div>
+    <img id="printMapImg" alt="Route map" />
+    <div class="ovl ovl-head">
+      <div class="eyebrow">02 · Route Map</div>
+      <h2>All stops, day by day</h2>
+      <div class="seg" id="seg">
+        <button data-day="all" class="on">All days</button>
+        <button data-day="1">Day 1</button>
+        <button data-day="2">Day 2</button>
+        <button data-day="3">Day 3</button>
+      </div>
+      <div class="cnt" id="ixCount">12 stops</div>
+    </div>
+    <div class="ovl ix">
+      <h3>Stop index</h3>
+      <div class="list" id="ixList"></div>
+    </div>
+    <div class="ovl legend">
+      <span><i style="background:var(--d1)"></i>Day 1</span>
+      <span><i style="background:var(--d2)"></i>Day 2</span>
+      <span><i style="background:var(--d3)"></i>Day 3</span>
+      <span><i class="sq" style="background:var(--ink)"></i>Dimapur Airport</span>
+    </div>
+  </section>
+
+  <!-- 3–5 · DAY SLIDES (rows/detail/collage generated) -->
+  <section class="slide day-slide" id="s-d1" data-title="Day 1" data-day="1" style="--c:var(--d1);--cl:var(--d1-l)">
+    <div class="s-num">03 · Day 1</div>
+    <header class="day-head">
+      <span class="chip" style="--c:var(--d1)">Day 1</span><h2>Food &amp; Shopping</h2>
+      <span class="meta" id="meta-1"></span>
+    </header>
+    <div class="day-grid">
+      <div class="rows" id="rows-1"></div>
+      <aside class="detail" id="detail-1"></aside>
+      <div class="pcollage" id="pc-1"></div>
+    </div>
+  </section>
+
+  <section class="slide day-slide" id="s-d2" data-title="Day 2" data-day="2" style="--c:var(--d2);--cl:var(--d2-l)">
+    <div class="s-num">04 · Day 2</div>
+    <header class="day-head">
+      <span class="chip" style="--c:var(--d2)">Day 2</span><h2>Heritage &amp; Nature</h2>
+      <span class="meta" id="meta-2"></span>
+    </header>
+    <div class="day-grid">
+      <div class="rows" id="rows-2"></div>
+      <aside class="detail" id="detail-2"></aside>
+      <div class="pcollage" id="pc-2"></div>
+    </div>
+  </section>
+
+  <section class="slide day-slide" id="s-d3" data-title="Day 3" data-day="3" style="--c:var(--d3);--cl:var(--d3-l)">
+    <div class="s-num">05 · Day 3</div>
+    <header class="day-head">
+      <span class="chip" style="--c:var(--d3)">Day 3</span><h2>Adventure &amp; Farm</h2>
+      <span class="meta" id="meta-3"></span>
+    </header>
+    <div class="day-grid">
+      <div class="rows" id="rows-3"></div>
+      <aside class="detail" id="detail-3"></aside>
+      <div class="pcollage" id="pc-3"></div>
+    </div>
+  </section>
+
+  <!-- 6 · WRAP-UP -->
+  <section class="slide" id="s-end" data-title="Inclusions & pricing">
+    <div class="s-num">06 · Inclusions &amp; Pricing</div>
+    <h2 style="font-size:clamp(20px,2.4vw,30px);margin-bottom:4px">Good to know</h2>
+    <p style="color:var(--muted);max-width:70ch">Everything the circuit covers, plus pricing placeholders to fill from your operator quote.</p>
+    <div class="incl">
+      <div class="i"><div class="ic"><svg class="ic"><use href="#i-bed"/></svg></div><h4>Stay</h4><p>2 nights at Zone Niathu Resort, Chümoukedima — base for the whole circuit.</p></div>
+      <div class="i"><div class="ic"><svg class="ic"><use href="#i-fork"/></svg></div><h4>Naga cuisine</h4><p>Food-court dinner at Urban Haat, Naga Heirloom lunch, resort &amp; local meals.</p></div>
+      <div class="i"><div class="ic"><svg class="ic"><use href="#i-weave"/></svg></div><h4>Craft &amp; culture</h4><p>Urban Haat cultural show, live weaving, cane-craft &amp; wood-carving demos.</p></div>
+      <div class="i"><div class="ic"><svg class="ic"><use href="#i-boat"/></svg></div><h4>Adventure</h4><p>4×4 trail, zip-line, boating, fishing, sunrise deck &amp; pineapple plucking.</p></div>
+    </div>
+    <div class="cost">
+      <div class="lead"><svg class="ic"><use href="#i-tag"/></svg>Package pricing</div>
+      <div class="box"><span>Total spend</span><b>Add your quote</b></div>
+      <div class="box"><span>Per head (group of 4)</span><b>Add your quote</b></div>
+      <div class="note">The source itinerary did not include costs, so pricing is left blank for you to fill from your operator quote (stay, transport, activities, guides &amp; meals).</div>
+    </div>
+    <div class="endfoot">
+      <div>Built from the “Tourist Circuit” brief · Data: Nagaland Tourism circuit, Dimapur–Chümoukedima · Map © Carto / Esri / OpenStreetMap · Photos: Wikimedia Commons.</div>
+      <div class="cta">
+        <button class="btn" onclick="exportPDF()">Export PDF ⤓</button>
+        <button class="btn solid" onclick="exportPPT()">Export PPT ▤</button>
+      </div>
+    </div>
+  </section>
+</main>
+
+<nav class="dots" id="dots" aria-label="Slides"></nav>
+<div class="deck-nav">
+  <span class="cnt" id="slideCnt">1 / 6</span>
+  <button onclick="goTo(cur-1)" aria-label="Previous slide">↑</button>
+  <button onclick="goTo(cur+1)" aria-label="Next slide">↓</button>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+/* ================= DATA (unchanged from source brief) ================= */
+const AIRPORT = {name:"Dimapur Airport", lat:25.8839, lng:93.7714,
+  img:"https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Airport_of_dimapur.jpg/960px-Airport_of_dimapur.jpg"};
+const DAYS = {
+  1:{key:"Day 1", name:"Food & Shopping"},
+  2:{key:"Day 2", name:"Heritage & Nature"},
+  3:{key:"Day 3", name:"Adventure & Farm"}
+};
+const DAY_HEX = {1:"#0e6e62", 2:"#b45309", 3:"#6d28d9"};
+
+/* img = free-license photo from Wikimedia Commons (rep = representative shot of the
+   area/experience, not the exact venue). gq = Google Images query. */
+const STOPS = [
+  {n:1, day:1, name:"Zone Niathu Resort", time:"3:30 – 4:00 PM", icon:"i-bed",
+   note:"Arrival from airport, hotel briefing & check-in. Base for both nights.", lat:25.823928, lng:93.781311,
+   img:null},
+  {n:2, day:1, name:"Hong Kong Market & Flea Market", time:"5:00 PM", icon:"i-bag",
+   note:"Unique Supermarket for organic/exotic foods, then the famous Hong Kong market & flea market.", lat:25.9090, lng:93.7275,
+   img:"https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/A_village_market_shed_in_Nagaland.jpg/960px-A_village_market_shed_in_Nagaland.jpg", rep:1},
+  {n:3, day:1, name:"Urban Haat", time:"6:00 – 9:00 PM", icon:"i-weave",
+   note:"Live weaving demo, Naga attire & souvenirs, evening cultural show and Naga-cuisine dinner at the food court.", lat:25.906212, lng:93.744937,
+   img:"https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Naga_Cuisine.jpg/960px-Naga_Cuisine.jpg", rep:1},
+  {n:4, day:2, name:"Kachari Ruins", time:"8:30 AM", icon:"i-landmark",
+   note:"Guided heritage tour of the megalithic ruins, museum / interpretation centre and conservation story.", lat:25.903762, lng:93.739653,
+   img:"https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Dimapur_Ruins_12.jpg/960px-Dimapur_Ruins_12.jpg"},
+  {n:5, day:2, name:"Padma Pukhuri Promenade", time:"10:00 AM", icon:"i-water",
+   note:"Lakeside promenade walk in the heart of Dimapur.", lat:25.9048, lng:93.7418,
+   img:"https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Dimapur_Town.jpeg/960px-Dimapur_Town.jpeg", rep:1},
+  {n:6, day:2, name:"Nagaland Zoological Park", time:"11 AM – 12 PM", icon:"i-trees",
+   note:"Nagaland Coffee at the sugar-mill stall, then Rangapahar zoo / fun park at Chumukedima.", lat:25.852993, lng:93.724127,
+   img:"https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/Great_Indian_Hornbill_at_Nagaland_Zoological_park.jpg/960px-Great_Indian_Hornbill_at_Nagaland_Zoological_park.jpg"},
+  {n:7, day:2, name:"Diezephe Craft Village", time:"1:15 – 4:00 PM", icon:"i-weave",
+   note:"Lunch at Naga Heirloom with cane-craft demo & museum, then handloom village — wood carving & artisan interaction.", lat:25.837434, lng:93.702913,
+   img:"https://upload.wikimedia.org/wikipedia/commons/thumb/c/c6/An_Angami_Naga_hut.jpg/960px-An_Angami_Naga_hut.jpg", rep:1},
+  {n:8, day:2, name:"Chumu View Point", time:"4:00 PM", icon:"i-camera",
+   note:"Sunset view, skyline walk and photography over the hills.", lat:25.8150, lng:93.7720,
+   img:"https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Sunset_dimapur.jpg/960px-Sunset_dimapur.jpg", rep:1},
+  {n:9, day:3, name:"Seithekema View Deck", time:"5:00 AM", icon:"i-sunrise",
+   note:"Sunrise viewing & meditation point to open the final day.", lat:25.8300, lng:93.8180,
+   img:null},
+  {n:10, day:3, name:"Triple Falls", time:"6:00 – 7:00 AM", icon:"i-falls",
+   note:"Breakfast & wellness by community members, then 4×4 adventure trail toward Mengu village.", lat:25.806302, lng:93.816648,
+   img:"https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Waterfall_nagaland.jpg/960px-Waterfall_nagaland.jpg", rep:1},
+  {n:11, day:3, name:"Noune Resort", time:"9:30 AM – 12:30 PM", icon:"i-boat",
+   note:"Zip-lining, fishing, spa/massage & boating, followed by a local-cuisine lunch.", lat:25.846382, lng:93.834162,
+   img:null},
+  {n:12, day:3, name:"Ruzaphema Pineapple Farm", time:"2:00 – 4:00 PM", icon:"i-leaf",
+   note:"Pineapple-farm tour & plucking (dao + bamboo bag), valley view over Peren, Nagaki & Dimapur, then bonfire & Naga-tea experience. Return to hotel for dinner (6 PM).", lat:25.718331, lng:93.792578,
+   img:"https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Pineapple_field_in_an_FPO_in_Nagaland.jpg/960px-Pineapple_field_in_an_FPO_in_Nagaland.jpg"}
+];
+const gimg=s=>'https://www.google.com/search?udm=2&q='+encodeURIComponent(s.name+' Chümoukedima Dimapur Nagaland');
+
+/* distances (haversine) */
+function distKm(a,b){
+  const R=6371, dLa=(b.lat-a.lat)*Math.PI/180, dLo=(b.lng-a.lng)*Math.PI/180;
+  const x=Math.sin(dLa/2)**2+Math.cos(a.lat*Math.PI/180)*Math.cos(b.lat*Math.PI/180)*Math.sin(dLo/2)**2;
+  return 2*R*Math.asin(Math.sqrt(x));
+}
+function dayKm(d){
+  const s=STOPS.filter(x=>x.day===d); let km=0;
+  for(let i=1;i<s.length;i++) km+=distKm(s[i-1],s[i]);
+  if(d===1) km+=distKm(AIRPORT,s[0]);
+  return Math.max(1,Math.round(km));
+}
+const TOTAL_KM=(()=>{let km=distKm(AIRPORT,STOPS[0]);for(let i=1;i<STOPS.length;i++)km+=distKm(STOPS[i-1],STOPS[i]);return Math.round(km);})();
+document.getElementById('factKm').textContent='~'+TOTAL_KM+' km';
+
+/* ================= THEME ================= */
+let mapReady=false;
+const themeBtn=document.getElementById('themeBtn');
+function setTheme(t){
+  document.documentElement.setAttribute('data-theme',t);
+  themeBtn.textContent=t==='dark'?'☀️':'🌙';
+  try{localStorage.setItem('ncTheme',t)}catch(e){}
+  if(mapReady) swapTiles();
+}
+try{
+  const s=localStorage.getItem('ncTheme');
+  if(s) setTheme(s); else if(matchMedia('(prefers-color-scheme: dark)').matches) setTheme('dark');
+}catch(e){}
+themeBtn.addEventListener('click',()=>setTheme(document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark'));
+
+/* ================= MAP (CORS-safe tiles so we can snapshot) ================= */
+const map=L.map('map',{scrollWheelZoom:false,zoomControl:true});
+map.zoomControl.setPosition('bottomright');
+const tileOpts={maxZoom:20,crossOrigin:true,subdomains:'abcd'};
+const liteTiles=L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
+  {...tileOpts,attribution:'© OpenStreetMap © CARTO'});
+const darkTiles=L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',
+  {...tileOpts,attribution:'© OpenStreetMap © CARTO'});
+let currentBase=null, printBase=false;
+function swapTiles(){
+  const want=(printBase||document.documentElement.getAttribute('data-theme')!=='dark')?liteTiles:darkTiles;
+  if(currentBase===want) return;
+  if(currentBase) map.removeLayer(currentBase);
+  currentBase=want; currentBase.addTo(map);
+}
+swapTiles(); mapReady=true;
+
+/* markers */
+const airMarker=L.marker([AIRPORT.lat,AIRPORT.lng],{icon:L.divIcon({className:'',
+  html:'<div class="pin air" title="Dimapur Airport">✈</div>',iconSize:[30,30],iconAnchor:[15,15]})}).addTo(map);
+airMarker.bindPopup('<div class="pop-t">'+AIRPORT.name+'</div><div class="pop-note">Arrival point — Day 1, 3:30 PM.</div>');
+
+const markers={};
+STOPS.forEach(s=>{
+  const m=L.marker([s.lat,s.lng],{icon:L.divIcon({className:'',
+    html:'<div class="pin" data-n="'+s.n+'" data-day="'+s.day+'">'+s.n+'</div>',
+    iconSize:[30,30],iconAnchor:[15,15]})}).addTo(map);
+  m.bindPopup(
+    '<span class="pop-n" style="background:'+DAY_HEX[s.day]+'">Stop '+s.n+' · '+DAYS[s.day].key+'</span>'+
+    '<div class="pop-t">'+s.name+'</div>'+
+    '<div class="pop-time">'+s.time+'</div>'+
+    '<div class="pop-note">'+s.note+'</div>'+
+    '<a class="pop-link" target="_blank" rel="noopener" href="'+gimg(s)+'">Photos on Google →</a>'+
+    ' &nbsp;<a class="pop-link" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination='+s.lat+','+s.lng+'">Directions →</a>');
+  m.on('popupopen',()=>highlight(s.n)); m.on('popupclose',()=>highlight(null));
+  markers[s.n]=m;
+});
+
+/* per-day colored route segments (canvas renderer → captures cleanly) */
+const lineRenderer=L.canvas({padding:.6});
+let routeLayers=[];
+function drawRoute(day){
+  routeLayers.forEach(l=>map.removeLayer(l)); routeLayers=[];
+  const seg=(pts,color)=>{
+    const pl=L.polyline(pts,{renderer:lineRenderer,color,weight:3.5,opacity:.85,dashArray:'2,9',lineCap:'round'}).addTo(map);
+    routeLayers.push(pl);
+  };
+  const byDay=d=>STOPS.filter(s=>s.day===d).map(s=>[s.lat,s.lng]);
+  if(day==='all'){
+    seg([[AIRPORT.lat,AIRPORT.lng],...byDay(1)],DAY_HEX[1]);
+    const d1e=STOPS.filter(s=>s.day===1).pop();
+    seg([[d1e.lat,d1e.lng],...byDay(2)],DAY_HEX[2]);
+    const d2e=STOPS.filter(s=>s.day===2).pop();
+    seg([[d2e.lat,d2e.lng],...byDay(3)],DAY_HEX[3]);
+  }else{
+    const d=Number(day), pts=byDay(d);
+    if(d===1) pts.unshift([AIRPORT.lat,AIRPORT.lng]);
+    seg(pts,DAY_HEX[d]);
+  }
+}
+function fitAll(list){
+  const pts=list.map(s=>[s.lat,s.lng]).concat([[AIRPORT.lat,AIRPORT.lng]]);
+  map.fitBounds(L.latLngBounds(pts).pad(0.12));
+}
+function fitCurrent(){
+  const shown=STOPS.filter(s=>activeDay==='all'||s.day==Number(activeDay));
+  if(activeDay==='all') fitAll(shown);
+  else map.fitBounds(L.latLngBounds(shown.map(s=>[s.lat,s.lng])).pad(0.2));
+}
+drawRoute('all'); fitAll(STOPS);
+map.on('click',()=>map.scrollWheelZoom.enable());
+map.on('mouseout',()=>map.scrollWheelZoom.disable());
+
+/* cinematic fly: zoom OUT first, then glide IN to the stop */
+function cinematicFly(lat,lng,z){
+  z=z||15;
+  map.stop(); map.closePopup();
+  const cur=map.getZoom(), out=Math.min(cur,11.2);
+  const mid=[(lat+map.getCenter().lat)/2,(lng+map.getCenter().lng)/2];
+  if(cur>out+.4){
+    map.flyTo(mid,out,{duration:.75,easeLinearity:.3});
+    map.once('moveend',()=>map.flyTo([lat,lng],z,{duration:1.15,easeLinearity:.24}));
+  }else{
+    map.flyTo([lat,lng],z,{duration:1.4,easeLinearity:.24});
+  }
+}
+function focusStop(n){
+  const s=STOPS.find(x=>x.n===n); if(!s) return;
+  if(activeDay!=='all'&&s.day!=Number(activeDay)) applyFilter('all');
+  cinematicFly(s.lat,s.lng);
+  setTimeout(()=>markers[n].openPopup(),2100);
+}
+function showOnMap(n){ goTo(1); setTimeout(()=>focusStop(n),450); }
+
+/* ================= DAY FILTER + STOP INDEX ================= */
+let activeDay='all';
+function applyFilter(day){
+  activeDay=day;
+  STOPS.forEach(s=>{
+    const el=markers[s.n];
+    if(day==='all'||s.day==Number(day)) el.addTo(map); else map.removeLayer(el);
+  });
+  if(day==='all'||day=='1') airMarker.addTo(map); else map.removeLayer(airMarker);
+  drawRoute(day);
+  fitCurrent();
+  document.querySelectorAll('#ixList [data-day]').forEach(b=>{
+    b.style.display=(day==='all'||b.dataset.day==day)?'':'none';
+  });
+  const shown=STOPS.filter(s=>day==='all'||s.day==Number(day));
+  document.getElementById('ixCount').textContent=shown.length+' stops · ~'+(day==='all'?TOTAL_KM:dayKm(Number(day)))+' km driving';
+  document.querySelectorAll('#seg button').forEach(x=>x.classList.toggle('on',x.dataset.day==day));
+}
+document.querySelectorAll('#seg button').forEach(c=>c.addEventListener('click',()=>applyFilter(c.dataset.day)));
+
+const ixList=document.getElementById('ixList');
+(function buildIndex(){
+  let html='<button class="ix-row air" data-day="1"><span class="num">✈</span><span><span class="nm">Dimapur Airport</span><br><span class="tm">Arrival · 3:30 PM</span></span></button>';
+  [1,2,3].forEach(d=>{
+    html+='<div class="dh" data-day="'+d+'" style="color:'+DAY_HEX[d]+'">'+DAYS[d].key+' · '+DAYS[d].name+'<small>~'+dayKm(d)+' km</small></div>';
+    STOPS.filter(s=>s.day===d).forEach(s=>{
+      html+='<button class="ix-row" data-n="'+s.n+'" data-day="'+d+'">'+
+        '<span class="num" style="background:'+DAY_HEX[d]+'">'+s.n+'</span>'+
+        '<span><span class="nm">'+s.name+'</span><br><span class="tm">'+s.time+'</span></span></button>';
+    });
+  });
+  ixList.innerHTML=html;
+})();
+ixList.addEventListener('click',e=>{
+  const r=e.target.closest('.ix-row'); if(!r) return;
+  if(r.classList.contains('air')){cinematicFly(AIRPORT.lat,AIRPORT.lng,14);setTimeout(()=>airMarker.openPopup(),2100);return;}
+  focusStop(Number(r.dataset.n));
+});
+ixList.addEventListener('mouseover',e=>{const r=e.target.closest('.ix-row');if(r&&r.dataset.n)highlight(Number(r.dataset.n));});
+ixList.addEventListener('mouseout',()=>highlight(null));
+function highlight(n){
+  document.querySelectorAll('.ix-row').forEach(i=>i.classList.toggle('hl',i.dataset.n==n));
+  document.querySelectorAll('.pin').forEach(p=>p.classList.toggle('hl',p.dataset.n==n));
+}
+
+/* ================= DAY SLIDES (rows + photo detail + print collage) ======= */
+const selected={};
+function renderRows(d){
+  const box=document.getElementById('rows-'+d);
+  let html='';
+  STOPS.filter(s=>s.day===d).forEach(s=>{
+    html+='<button class="row'+(selected[d]===s.n?' on':'')+'" data-n="'+s.n+'">'+
+      '<span class="num">'+s.n+'</span><span style="min-width:0">'+
+      '<span class="nm"><svg class="ic"><use href="#'+s.icon+'"/></svg>'+s.name+'</span>'+
+      '<span class="tm">'+s.time+'</span>'+
+      '<span class="note">'+s.note+'</span></span></button>';
+  });
+  box.innerHTML=html;
+}
+function renderDetail(d){
+  const s=STOPS.find(x=>x.n===selected[d]);
+  const el=document.getElementById('detail-'+d);
+  const cred=s.img?('Wikimedia Commons'+(s.rep?' · representative photo':'')):'';
+  el.innerHTML=
+    '<div class="ph">'+
+      (s.img
+        ?'<img src="'+s.img+'" alt="'+s.name+'" loading="lazy" onerror="this.style.display=\'none\';this.parentElement.querySelector(\'.noimg\').style.display=\'flex\'">'+
+         '<div class="noimg" style="display:none"><svg class="ic"><use href="#'+s.icon+'"/></svg><span>Photo unavailable — try Google Photos below</span></div>'+
+         '<span class="cred">'+cred+'</span>'
+        :'<div class="noimg"><svg class="ic"><use href="#'+s.icon+'"/></svg><span>No free-license photo yet — open Google Photos below</span></div>')+
+    '</div>'+
+    '<div class="d-body fadein">'+
+      '<div class="d-top"><h3>'+s.n+'. '+s.name+'</h3><span class="tm">'+s.time+'</span></div>'+
+      '<p>'+s.note+'</p>'+
+      '<div class="acts">'+
+        '<a class="btn" target="_blank" rel="noopener" href="'+gimg(s)+'">Photos on Google ↗</a>'+
+        '<button class="btn" onclick="showOnMap('+s.n+')">Show on map</button>'+
+        '<a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination='+s.lat+','+s.lng+'">Directions ↗</a>'+
+      '</div>'+
+    '</div>';
+}
+[1,2,3].forEach(d=>{
+  const list=STOPS.filter(s=>s.day===d);
+  selected[d]=(list.find(s=>s.img)||list[0]).n;
+  document.getElementById('meta-'+d).textContent=
+    list.length+' stops · ~'+dayKm(d)+' km driving'+(d===1?' · starts at Dimapur Airport, 3:30 PM':'');
+  renderRows(d); renderDetail(d);
+  document.getElementById('rows-'+d).addEventListener('click',e=>{
+    const r=e.target.closest('.row'); if(!r) return;
+    selected[d]=Number(r.dataset.n);
+    renderRows(d); renderDetail(d);
+  });
+  /* print-only collage: up to 2 photos of the day */
+  const pc=document.getElementById('pc-'+d);
+  list.filter(s=>s.img).slice(0,2).forEach(s=>{
+    const f=document.createElement('figure');
+    f.innerHTML='<img src="'+s.img+'" alt="'+s.name+'" loading="lazy">'+
+      '<figcaption>'+s.n+' · '+s.name+(s.rep?' · representative':'')+'</figcaption>';
+    pc.appendChild(f);
+  });
+});
+
+/* ================= DECK NAVIGATION ================= */
+const deck=document.getElementById('deck');
+const slides=[...document.querySelectorAll('.slide')];
+const dots=document.getElementById('dots');
+let cur=0;
+slides.forEach((s,i)=>{
+  const b=document.createElement('button');
+  b.dataset.t=s.dataset.title; b.setAttribute('aria-label',s.dataset.title);
+  b.addEventListener('click',()=>goTo(i));
+  dots.appendChild(b);
+});
+function goTo(i){
+  i=Math.max(0,Math.min(slides.length-1,i));
+  slides[i].scrollIntoView({behavior:'smooth'});
+}
+const slideIO=new IntersectionObserver(es=>{
+  es.forEach(e=>{
+    e.target.classList.toggle('in',e.isIntersecting);
+    if(e.isIntersecting&&e.intersectionRatio>=.55){
+      cur=slides.indexOf(e.target);
+      document.getElementById('slideCnt').textContent=(cur+1)+' / '+slides.length;
+      [...dots.children].forEach((d,i)=>d.classList.toggle('on',i===cur));
+      if(e.target.id==='s-map') setTimeout(()=>map.invalidateSize(),80);
+    }
+  });
+},{root:deck,threshold:[.2,.55]});
+slides.forEach(s=>slideIO.observe(s));
+document.addEventListener('keydown',e=>{
+  if(e.target.closest('input,textarea')) return;
+  if(['ArrowDown','PageDown'].includes(e.key)){e.preventDefault();goTo(cur+1);}
+  if(['ArrowUp','PageUp'].includes(e.key)){e.preventDefault();goTo(cur-1);}
+  if(e.key==='Home'){e.preventDefault();goTo(0);}
+  if(e.key==='End'){e.preventDefault();goTo(slides.length-1);}
+});
+
+/* ================= TOAST ================= */
+let toastT;
+function toast(msg){
+  const t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show');
+  clearTimeout(toastT); toastT=setTimeout(()=>t.classList.remove('show'),3200);
+}
+
+/* ================= SCHEMATIC MAP (offline-proof export fallback) ========== */
+function schematicMap(){
+  const W=1560,H=1040,P=130;
+  const c=document.createElement('canvas'); c.width=W; c.height=H;
+  const g=c.getContext('2d');
+  if(!g.roundRect) g.roundRect=function(x,y,w,h){this.rect(x,y,w,h);};
+  const pts=[AIRPORT,...STOPS];
+  const lats=pts.map(p=>p.lat), lngs=pts.map(p=>p.lng);
+  const la0=Math.min(...lats),la1=Math.max(...lats),lo0=Math.min(...lngs),lo1=Math.max(...lngs);
+  const X=p=>P+(p.lng-lo0)/(lo1-lo0)*(W-2*P);
+  const Y=p=>H-P-(p.lat-la0)/(la1-la0)*(H-2*P);
+  g.fillStyle='#eef3f0'; g.fillRect(0,0,W,H);
+  g.strokeStyle='#dfe8e3'; g.lineWidth=1;
+  for(let x=0;x<W;x+=78){g.beginPath();g.moveTo(x,0);g.lineTo(x,H);g.stroke();}
+  for(let y=0;y<H;y+=78){g.beginPath();g.moveTo(0,y);g.lineTo(W,y);g.stroke();}
+  g.lineCap='round'; g.setLineDash([3,16]); g.lineWidth=5;
+  const path=[AIRPORT,...STOPS];
+  for(let i=1;i<path.length;i++){
+    g.strokeStyle=DAY_HEX[path[i].day||1];
+    g.beginPath(); g.moveTo(X(path[i-1]),Y(path[i-1])); g.lineTo(X(path[i]),Y(path[i])); g.stroke();
+  }
+  g.setLineDash([]);
+  const ax=X(AIRPORT),ay=Y(AIRPORT);
+  g.fillStyle='#12211d';
+  g.beginPath(); g.roundRect(ax-24,ay-24,48,48,5); g.fill();
+  g.fillStyle='#fff'; g.font='700 26px "Segoe UI Symbol","Segoe UI"'; g.textAlign='center'; g.textBaseline='middle';
+  g.fillText('✈',ax,ay+2);
+  g.font='700 21px Sora,Arial'; g.fillStyle='#12211d';
+  g.strokeStyle='#eef3f0'; g.lineWidth=6; g.textAlign='left';
+  g.strokeText('Dimapur Airport',ax+34,ay); g.fillText('Dimapur Airport',ax+34,ay);
+  STOPS.forEach((s,i)=>{
+    const x=X(s),y=Y(s);
+    g.fillStyle=DAY_HEX[s.day];
+    g.beginPath(); g.arc(x,y,25,0,7); g.fill();
+    g.lineWidth=4; g.strokeStyle='#fff'; g.stroke();
+    g.fillStyle='#fff'; g.font='700 21px Sora,Arial'; g.textAlign='center'; g.textBaseline='middle';
+    g.fillText(String(s.n),x,y+1);
+    const side=(i%2?-1:1), lx=x+side*36;
+    g.font='600 20px Inter,Arial'; g.textAlign=side>0?'left':'right';
+    g.lineWidth=6; g.strokeStyle='#eef3f0'; g.fillStyle='#12211d';
+    g.strokeText(s.name,lx,y-(i%3)*14); g.fillText(s.name,lx,y-(i%3)*14);
+  });
+  g.textAlign='left'; g.textBaseline='middle';
+  [[1,'Day 1 · Food & Shopping'],[2,'Day 2 · Heritage & Nature'],[3,'Day 3 · Adventure & Farm']].forEach((d,i)=>{
+    const y=44+i*36;
+    g.fillStyle=DAY_HEX[d[0]]; g.beginPath(); g.arc(46,y,11,0,7); g.fill();
+    g.font='600 20px Inter,Arial'; g.fillStyle='#12211d'; g.fillText(d[1],66,y);
+  });
+  return c;
+}
+
+/* ================= MAP CAPTURE (shared by PPT + PDF) ================= */
+const wait=ms=>new Promise(r=>setTimeout(r,ms));
+async function captureMap(){
+  const prevDay=activeDay;
+  printBase=true; swapTiles();               // always capture light road tiles
+  applyFilter('all'); map.closePopup(); map.invalidateSize(); fitAll(STOPS);
+  // wait until every visible tile has actually loaded (capped at 6s) so the
+  // snapshot has no white bands, then a short settle for fade-in
+  await new Promise(res=>{
+    let done=false; const finish=()=>{ if(!done){done=true;res();} };
+    if(currentBase&&currentBase.isLoading&&currentBase.isLoading()){
+      currentBase.once('load',finish); setTimeout(finish,6000);
+    }else{ setTimeout(finish,800); }
+  });
+  await wait(500);
+  let img=null, ratio=1.5;
+  try{
+    const canvas=await html2canvas(document.getElementById('map'),
+      {useCORS:true,allowTaint:false,scale:2,logging:false,backgroundColor:'#eef3f0',
+       ignoreElements:el=>el.classList&&(el.classList.contains('leaflet-control-zoom')||el.classList.contains('leaflet-control-attribution')||el.classList.contains('ovl'))});
+    img=canvas.toDataURL('image/jpeg',.92); ratio=canvas.width/canvas.height;
+  }catch(err){ console.warn('Live map capture failed → schematic fallback',err); }
+  if(!img){ const c=schematicMap(); img=c.toDataURL('image/png'); ratio=c.width/c.height; }
+  printBase=false; swapTiles();
+  applyFilter(prevDay);
+  return {img,ratio};
+}
+
+/* ================= PDF EXPORT — landscape, one slide per page ============ */
+let printingTheme=null;
+function forceLightForPrint(on){
+  if(on){
+    const curT=document.documentElement.getAttribute('data-theme');
+    if(curT==='dark'){printingTheme=curT;document.documentElement.setAttribute('data-theme','light');}
+  }else if(printingTheme){
+    document.documentElement.setAttribute('data-theme',printingTheme);printingTheme=null;
+  }
+}
+async function eagerImages(){
+  const imgs=[...document.querySelectorAll('.pcollage img,.detail img,.cover-ph img')];
+  imgs.forEach(i=>{i.loading='eager'});
+  await Promise.all(imgs.map(i=>i.decode?i.decode().catch(()=>{}):Promise.resolve()));
+}
+async function exportPDF(){
+  const pdfBtn=document.getElementById('pdfBtn');
+  if(pdfBtn.classList.contains('busy'))return;
+  pdfBtn.classList.add('busy');
+  try{
+    forceLightForPrint(true);
+    toast('Preparing PDF — pick “Save as PDF” and Landscape in the print dialog');
+    await eagerImages();
+    if(typeof html2canvas!=='undefined'){
+      const {img}=await captureMap();
+      document.getElementById('printMapImg').src=img;
+    }
+    await wait(200);
+    window.print();
+  }catch(err){ console.error(err); toast('PDF preparation failed: '+err.message); }
+  finally{ forceLightForPrint(false); pdfBtn.classList.remove('busy'); }
+}
+window.addEventListener('beforeprint',()=>{        // covers direct Ctrl+P too
+  forceLightForPrint(true);
+  if(!document.getElementById('printMapImg').src){
+    document.getElementById('map').style.setProperty('display','block','important');
+    document.getElementById('printMapImg').style.setProperty('display','none','important');
+    map.invalidateSize();
+  }
+});
+window.addEventListener('afterprint',()=>{
+  forceLightForPrint(false);
+  document.getElementById('map').style.removeProperty('display');
+  document.getElementById('printMapImg').style.removeProperty('display');
+});
+
+/* ================= PPT EXPORT ================= */
+async function exportPPT(){
+  const btn=document.getElementById('exportBtn');
+  if(btn.classList.contains('busy')) return;
+  if(typeof PptxGenJS==='undefined'||typeof html2canvas==='undefined'){
+    toast('Export libraries are still loading — check your connection and retry.'); return;
+  }
+  btn.classList.add('busy');
+  const txt=btn.querySelector('.txt'), old=txt.textContent; txt.textContent='Building…';
+  try{
+    const {img,ratio}=await captureMap();
+
+    const pptx=new PptxGenJS();
+    pptx.defineLayout({name:'W',width:13.33,height:7.5}); pptx.layout='W';
+    pptx.author='Nagaland Circuit Planner';
+    pptx.title='Dimapur–Chümoukedima Circuit · 3D/2N';
+    const F='Segoe UI';
+    const C={ink:'12211D',teal:'0E6E62',teald:'0A4F47',green:'3DA35D',
+             muted:'6A7C78',line:'E4EBE8',mint:'E7F2F0'};
+    const DC={1:'0E6E62',2:'B45309',3:'6D28D9'};
+    const NSLIDES=6;
+    const foot=(s,n)=>{
+      s.addText('Nagaland Circuit · Dimapur–Chümoukedima · 3D/2N',
+        {x:.5,y:7.08,w:9,h:.3,fontFace:F,fontSize:8.5,color:C.muted});
+      s.addText(n+' / '+NSLIDES,{x:12.2,y:7.08,w:.7,h:.3,fontFace:F,fontSize:8.5,color:C.muted,align:'right'});
+    };
+    const band=(s,title,sub,color)=>{
+      s.background={color:'FFFFFF'};
+      s.addShape(pptx.ShapeType.rect,{x:0,y:0,w:13.33,h:1.02,fill:{color:C.ink}});
+      s.addShape(pptx.ShapeType.rect,{x:0,y:0,w:.16,h:1.02,fill:{color}});
+      s.addText(title,{x:.45,y:.07,w:11,h:.55,fontFace:F,bold:true,fontSize:20,color:'FFFFFF'});
+      if(sub) s.addText(sub,{x:.47,y:.58,w:12.3,h:.34,fontFace:F,fontSize:10.5,color:'A7CFC5'});
+    };
+
+    /* --- Slide 1 · Cover --- */
+    {
+      const s=pptx.addSlide(); s.background={color:'0B1A16'};
+      s.addShape(pptx.ShapeType.rect,{x:0,y:0,w:.2,h:7.5,fill:{color:C.teal}});
+      s.addText('NAGALAND · NORTHEAST INDIA · TOURIST CIRCUIT',
+        {x:.85,y:1.15,w:11,h:.4,fontFace:F,fontSize:12,color:'8FD0C2',charSpacing:4,bold:true});
+      s.addText('Dimapur–Chümoukedima Circuit',
+        {x:.8,y:1.6,w:11.8,h:1.5,fontFace:F,fontSize:40,bold:true,color:'FFFFFF'});
+      s.addText('A 3-day journey through Naga food and markets, megalithic heritage, forest waterfalls and a working pineapple valley — designed for a group of four.',
+        {x:.85,y:3.0,w:8.6,h:1.0,fontFace:F,fontSize:14,color:'CFE7E0'});
+      const stats=[['3D / 2N','DURATION'],['12 Stops','CURATED EXPERIENCES'],['Group of 4','ALL TYPES OF TOURISTS'],['~'+TOTAL_KM+' km','TOTAL DRIVING']];
+      stats.forEach((st,i)=>{
+        const x=.85+i*3.05;
+        s.addShape(pptx.ShapeType.rect,{x,y:4.55,w:2.8,h:1.35,
+          fill:{color:'12332C'},line:{color:'1E4A40',width:1}});
+        s.addText(st[0],{x:x+.15,y:4.68,w:2.5,h:.55,fontFace:F,fontSize:19,bold:true,color:'FFFFFF'});
+        s.addText(st[1],{x:x+.15,y:5.25,w:2.55,h:.4,fontFace:F,fontSize:8.5,color:'8FD0C2',charSpacing:2});
+      });
+      s.addText([
+        {text:'Base: ',options:{bold:true,color:'8FD0C2'}},
+        {text:'Zone Niathu Resort, Chümoukedima (2 nights)   ·   ',options:{color:'CFE7E0'}},
+        {text:'Arrival: ',options:{bold:true,color:'8FD0C2'}},
+        {text:'Dimapur Airport, Day 1 · 3:30 PM',options:{color:'CFE7E0'}}],
+        {x:.85,y:6.3,w:11.5,h:.4,fontFace:F,fontSize:11.5});
+      foot(s,1);
+    }
+
+    /* --- Slide 2 · Route map --- */
+    {
+      const s=pptx.addSlide();
+      band(s,'Route Map','All 12 stops · Dimapur & Chümoukedima region · ~'+TOTAL_KM+' km total driving',C.teal);
+      const bx=.45,by=1.3,bw=8.6,bh=5.55;
+      let w=bw,h=w/ratio; if(h>bh){h=bh;w=h*ratio;}
+      s.addShape(pptx.ShapeType.rect,{x:bx-.04,y:by-.04,w:w+.08,h:h+.08,fill:{color:C.line}});
+      s.addImage({data:img,x:bx,y:by,w,h});
+      s.addText('ALL STOPS',{x:9.35,y:1.28,w:3.5,h:.32,fontFace:F,fontSize:10,bold:true,color:C.muted,charSpacing:2});
+      STOPS.forEach((st,i)=>{
+        const y=1.66+i*.437;
+        s.addText(String(st.n),{shape:pptx.ShapeType.ellipse,fill:{color:DC[st.day]},
+          x:9.35,y,w:.3,h:.3,align:'center',valign:'middle',fontFace:F,fontSize:9.5,bold:true,color:'FFFFFF'});
+        s.addText([
+          {text:st.name,options:{bold:true,fontSize:10.5,color:C.ink}},
+          {text:'   '+st.time,options:{fontSize:8.5,color:C.muted}}],
+          {x:9.72,y:y-.045,w:3.35,h:.42,fontFace:F,valign:'middle'});
+      });
+      foot(s,2);
+    }
+
+    /* --- Slides 3–5 · Day slides --- */
+    [1,2,3].forEach((d,di)=>{
+      const s=pptx.addSlide();
+      const list=STOPS.filter(x=>x.day===d);
+      band(s,DAYS[d].key+' — '+DAYS[d].name,list.length+' stops · ~'+dayKm(d)+' km driving'+(d===1?' · starts at Dimapur Airport (3:30 PM)':''),DC[d]);
+      const top=1.32,HH=5.6,gap=.14;
+      const rowH=Math.min(1.5,(HH-(list.length-1)*gap)/list.length);
+      list.forEach((st,i)=>{
+        const y=top+i*(rowH+gap);
+        s.addShape(pptx.ShapeType.rect,{x:.45,y,w:12.43,h:rowH,
+          fill:{color:'FAFCFB'},line:{color:C.line,width:1}});
+        s.addShape(pptx.ShapeType.rect,{x:.45,y:y+.12,w:.07,h:rowH-.24,fill:{color:DC[d]}});
+        s.addText(String(st.n),{shape:pptx.ShapeType.ellipse,fill:{color:DC[d]},
+          x:.72,y:y+rowH/2-.19,w:.38,h:.38,align:'center',valign:'middle',fontFace:F,fontSize:12,bold:true,color:'FFFFFF'});
+        s.addText(st.name,{x:1.26,y:y+.07,w:8.2,h:.4,fontFace:F,fontSize:13.5,bold:true,color:C.ink,valign:'middle'});
+        s.addText(st.time,{x:9.6,y:y+.09,w:3.1,h:.36,fontFace:F,fontSize:11,bold:true,color:DC[d],align:'right',valign:'middle'});
+        s.addText(st.note,{x:1.26,y:y+.44,w:11.4,h:rowH-.5,fontFace:F,fontSize:9.5,color:C.muted,valign:'top'});
+      });
+      foot(s,3+di);
+    });
+
+    /* --- Slide 6 · Inclusions & pricing --- */
+    {
+      const s=pptx.addSlide();
+      band(s,'Inclusions & Pricing','What the circuit covers · pricing placeholders for your operator quote',C.green);
+      const inc=[
+        ['Stay','2 nights at Zone Niathu Resort, Chümoukedima — base for the whole circuit.'],
+        ['Naga cuisine','Food-court dinner at Urban Haat, Naga Heirloom lunch, resort & local meals.'],
+        ['Craft & culture','Urban Haat cultural show, live weaving, cane-craft & wood-carving demos.'],
+        ['Adventure','4×4 trail, zip-line, boating, fishing, sunrise deck & pineapple plucking.']];
+      inc.forEach((it,i)=>{
+        const x=.45+(i%2)*6.5, y=1.35+Math.floor(i/2)*1.85;
+        s.addShape(pptx.ShapeType.rect,{x,y,w:6.28,h:1.68,
+          fill:{color:'FAFCFB'},line:{color:C.line,width:1}});
+        s.addShape(pptx.ShapeType.rect,{x:x+.22,y:y+.22,w:.42,h:.42,fill:{color:C.mint}});
+        s.addText('✓',{x:x+.22,y:y+.22,w:.42,h:.42,align:'center',valign:'middle',fontFace:F,fontSize:14,bold:true,color:C.teal});
+        s.addText(it[0],{x:x+.8,y:y+.16,w:5.2,h:.42,fontFace:F,fontSize:14,bold:true,color:C.ink});
+        s.addText(it[1],{x:x+.8,y:y+.58,w:5.3,h:1.0,fontFace:F,fontSize:10.5,color:C.muted});
+      });
+      s.addShape(pptx.ShapeType.rect,{x:.45,y:5.25,w:12.43,h:1.55,
+        fill:{color:C.mint},line:{color:C.teal,width:1,dashType:'dash'}});
+      s.addText('PACKAGE PRICING',{x:.75,y:5.42,w:4,h:.3,fontFace:F,fontSize:10,bold:true,color:C.teald,charSpacing:2});
+      s.addText('Total spend:  ____________          Per head (group of 4):  ____________',
+        {x:.75,y:5.74,w:8.6,h:.45,fontFace:F,fontSize:13,bold:true,color:C.ink});
+      s.addText('The source itinerary did not include costs — fill these from your operator quote (stay, transport, activities, guides & meals).',
+        {x:.75,y:6.2,w:11.8,h:.5,fontFace:F,fontSize:9.5,color:C.muted,italic:true});
+      foot(s,6);
+    }
+
+    await pptx.writeFile({fileName:'Nagaland-Circuit-Dimapur-Chumoukedima-3D2N.pptx'});
+    toast('PowerPoint exported — 6 slides, map included ✓');
+  }catch(err){
+    console.error(err);
+    toast('Export failed: '+(err&&err.message?err.message:'unknown error'));
+  }finally{
+    btn.classList.remove('busy'); txt.textContent=old;
+  }
+}
+</script>
+</body>
+</html>
