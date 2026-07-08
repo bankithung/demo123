@@ -440,8 +440,9 @@
     .row .nm svg.ic{color:var(--c);opacity:1}
     .row .tm{color:var(--muted)}
     .row .note{display:block;font-size:9.5px;color:var(--muted);margin-top:1mm}
-    .pcollage{display:flex;flex-direction:column;gap:4mm;min-height:0;grid-column:2}
-    .pcollage figure{position:relative;flex:1;min-height:0;overflow:hidden;border:1px solid var(--line);border-radius:var(--r)}
+    .pcollage{display:grid;grid-template-columns:1fr;grid-auto-rows:1fr;gap:3mm;min-height:0;grid-column:2}
+    .pcollage.two{grid-template-columns:1fr 1fr}
+    .pcollage figure{position:relative;min-height:0;overflow:hidden;border:1px solid var(--line);border-radius:var(--r);margin:0}
     .pcollage img{width:100%;height:100%;object-fit:cover}
     .pcollage figcaption{position:absolute;left:2mm;bottom:2mm;background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:1mm 2.4mm;font:600 8.5px "Inter";color:var(--muted)}
     /* wrap-up */
@@ -632,16 +633,16 @@ const STOPS = [
    img:null},
   {n:2, day:1, name:"Hong Kong Market & Flea Market", time:"5:00 PM", icon:"i-bag",
    note:"Unique Supermarket for organic/exotic foods, then the famous Hong Kong market & flea market.", lat:25.9090, lng:93.7275,
-   img:"https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/A_village_market_shed_in_Nagaland.jpg/960px-A_village_market_shed_in_Nagaland.jpg", rep:1},
+   img:"assets/Super market1.png", extra:["assets/Super market2.png"], local:1},
   {n:3, day:1, name:"Urban Haat", time:"6:00 – 9:00 PM", icon:"i-weave",
    note:"Live weaving demo, Naga attire & souvenirs, evening cultural show and Naga-cuisine dinner at the food court.", lat:25.906212, lng:93.744937,
-   img:"https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Naga_Cuisine.jpg/960px-Naga_Cuisine.jpg", rep:1},
+   img:"assets/Urban haat.png", extra:["assets/Urban haat1.png"], local:1},
   {n:4, day:2, name:"Kachari Ruins", time:"8:30 AM", icon:"i-landmark",
    note:"Guided heritage tour of the megalithic ruins, museum / interpretation centre and conservation story.", lat:25.903762, lng:93.739653,
-   img:"https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Dimapur_Ruins_12.jpg/960px-Dimapur_Ruins_12.jpg"},
+   img:"assets/Kachari ruins.png", local:1},
   {n:5, day:2, name:"Padma Pukhuri Promenade", time:"10:00 AM", icon:"i-water",
    note:"Lakeside promenade walk in the heart of Dimapur.", lat:25.9048, lng:93.7418,
-   img:"https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Dimapur_Town.jpeg/960px-Dimapur_Town.jpeg", rep:1},
+   img:"assets/Padumpukhuri.png", extra:["assets/Raj pukhuri.png"], local:1},
   {n:6, day:2, name:"Nagaland Zoological Park", time:"11 AM – 12 PM", icon:"i-trees",
    note:"Nagaland Coffee at the sugar-mill stall, then Rangapahar zoo / fun park at Chumukedima.", lat:25.852993, lng:93.724127,
    img:"https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/Great_Indian_Hornbill_at_Nagaland_Zoological_park.jpg/960px-Great_Indian_Hornbill_at_Nagaland_Zoological_park.jpg"},
@@ -881,7 +882,7 @@ function renderDetail(d){
   const s=STOPS.find(x=>x.n===selected[d]);
   const bg=document.getElementById('bg-'+d);
   const el=document.getElementById('detail-'+d);
-  const cred=s.img?('Wikimedia Commons'+(s.rep?' · representative photo':'')):'';
+  const cred=s.img?(s.local?'On-location photo':('Wikimedia Commons'+(s.rep?' · representative photo':''))):'';
   /* full-bleed background photo of the selected stop */
   bg.innerHTML=s.img
     ?'<img src="'+s.img+'" alt="'+s.name+'" loading="lazy" onerror="this.style.display=\'none\';this.parentElement.querySelector(\'.noimg\').style.display=\'flex\'">'+
@@ -913,14 +914,21 @@ function renderDetail(d){
     selected[d]=Number(r.dataset.n);
     renderRows(d); renderDetail(d);
   });
-  /* print-only collage: up to 2 photos of the day */
+  /* print-only collage: real on-location photos of the day (primary + extras) */
   const pc=document.getElementById('pc-'+d);
-  list.filter(s=>s.img).slice(0,2).forEach(s=>{
+  const shots=[];
+  list.forEach(s=>{
+    if(s.img) shots.push({src:s.img,n:s.n,name:s.name,rep:s.rep,local:s.local});
+    (s.extra||[]).forEach(x=>shots.push({src:x,n:s.n,name:s.name,rep:s.rep,local:s.local}));
+  });
+  shots.slice(0,4).forEach(sh=>{
     const f=document.createElement('figure');
-    f.innerHTML='<img src="'+s.img+'" alt="'+s.name+'" loading="lazy">'+
-      '<figcaption>'+s.n+' · '+s.name+(s.rep?' · representative':'')+'</figcaption>';
+    const tag=sh.local?'':(sh.rep?' · representative':'');
+    f.innerHTML='<img src="'+sh.src+'" alt="'+sh.name+'" loading="lazy">'+
+      '<figcaption>'+sh.n+' · '+sh.name+tag+'</figcaption>';
     pc.appendChild(f);
   });
+  if(shots.length>=3) pc.classList.add('two');
 });
 
 /* ================= DECK NAVIGATION (presentation — no scroll) ============ */
@@ -1073,6 +1081,22 @@ async function captureMap(){
   return {img,ratio};
 }
 
+/* load a local image and return {data,ratio} as a JPEG data URL for PptxGenJS */
+function imgToData(src,maxW){
+  return new Promise(res=>{
+    const im=new Image(); im.decoding='async';
+    im.onload=()=>{
+      const scale=Math.min(1,(maxW||1600)/im.naturalWidth);
+      const w=Math.round(im.naturalWidth*scale), h=Math.round(im.naturalHeight*scale);
+      const c=document.createElement('canvas'); c.width=w; c.height=h;
+      c.getContext('2d').drawImage(im,0,0,w,h);
+      try{res({data:c.toDataURL('image/jpeg',.86),ratio:w/h});}catch(e){res(null);}
+    };
+    im.onerror=()=>res(null);
+    im.src=src;
+  });
+}
+
 /* ================= PDF EXPORT — landscape, one slide per page ============ */
 let printingTheme=null;
 function forceLightForPrint(on){
@@ -1201,26 +1225,47 @@ async function exportPPT(){
       foot(s,2);
     }
 
-    /* --- Slides 3–5 · Day slides --- */
-    [1,2,3].forEach((d,di)=>{
+    /* --- Slides 3–5 · Day slides (stop list + real photo panel) --- */
+    for(let di=0;di<3;di++){
+      const d=di+1;
       const s=pptx.addSlide();
       const list=STOPS.filter(x=>x.day===d);
       band(s,DAYS[d].key+' — '+DAYS[d].name,list.length+' stops · ~'+dayKm(d)+' km driving'+(d===1?' · starts at Dimapur Airport (3:30 PM)':''),DC[d]);
+      /* gather this day's real on-location photos (primary + extras) */
+      const srcs=[];
+      list.forEach(st=>{ if(st.local&&st.img){srcs.push(st.img);(st.extra||[]).forEach(x=>srcs.push(x));} });
+      const hasPhotos=srcs.length>0;
+      const listW=hasPhotos?7.55:12.43;      // leave room for a photo column when we have photos
       const top=1.32,HH=5.6,gap=.14;
       const rowH=Math.min(1.5,(HH-(list.length-1)*gap)/list.length);
       list.forEach((st,i)=>{
         const y=top+i*(rowH+gap);
-        s.addShape(pptx.ShapeType.rect,{x:.45,y,w:12.43,h:rowH,
+        s.addShape(pptx.ShapeType.rect,{x:.45,y,w:listW,h:rowH,
           fill:{color:'FAFCFB'},line:{color:C.line,width:1}});
         s.addShape(pptx.ShapeType.rect,{x:.45,y:y+.12,w:.07,h:rowH-.24,fill:{color:DC[d]}});
         s.addText(String(st.n),{shape:pptx.ShapeType.ellipse,fill:{color:DC[d]},
           x:.72,y:y+rowH/2-.19,w:.38,h:.38,align:'center',valign:'middle',fontFace:F,fontSize:12,bold:true,color:'FFFFFF'});
-        s.addText(st.name,{x:1.26,y:y+.07,w:8.2,h:.4,fontFace:F,fontSize:13.5,bold:true,color:C.ink,valign:'middle'});
-        s.addText(st.time,{x:9.6,y:y+.09,w:3.1,h:.36,fontFace:F,fontSize:11,bold:true,color:DC[d],align:'right',valign:'middle'});
-        s.addText(st.note,{x:1.26,y:y+.44,w:11.4,h:rowH-.5,fontFace:F,fontSize:9.5,color:C.muted,valign:'top'});
+        const nameW=listW-3.2;
+        s.addText(st.name,{x:1.26,y:y+.07,w:nameW,h:.4,fontFace:F,fontSize:13,bold:true,color:C.ink,valign:'middle'});
+        s.addText(st.time,{x:listW-2.55,y:y+.09,w:2.4,h:.36,fontFace:F,fontSize:10.5,bold:true,color:DC[d],align:'right',valign:'middle'});
+        s.addText(st.note,{x:1.26,y:y+.44,w:listW-1,h:rowH-.5,fontFace:F,fontSize:9,color:C.muted,valign:'top'});
       });
+      /* photo panel on the right: up to 3 real photos stacked, cover-cropped */
+      if(hasPhotos){
+        const px=8.25, pw=4.63, py=1.32, ph=5.6, n=Math.min(3,srcs.length);
+        const pg=.14, ih=(ph-(n-1)*pg)/n;
+        for(let k=0;k<n;k++){
+          const y=py+k*(ih+pg);
+          const d0=await imgToData(srcs[k],1400);
+          if(d0){
+            s.addShape(pptx.ShapeType.rect,{x:px,y,w:pw,h:ih,fill:{color:'EEF2F0'},line:{color:C.line,width:1}});
+            s.addImage({data:d0.data,x:px,y,w:pw,h:ih,sizing:{type:'cover',w:pw,h:ih}});
+          }
+        }
+        s.addText('On-location photos',{x:px,y:py+ph+.02,w:pw,h:.28,fontFace:F,fontSize:8.5,italic:true,color:C.muted,align:'right'});
+      }
       foot(s,3+di);
-    });
+    }
 
     /* --- Slide 6 · Inclusions & pricing --- */
     {
