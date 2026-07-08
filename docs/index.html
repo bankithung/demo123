@@ -313,7 +313,7 @@
   }
 
   /* ============ PRINT — 16:9 pages, 1:1 with the screen stage ============ */
-  @page{size:13.333in 7.5in;margin:0}
+  @page{size:1280px 720px;margin:0}
   @media print{
     html,body{height:auto;overflow:visible;background:#fff}
     .topbar,.dots,.deck-nav,.toast,.leaflet-control-container{display:none!important}
@@ -330,6 +330,19 @@
     #s-map .map-el{display:none!important}
     #printMapImg{display:block!important;position:absolute;inset:0;z-index:1;width:100%;height:100%;object-fit:cover}
     .seg{display:none!important}
+    /* no scrollbars on paper — compact the stop index so all rows fit the page */
+    .ix .list{overflow:hidden!important;scrollbar-width:none;padding:6px}
+    .ix .list::-webkit-scrollbar{display:none;width:0;height:0}
+    .ix{top:14px;bottom:14px}
+    .ix h3{padding:8px 14px}
+    .ix .dh{padding:6px 8px 2px}
+    /* one line per stop on paper: name + time side by side */
+    .ix-row{padding:4px 8px;gap:8px}
+    .ix-row br{display:none}
+    .ix-row>span:last-child{display:flex;align-items:baseline;gap:8px;min-width:0;flex:1}
+    .ix-row .nm{font-size:12px;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .ix-row .tm{font-size:10px;white-space:nowrap;margin-left:auto}
+    .ix-row .num{width:20px;height:20px;font-size:10.5px}
   }
 </style>
 </head>
