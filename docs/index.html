@@ -303,29 +303,39 @@
   .endfoot{margin-top:auto;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;align-items:center;color:var(--muted);font-size:12px;border-top:1px solid var(--line);padding-top:14px}
   .endfoot .cta{gap:8px}
 
-  /* ============ ITINERARY OVERVIEW (3-column day timelines) ============ */
+  /* ============ ITINERARY OVERVIEW (3 day cards) ============ */
   #s-over{background:var(--cream)}
-  #s-over .ov-head{display:flex;align-items:flex-end;justify-content:space-between;gap:18px;flex-wrap:wrap;margin-bottom:clamp(12px,2.2vh,22px)}
+  #s-over .ov-head{display:flex;align-items:flex-end;justify-content:space-between;gap:18px;flex-wrap:wrap;margin-bottom:clamp(14px,2.4vh,26px)}
+  #s-over .ov-head .eyebrow{margin-bottom:6px}
   #s-over .ov-head h2{font-size:clamp(22px,3vw,38px);font-weight:800;letter-spacing:-.02em;color:var(--ink)}
-  #s-over .ov-head .sub{color:var(--muted);font:600 12.5px "Inter";margin-top:4px}
-  #s-over .ov-cols{flex:1;min-height:0;display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(12px,1.6vw,24px)}
-  .ovcol{min-height:0;display:flex;flex-direction:column;border:1px solid var(--line);border-radius:var(--r);background:var(--paper);overflow:hidden}
-  .ovcol .cap{display:flex;align-items:center;gap:9px;padding:12px 16px;border-bottom:1px solid var(--line);border-top:3px solid var(--c)}
-  .ovcol .cap b{font:800 14px "Sora";color:var(--ink)}
-  .ovcol .cap .kd{font:700 10px "Inter";letter-spacing:.14em;text-transform:uppercase;color:var(--c)}
-  .ovcol .cap .km{margin-left:auto;font:600 11px "Inter";color:var(--muted)}
-  .ovcol .tl{flex:1;min-height:0;overflow-y:auto;padding:8px 16px 14px;position:relative}
-  .tl .ev{position:relative;display:flex;gap:12px;padding:9px 0 9px 4px}
-  .tl .ev::before{content:"";position:absolute;left:16px;top:0;bottom:0;width:2px;background:var(--line)}
-  .tl .ev:first-child::before{top:16px}
-  .tl .ev:last-child::before{bottom:calc(100% - 16px)}
-  .tl .ev .mk{position:relative;z-index:1;flex:0 0 32px;width:32px;height:32px;border-radius:50%;background:var(--c);color:#fff;display:grid;place-items:center;font:700 12.5px "Sora"}
-  .tl .ev .mk svg{width:15px;height:15px}
+  #s-over .ov-head .sub{color:var(--muted);font:500 13px "Inter";margin-top:6px}
+  #s-over .ov-head .sub b{color:var(--ink);font-weight:700}
+  #s-over .ov-cols{flex:1;min-height:0;display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,1.6vw,24px)}
+
+  .ovcol{min-height:0;display:flex;flex-direction:column;border:1px solid var(--line);border-radius:12px;background:var(--paper);overflow:hidden;position:relative}
+  .ovcol::before{content:"";position:absolute;inset:0 0 auto;height:4px;background:var(--c);z-index:2}
+  .ovcol .cap{padding:16px 18px 13px;background:var(--cl)}
+  .ovcol .cap .top{display:flex;align-items:center;gap:12px}
+  .ovcol .cap .dn{flex:none;width:42px;height:42px;border-radius:11px;background:var(--c);color:#fff;display:grid;place-items:center;font:800 19px "Sora"}
+  .ovcol .cap .kd{font:700 10px "Inter";letter-spacing:.18em;text-transform:uppercase;color:var(--c)}
+  .ovcol .cap b{display:block;font:800 16.5px "Sora";color:var(--ink);margin-top:2px;line-height:1.1}
+  .ovcol .cap .meta{display:flex;gap:6px;margin-top:13px;flex-wrap:wrap}
+  .ovcol .cap .mchip{font:600 10.5px "Inter";color:var(--muted);background:var(--paper);border:1px solid var(--line);border-radius:20px;padding:3px 10px}
+  .ovcol .tl{flex:1;min-height:0;overflow:hidden;padding:12px 18px 16px;display:flex;flex-direction:column}
+  .tl .ev{position:relative;display:flex;gap:13px;padding:9px 0}
+  .tl .ev::before{content:"";position:absolute;left:18px;top:0;bottom:0;width:2px;background:var(--line)}
+  .tl .ev:first-child::before{top:19px}
+  .tl .ev:last-child::before{bottom:calc(100% - 19px)}
+  .tl .ev .mk{position:relative;z-index:1;flex:0 0 38px;width:38px;height:38px;border-radius:50%;background:var(--paper);border:2px solid var(--c);color:var(--c);display:grid;place-items:center}
+  .tl .ev .mk svg{width:17px;height:17px}
+  .tl .ev .mk .no{position:absolute;right:-4px;bottom:-4px;min-width:17px;height:17px;padding:0 3px;border-radius:9px;background:var(--c);color:#fff;font:700 9.5px "Inter";display:grid;place-items:center;border:1.5px solid var(--paper)}
+  .tl .ev.air .mk{background:var(--c);color:#fff}
   .tl .ev .bd{flex:1;min-width:0;padding-top:2px}
-  .tl .ev .bd .nm{font:600 13px "Inter";color:var(--ink);line-height:1.3}
-  .tl .ev .bd .tm{font:600 11px "Inter";color:var(--c);margin-top:1px}
-  .tl .ev .bd .nt{font-size:11.5px;color:var(--muted);margin-top:3px;line-height:1.4}
-  .tl .ev.air .mk{background:var(--cream);border:2px solid var(--c);color:var(--c)}
+  .tl .ev .bd .hd{display:flex;align-items:baseline;gap:8px}
+  .tl .ev .bd .nm{flex:1;min-width:0;font:700 13px "Inter";color:var(--ink);line-height:1.3}
+  .tl .ev .bd .tm{flex:none;font:600 10px "Inter";color:var(--c);background:var(--cl);border-radius:5px;padding:2px 7px;white-space:nowrap}
+  .tl .ev .bd .nt{font-size:11px;color:var(--muted);margin-top:4px;line-height:1.45;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .tl .ev.air .bd .nm{color:var(--c)}
 
   /* toast */
   .toast{
@@ -344,6 +354,8 @@
     .incl{grid-template-columns:repeat(2,1fr)}
     .slide{overflow-y:auto}
     #s-map,.day-slide{overflow:hidden}
+    #s-over .ov-cols{grid-template-columns:repeat(2,1fr);align-content:start}
+    #s-over .tl{overflow:visible}
   }
   @media (max-width:560px){
     .brand small{display:none}
@@ -352,6 +364,7 @@
     .incl{grid-template-columns:1fr}
     .rows{width:auto;right:var(--pad)}
     .detail{display:none}
+    #s-over .ov-cols{grid-template-columns:1fr}
   }
   @media (prefers-reduced-motion:reduce){
     html,#deck{scroll-behavior:auto}
@@ -377,12 +390,17 @@
     #s-cover{padding:0}
     .cover-bg img{position:absolute}
     #s-cover .cv{position:absolute;bottom:0;left:0;padding:0 16mm 16mm}
-    /* itinerary overview: keep 3 columns, let timelines show fully */
-    #s-over .ov-cols{gap:6mm}
-    #s-over .ovcol{break-inside:avoid}
-    #s-over .tl{overflow:hidden}
-    #s-over .tl .ev{padding:2.6mm 0 2.6mm 4px;break-inside:avoid}
-    #s-over .tl .ev .nt{font-size:9px}
+    /* itinerary overview: keep 3 columns, compact for one page */
+    #s-over .ov-cols{gap:5mm}
+    #s-over .ovcol{break-inside:avoid;border-radius:2mm}
+    #s-over .cap{padding:3mm 4mm 2.4mm}
+    #s-over .cap .dn{width:8mm;height:8mm;border-radius:2mm;font-size:13px}
+    #s-over .tl{overflow:hidden;padding:3mm 4mm 3mm}
+    #s-over .tl .ev{padding:1.9mm 0;break-inside:avoid}
+    #s-over .tl .ev .mk{flex:0 0 7mm;width:7mm;height:7mm}
+    #s-over .tl .ev .bd .nm{font-size:10px}
+    #s-over .tl .ev .bd .tm{font-size:8px}
+    #s-over .tl .ev .bd .nt{font-size:8.5px;-webkit-line-clamp:2}
     /* map page: swap live map for the captured snapshot, keep index + legend cards */
     #s-map{padding:0}
     #s-map .map-el{display:none!important}
@@ -800,27 +818,29 @@ const ixList=document.getElementById('ixList');
 /* ================= ITINERARY OVERVIEW (3 day columns) ================= */
 (function buildOverview(){
   const cols=document.getElementById('ovCols');
+  const flight=(nm,tm,nt)=>'<div class="ev air"><span class="mk"><svg><use href="#i-plane"/></svg></span>'+
+    '<div class="bd"><div class="hd"><span class="nm">'+nm+'</span><span class="tm">'+tm+'</span></div>'+
+    '<div class="nt">'+nt+'</div></div></div>';
   let html='';
   [1,2,3].forEach(d=>{
+    const list=STOPS.filter(s=>s.day===d);
     let evs='';
-    if(d===1) evs+='<div class="ev air"><span class="mk"><svg><use href="#i-plane"/></svg></span>'+
-      '<div class="bd"><div class="nm">Dimapur Airport</div><div class="tm">Arrival · 3:30 PM</div>'+
-      '<div class="nt">Group of 4 picked up and driven to the resort.</div></div></div>';
-    STOPS.filter(s=>s.day===d).forEach(s=>{
-      evs+='<div class="ev"><span class="mk">'+s.n+'</span>'+
-        '<div class="bd"><div class="nm">'+s.name+'</div><div class="tm">'+s.time+'</div>'+
+    if(d===1) evs+=flight('Dimapur Airport','3:30 PM','Group of 4 picked up and driven to the resort.');
+    list.forEach(s=>{
+      evs+='<div class="ev"><span class="mk"><svg><use href="#'+s.icon+'"/></svg><span class="no">'+s.n+'</span></span>'+
+        '<div class="bd"><div class="hd"><span class="nm">'+s.name+'</span><span class="tm">'+s.time+'</span></div>'+
         '<div class="nt">'+s.note+'</div></div></div>';
     });
-    if(d===3) evs+='<div class="ev air"><span class="mk"><svg><use href="#i-plane"/></svg></span>'+
-      '<div class="bd"><div class="nm">Return to hotel &amp; departure</div><div class="tm">Evening</div>'+
-      '<div class="nt">Dinner at 6 PM, then transfer for onward journey.</div></div></div>';
-    html+='<div class="ovcol" style="--c:'+DAY_HEX[d]+'">'+
-      '<div class="cap"><b>'+DAYS[d].key+'</b><span class="kd">'+DAYS[d].name+'</span>'+
-      '<span class="km">~'+dayKm(d)+' km</span></div>'+
+    if(d===3) evs+=flight('Return &amp; departure','Evening','Dinner at 6 PM, then transfer for the onward journey.');
+    html+='<div class="ovcol" style="--c:'+DAY_HEX[d]+';--cl:var(--d'+d+'-l)">'+
+      '<div class="cap"><div class="top"><span class="dn">'+d+'</span>'+
+        '<div><span class="kd">'+DAYS[d].key+'</span><b>'+DAYS[d].name+'</b></div></div>'+
+        '<div class="meta"><span class="mchip">'+list.length+' stops</span>'+
+        '<span class="mchip">~'+dayKm(d)+' km</span></div></div>'+
       '<div class="tl">'+evs+'</div></div>';
   });
   cols.innerHTML=html;
-  document.getElementById('ovSub').textContent=STOPS.length+' experiences · 3 days · ~'+TOTAL_KM+' km total driving';
+  document.getElementById('ovSub').innerHTML='<b>'+STOPS.length+'</b> experiences · <b>3</b> days · <b>~'+TOTAL_KM+' km</b> total driving';
 })();
 ixList.addEventListener('click',e=>{
   const r=e.target.closest('.ix-row'); if(!r) return;
