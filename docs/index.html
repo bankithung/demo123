@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Nagaland Circuit · Dimapur–Chümoukedima · 3D/2N Itinerary</title>
+<title>Dimapur–Chümoukedima Tourist Circuit · ₹625 Cr · DoNER Proposal</title>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"
   integrity="sha384-c6Rcwz4e4CITMbu/NBmnNS8yN2sC3cUElMEMfP3vqqKFp7GOYaaBBCqmaWBjmkjb" crossorigin="anonymous" />
@@ -385,6 +385,33 @@
   .out .phase p{font:450 11.5px/1.55 "Inter";color:var(--muted)}
   .out .fine{font:450 11px/1.5 "Inter";color:var(--muted);margin-top:2px}
 
+  /* funding structure (30:40:30) */
+  .fund .body{justify-content:center}
+  .fund table{width:100%;border-collapse:collapse;margin-top:6px}
+  .fund th{background:var(--teal);color:#fff;font:700 13px "Inter";text-align:left;padding:12px 18px;border-right:1px solid rgba(255,255,255,.25)}
+  .fund th:last-child{border-right:none}
+  .fund td{padding:15px 18px;border:1px solid var(--line);border-top:none;font:500 13px/1.5 "Inter";color:var(--ink);background:#fafcfb;vertical-align:middle}
+  .fund td b{font:700 15px "Sora"}
+  .fund tr.hi td{background:var(--mint)}
+  .fund .amt{font:800 17px "Sora";color:var(--teal);white-space:nowrap}
+  .fund .core{margin-top:18px;border:1px solid var(--line);border-left:4px solid var(--teal);background:#fafcfb;padding:14px 16px;font:450 12.5px/1.6 "Inter"}
+  .fund .core b{color:var(--teal);font:700 12.5px "Sora"}
+
+  /* detailed budget breakup */
+  .bud .bgrid{flex:1;display:grid;grid-template-columns:repeat(4,1fr);gap:14px;min-height:0}
+  .bud .bcard{border:1px solid var(--line);border-top:4px solid var(--teal);background:#fafcfb;padding:14px 16px;display:flex;flex-direction:column;min-height:0}
+  .bud .bcard h3{font:800 15px "Sora";line-height:1.25}
+  .bud .bcard .sum{font:800 21px "Sora";color:var(--teal);margin-top:3px}
+  .bud .bcard .tag{font:700 9.5px "Inter";letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-top:3px}
+  .bud .bcard p{font:450 12px/1.6 "Inter";color:var(--muted);margin-top:10px}
+  .bud .bcard .fill-sp{flex:1}
+  .bud .li{display:flex;justify-content:space-between;align-items:baseline;gap:10px;padding:9px 0;border-bottom:1px solid var(--line);font:450 12px/1.45 "Inter";color:var(--muted)}
+  .bud .li:last-child{border-bottom:0}
+  .bud .li .rs{font:700 12.5px "Sora";color:var(--teal);white-space:nowrap}
+  .bud .tot{margin-top:14px;background:var(--teal);color:#fff;padding:13px 20px;display:flex;gap:26px;align-items:center;justify-content:space-between}
+  .bud .tot b{font:800 20px "Sora"}
+  .bud .tot span{font:600 11px "Inter";color:#c9ece4}
+
   /* toast */
   .toast{
     position:fixed;left:50%;bottom:22px;transform:translate(-50%,14px);z-index:1500;opacity:0;pointer-events:none;
@@ -473,15 +500,16 @@
       <div class="frame"></div>
       <div class="logo"><b>Nagaland</b><span>Tourism</span></div>
       <div class="cv">
-        <div class="kicker">Discover Nagaland — The Gateway Circuit · 3 Days / 2 Nights</div>
-        <h1>Dimapur–<em>Chümoukedima</em> Circuit</h1>
-        <p class="sub">Naga food &amp; markets · megalithic heritage · forest waterfalls · a working pineapple valley</p>
+        <div class="kicker">Developing the Dimapur–Chümoukedima (Chumu) Tourist Circuit</div>
+        <h1 style="font-size:46px">From Transit Gateway to<br>Heritage, Nature &amp; <em>Wellness Hub</em></h1>
+        <p class="sub">Activating Economic Potential · Relieving Kohima · Leveraging Private Investments</p>
         <div class="cstats">
-          <div><b>3D / 2N</b><span>Duration</span></div>
-          <div><b>12 stops</b><span>Experiences</span></div>
-          <div><b>Group of 4</b><span>All tourists</span></div>
-          <div><b id="factKm">~64 km</b><span>Driving</span></div>
+          <div><b>₹625 Cr</b><span>Total Budget</span></div>
+          <div><b>30 : 40 : 30</b><span>State · DoNER · PPP</span></div>
+          <div><b>₹250 Cr</b><span>DoNER Share</span></div>
+          <div><b id="factKm">~64 km</b><span>3D/2N Circuit</span></div>
         </div>
+        <p class="sub" style="font:600 12px 'Inter';margin-top:14px;color:rgba(255,255,255,.72)">Presented by: [Your Name] · [Date]</p>
       </div>
       <div class="cred">Naga morung · Wikimedia Commons</div>
     </div>
@@ -492,20 +520,20 @@
     <div class="stage con why">
       <header class="hd">
         <span class="dash"></span>
-        <h2>The Gateway <em>Today</em></h2>
+        <h2>Current Challenges — <em>Why Now?</em></h2>
         <span class="rule"></span>
-        <span class="meta">Situation &amp; rationale · from the Tourism Dept. concept note</span>
+        <span class="meta">The transit gateway today · the untapped opportunity</span>
       </header>
       <div class="body">
         <div class="cols">
           <div>
-            <div class="seclab">Where we stand today</div>
+            <div class="seclab">Current challenges</div>
             <div id="whyNow"></div>
           </div>
           <div>
-            <div class="seclab">Why the project is needed</div>
+            <div class="seclab">Untapped transit traffic — the opportunity</div>
             <div id="whyNeed"></div>
-            <div class="core"><b>Core idea —</b> stitch the dispersed assets of the two districts into one legible, safe and marketed circuit — the <b>Gateway Circuit</b> — so a traveller who today passes through in a few hours instead stays for four days.</div>
+            <div class="core"><b>Actionable potential —</b> converting even <b>one extra day of dwell</b> for a portion of this transit traffic unlocks massive economic gains in hotels, food, shopping and services.</div>
           </div>
         </div>
         <div class="band" id="whyBand"></div>
@@ -513,17 +541,59 @@
     </div>
   </section>
 
-  <!-- 3 · VISION & OBJECTIVES -->
+  <!-- 3 · UNIQUE HERITAGE & ENGINEERING MARVELS -->
+  <section class="slide" id="s-marvel" data-title="Heritage & marvels">
+    <div class="stage day" style="--acc:var(--teal)">
+      <header class="hd">
+        <span class="dash"></span>
+        <h2>Heritage &amp; <em>Engineering Marvels</em></h2>
+        <span class="rule"></span>
+        <span class="meta">Kachari legacy · living hydro-engineering</span>
+      </header>
+      <div class="grid">
+        <div class="dlist">
+          <div class="stop"><span class="b">1</span><div class="tx">
+            <div class="top"><span class="nm"><svg class="ic"><use href="#i-landmark"/></svg>Rich Kachari (Dimasa) history</span><span class="tm">10th century</span></div>
+            <div class="nt">Dimapur was the ancient Kachari capital — megalithic ruins dating to the 10th century survive at its heart. A powerful, authentic branding platform for the circuit.</div>
+          </div></div>
+          <div class="stop"><span class="b">2</span><div class="tx">
+            <div class="top"><span class="nm"><svg class="ic"><use href="#i-water"/></svg>Ancient ponds — engineering that still works</span><span class="tm">All-season</span></div>
+            <div class="nt">The historic waterbodies neither dry up in winter nor flood in the monsoon — superior early hydro-engineering, ideal for education, wellness and leisure tourism.</div>
+          </div></div>
+        </div>
+        <div class="ph p3">
+          <figure><img src="assets/Kachari ruins.jpg" alt="Kachari Ruins, Dimapur" loading="lazy"><figcaption><i>01</i>Kachari Ruins — the medieval capital</figcaption></figure>
+          <figure><img src="assets/Padumpukhuri.jpg" alt="Padum Pukhuri" loading="lazy"><figcaption><i>02</i>Padum Pukhuri — ancient pond</figcaption></figure>
+          <figure><img src="assets/Raj pukhuri.jpg" alt="Raj Pukhuri" loading="lazy"><figcaption><i>02</i>Raj Pukhuri — never dries, never floods</figcaption></figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 · STRATEGIC & ECONOMIC ADVANTAGES -->
+  <section class="slide" id="s-adv" data-title="Strategic advantages">
+    <div class="stage con hub" style="--acc:var(--teal)">
+      <header class="hd">
+        <span class="dash"></span>
+        <h2>Strategic &amp; <em>Economic Advantages</em></h2>
+        <span class="rule"></span>
+        <span class="meta">Relieve Kohima · multiply private capital · plug into what exists</span>
+      </header>
+      <div class="body"><div class="rows" id="advRows"></div></div>
+    </div>
+  </section>
+
+  <!-- 5 · VISION & OBJECTIVES -->
   <section class="slide" id="s-vis" data-title="Vision & objectives">
     <div class="stage con vis">
       <header class="hd">
         <span class="dash"></span>
         <h2>Vision &amp; <em>Objectives</em></h2>
         <span class="rule"></span>
-        <span class="meta">“Discover Nagaland — The Gateway Circuit”</span>
+        <span class="meta">“Dimapur–Chumu Circuit”</span>
       </header>
       <div class="body">
-        <p class="lead">Position the twin districts as <em>Nagaland’s premier gateway tourism destination</em> — where heritage, culture and nature meet — and the anchor of the wider State circuit.</p>
+        <p class="lead"><em>“Dimapur–Chumu Circuit”</em> — one seamless <em>Heritage–Nature–Culture–Adventure</em> experience at the gateway of Nagaland.</p>
         <div class="ogrid" id="visGrid"></div>
       </div>
     </div>
@@ -545,38 +615,97 @@
     </div>
   </section>
 
-  <!-- 5 · DIMAPUR TOURISM HUB -->
-  <section class="slide" id="s-hubA" data-title="Dimapur hub">
+  <!-- 7 · PROPOSED KEY INTERVENTIONS -->
+  <section class="slide" id="s-int" data-title="Key interventions">
     <div class="stage con hub" style="--acc:var(--teal)">
       <header class="hd">
         <span class="dash"></span>
-        <h2>Dimapur <em>Tourism Hub</em></h2>
+        <h2>Proposed <em>Key Interventions</em></h2>
         <span class="rule"></span>
-        <span class="meta">5 signature nodes · indicative ₹59 cr · Public + PPP</span>
+        <span class="meta">Five integrated moves · ₹625 Cr programme</span>
       </header>
-      <div class="body"><div class="rows" id="hubARows"></div></div>
+      <div class="body"><div class="rows" id="intRows"></div></div>
     </div>
   </section>
 
-  <!-- 6 · CHUMOUKEDIMA TOURISM HUB -->
-  <section class="slide" id="s-hubB" data-title="Chumoukedima hub">
-    <div class="stage con hub" style="--acc:var(--d2)">
-      <header class="hd" style="--acc:var(--d2)">
+  <!-- 8 · FUNDING STRUCTURE (30:40:30) -->
+  <section class="slide" id="s-fund" data-title="Funding structure">
+    <div class="stage con fund">
+      <header class="hd">
         <span class="dash"></span>
-        <h2>Chümoukedima <em>Tourism Hub</em></h2>
+        <h2>Funding <em>Structure</em></h2>
         <span class="rule"></span>
-        <span class="meta">5 signature nodes · indicative ₹88 cr · largely PPP</span>
+        <span class="meta">₹625 Cr total · 30 : 40 : 30 · DoNER share fixed at ₹250 Cr</span>
       </header>
-      <div class="body"><div class="rows" id="hubBRows"></div></div>
+      <div class="body">
+        <table>
+          <tr><th style="width:17%">Partner</th><th style="width:10%">Ratio</th><th style="width:15%">Amount</th><th>Focus areas</th></tr>
+          <tr><td><b>State</b></td><td>30%</td><td class="amt">₹187.5 Cr</td><td>Land acquisition, link roads, coordination &amp; basic infrastructure</td></tr>
+          <tr class="hi"><td><b>DoNER</b></td><td>40%</td><td class="amt">₹250 Cr</td><td>Major heritage &amp; tourism infrastructure — Kachari ruins, ancient ponds, Super Market, skywalks</td></tr>
+          <tr><td><b>PPP / Private</b></td><td>30%</td><td class="amt">₹187.5 Cr</td><td>Hotel &amp; water-park expansions, transport fleet, commercial operations &amp; maintenance</td></tr>
+        </table>
+        <div class="core"><b>Rationale —</b> a scaled-up project with stronger DoNER support for core components while maintaining the original proportional contributions. This allows more ambitious development and faster private-sector returns.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9 · DETAILED BUDGET BREAKUP -->
+  <section class="slide" id="s-budget" data-title="Budget breakup">
+    <div class="stage con bud">
+      <header class="hd">
+        <span class="dash"></span>
+        <h2>Detailed <em>Budget Breakup</em></h2>
+        <span class="rule"></span>
+        <span class="meta">₹625 Crore · four programme heads</span>
+      </header>
+      <div class="body">
+        <div class="bgrid">
+          <div class="bcard">
+            <h3>Heritage &amp; Conservation</h3>
+            <div class="sum">₹230 Cr</div>
+            <div class="tag">DoNER lead</div>
+            <div class="li" style="margin-top:12px"><span>Kachari Ruins upgrade — museum, park, light &amp; sound</span><span class="rs">₹100 Cr</span></div>
+            <div class="li"><span>Ponds → Promenades + skywalks</span><span class="rs">₹80 Cr</span></div>
+            <div class="li"><span>Interpretation centres &amp; signage</span><span class="rs">₹50 Cr</span></div>
+            <div class="fill-sp"></div>
+          </div>
+          <div class="bcard">
+            <h3>Infrastructure &amp; Amenities</h3>
+            <div class="sum">₹160 Cr</div>
+            <div class="tag">State + DoNER</div>
+            <div class="li" style="margin-top:12px"><span>Link roads &amp; connectivity (State)</span><span class="rs">₹70 Cr</span></div>
+            <div class="li"><span>Super Market revamp — market, amphitheatre, food court</span><span class="rs">₹50 Cr</span></div>
+            <div class="li"><span>Tourist amenity centres</span><span class="rs">₹40 Cr</span></div>
+            <div class="fill-sp"></div>
+          </div>
+          <div class="bcard">
+            <h3>Experiential Products &amp; Operations</h3>
+            <div class="sum">₹145 Cr</div>
+            <div class="tag">Convergence</div>
+            <div class="li" style="margin-top:12px"><span>Diezephe, Bamboo/Honey, Sovima &amp; Bambusa integrations</span><span class="rs">₹55 Cr</span></div>
+            <div class="li"><span>Cultural programmes, viewpoint, wellness zones</span><span class="rs">₹60 Cr</span></div>
+            <div class="li"><span>Training, marketing &amp; digital app</span><span class="rs">₹30 Cr</span></div>
+            <div class="fill-sp"></div>
+          </div>
+          <div class="bcard">
+            <h3>Private Sector &amp; Contingency</h3>
+            <div class="sum">₹90 Cr</div>
+            <div class="tag">PPP-led</div>
+            <p>Hotel &amp; water-park synergies, transport fleet, commercial outlets, and project buffer.</p>
+            <div class="fill-sp"></div>
+          </div>
+        </div>
+        <div class="tot"><span style="font:700 13px 'Sora'">Total programme</span><b>₹625 Crore</b><span>State ₹187.5 Cr · DoNER ₹250 Cr · PPP ₹187.5 Cr</span></div>
+      </div>
     </div>
   </section>
 
   <!-- 7 · ITINERARY OVERVIEW -->
-  <section class="slide" id="s-over" data-title="Itinerary">
+  <section class="slide" id="s-over" data-title="Itinerary options">
     <div class="stage ov">
       <header class="hd">
         <span class="dash"></span>
-        <h2>Itinerary <em>Overview</em></h2>
+        <h2>Itinerary <em>Options</em></h2>
         <span class="rule"></span>
         <span class="meta" id="ovSub"></span>
       </header>
@@ -593,32 +722,32 @@
         <span class="dash"></span>
         <h2>Route <em>Map</em></h2>
         <div class="seg" id="seg">
-          <button data-day="all" class="on">All days</button>
-          <button data-day="1">Day 1</button>
-          <button data-day="2">Day 2</button>
-          <button data-day="3">Day 3</button>
+          <button data-day="all" class="on">All options</button>
+          <button data-day="1">Option 1</button>
+          <button data-day="2">Option 2</button>
+          <button data-day="3">Option 3</button>
         </div>
-        <div class="cnt" id="ixCount">12 stops</div>
+        <div class="cnt" id="ixCount">14 stops</div>
       </div>
       <div class="ovl ix">
         <h3>Stop Index</h3>
         <div class="list" id="ixList"></div>
       </div>
       <div class="ovl legend">
-        <span><i style="background:var(--d1)"></i>Day 1</span>
-        <span><i style="background:var(--d2)"></i>Day 2</span>
-        <span><i style="background:var(--d3)"></i>Day 3</span>
+        <span><i style="background:var(--d1)"></i>Option 1</span>
+        <span><i style="background:var(--d2)"></i>Option 2</span>
+        <span><i style="background:var(--d3)"></i>Option 3</span>
         <span><i class="sq" style="background:var(--ink)"></i>Dimapur Airport</span>
       </div>
     </div>
   </section>
 
   <!-- 4–6 · DAY PAGES -->
-  <section class="slide" id="s-d1" data-title="Day 1">
+  <section class="slide" id="s-d1" data-title="Day 1 · Option 1">
     <div class="stage day" style="--acc:var(--d1)">
       <header class="hd">
         <span class="dash"></span>
-        <h2><em>Day 1</em> — Food &amp; Shopping</h2>
+        <h2><em>Day 1 · Option 1</em> — Food &amp; Shopping</h2>
         <span class="rule"></span>
         <span class="meta" id="meta-1"></span>
       </header>
@@ -629,11 +758,11 @@
     </div>
   </section>
 
-  <section class="slide" id="s-d2" data-title="Day 2">
+  <section class="slide" id="s-d2" data-title="Day 2 · Option 2">
     <div class="stage day" style="--acc:var(--d2)">
       <header class="hd" style="--acc:var(--d2)">
         <span class="dash"></span>
-        <h2><em>Day 2</em> — Heritage &amp; Nature</h2>
+        <h2><em>Day 2 · Option 2</em> — Heritage &amp; Nature</h2>
         <span class="rule"></span>
         <span class="meta" id="meta-2"></span>
       </header>
@@ -644,11 +773,11 @@
     </div>
   </section>
 
-  <section class="slide" id="s-d3" data-title="Day 3">
+  <section class="slide" id="s-d3" data-title="Day 3 · Option 3">
     <div class="stage day" style="--acc:var(--d3)">
       <header class="hd" style="--acc:var(--d3)">
         <span class="dash"></span>
-        <h2><em>Day 3</em> — Adventure &amp; Farm</h2>
+        <h2><em>Day 3 · Option 3</em> — Sunrise, Heritage &amp; Farm</h2>
         <span class="rule"></span>
         <span class="meta" id="meta-3"></span>
       </header>
@@ -723,7 +852,7 @@
           <div class="card"><div class="ic"><svg class="ic"><use href="#i-bed"/></svg></div><h4>Stay</h4><p>2 nights at Zone Niathu Resort, Chümoukedima — one base for the whole circuit.</p></div>
           <div class="card"><div class="ic"><svg class="ic"><use href="#i-fork"/></svg></div><h4>Naga Cuisine</h4><p>Food-court dinner at Urban Haat, Naga Heirloom lunch, resort &amp; local meals.</p></div>
           <div class="card"><div class="ic"><svg class="ic"><use href="#i-weave"/></svg></div><h4>Craft &amp; Culture</h4><p>Urban Haat cultural show, live weaving, cane-craft &amp; wood-carving demos.</p></div>
-          <div class="card"><div class="ic"><svg class="ic"><use href="#i-boat"/></svg></div><h4>Adventure</h4><p>4×4 trail, zip-line, boating, fishing, sunrise deck &amp; pineapple plucking.</p></div>
+          <div class="card"><div class="ic"><svg class="ic"><use href="#i-sunrise"/></svg></div><h4>Sunrise &amp; Farm</h4><p>Seithekema sunrise, Triple Falls breakfast, Sechü Zubza heritage halt, pineapple plucking &amp; Unity Mall shopping.</p></div>
         </div>
         <table>
           <tr><th style="width:34%">Package Pricing</th><th style="width:33%">Total Spend</th><th>Per Head (Group of 4)</th></tr>
@@ -754,10 +883,12 @@
 <script>
 /* ================= DATA (unchanged from source brief) ================= */
 const AIRPORT = {name:"Dimapur Airport", lat:25.8839, lng:93.7714};
+/* Three interchangeable ONE-DAY OPTIONS — a visitor picks any option on
+   any day of the stay; Option N is the suggested plan for Day N. */
 const DAYS = {
-  1:{key:"Day 1", name:"Food & Shopping"},
-  2:{key:"Day 2", name:"Heritage & Nature"},
-  3:{key:"Day 3", name:"Adventure & Farm"}
+  1:{key:"Option 1", name:"Food & Shopping"},
+  2:{key:"Option 2", name:"Heritage & Nature"},
+  3:{key:"Option 3", name:"Sunrise, Heritage & Farm"}
 };
 const DAY_HEX = {1:"#0e6e62", 2:"#b45309", 3:"#6d28d9"};
 
@@ -786,18 +917,24 @@ const STOPS = [
   {n:8, day:2, name:"Chumu View Point", time:"4:00 PM", icon:"i-camera",
    note:"Sunset view, skyline walk and photography over the hills.", lat:25.8150, lng:93.7720,
    img:"https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Sunset_dimapur.jpg/960px-Sunset_dimapur.jpg", rep:1},
-  {n:9, day:3, name:"Seithekema View Deck", time:"5:00 AM", icon:"i-sunrise",
-   note:"Sunrise viewing & meditation point to open the final day.", lat:25.8300, lng:93.8180,
+  {n:9, day:3, name:"Seithekema Village Sunrise", time:"5:00 AM", icon:"i-sunrise",
+   note:"Sunrise viewing & meditation point at Seithekema village to open the day.", lat:25.8300, lng:93.8180,
    img:null},
-  {n:10, day:3, name:"Triple Falls", time:"6:00 – 7:00 AM", icon:"i-falls",
-   note:"Breakfast & wellness by community members, then 4×4 adventure trail toward Mengu village.", lat:25.806302, lng:93.816648,
+  {n:10, day:3, name:"Triple Falls", time:"6:00 – 7:30 AM", icon:"i-falls",
+   note:"Breakfast & wellness by community members beside the three-tier falls.", lat:25.806302, lng:93.816648,
    img:"https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Waterfall_nagaland.jpg/960px-Waterfall_nagaland.jpg", rep:1},
-  {n:11, day:3, name:"Noune Resort", time:"9:30 AM – 12:30 PM", icon:"i-boat",
-   note:"Zip-lining, fishing, spa/massage & boating, followed by a local-cuisine lunch.", lat:25.846382, lng:93.834162,
+  {n:11, day:3, name:"Sechü Zubza Historical Site", time:"9:00 – 11:30 AM", icon:"i-landmark",
+   note:"Guided visit to the historical site at Sechü Zubza, in the foothills on NH-29 towards Kohima.", lat:25.7150, lng:94.0365,
    img:null},
-  {n:12, day:3, name:"Ruzaphema Pineapple Farm", time:"2:00 – 4:00 PM", icon:"i-leaf",
-   note:"Pineapple-farm tour & plucking (dao + bamboo bag), valley view over Peren, Nagaki & Dimapur, then bonfire & Naga-tea experience. Return to hotel for dinner (6 PM).", lat:25.718331, lng:93.792578,
-   img:"https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Pineapple_field_in_an_FPO_in_Nagaland.jpg/960px-Pineapple_field_in_an_FPO_in_Nagaland.jpg"}
+  {n:12, day:3, name:"Wonder Hills", time:"12:00 – 1:30 PM", icon:"i-fork",
+   note:"Local-cuisine lunch with valley views at Wonder Hills on the NH-29 corridor.", lat:25.7450, lng:93.9800,
+   img:null},
+  {n:13, day:3, name:"Medziphema Pineapple Farm", time:"2:00 – 3:30 PM", icon:"i-leaf",
+   note:"Pineapple-farm tour & plucking (dao + bamboo bag) in the Medziphema pineapple belt.", lat:25.7776, lng:93.9265,
+   img:"https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Pineapple_field_in_an_FPO_in_Nagaland.jpg/960px-Pineapple_field_in_an_FPO_in_Nagaland.jpg"},
+  {n:14, day:3, name:"Unity Mall, Chümoukedima", time:"4:30 – 6:00 PM", icon:"i-bag",
+   note:"ODOP shopping — local produce, handloom & souvenirs — then return to the hotel for dinner (7 PM).", lat:25.8660, lng:93.7760,
+   img:null}
 ];
 const gimg=s=>'https://www.google.com/search?udm=2&q='+encodeURIComponent(s.name+' Chümoukedima Dimapur Nagaland');
 
@@ -832,7 +969,7 @@ L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r
 /* markers */
 const airMarker=L.marker([AIRPORT.lat,AIRPORT.lng],{icon:L.divIcon({className:'',
   html:'<div class="pin air" title="Dimapur Airport">✈</div>',iconSize:[30,30],iconAnchor:[15,15]})}).addTo(map);
-airMarker.bindPopup('<div class="pop-t">'+AIRPORT.name+'</div><div class="pop-note">Arrival point — Day 1, 3:30 PM.</div>');
+airMarker.bindPopup('<div class="pop-t">'+AIRPORT.name+'</div><div class="pop-note">Arrival — pickup 3:30 PM. Option 1 suits the arrival evening.</div>');
 
 const markers={};
 STOPS.forEach(s=>{
@@ -969,18 +1106,18 @@ function highlight(n){
     let evs='';
     if(d===1) evs+=air('3:30 PM','Dimapur Airport — pickup','Group of 4 picked up and driven to the resort.');
     list.forEach(s=>{evs+=stop(s);});
-    if(d===3) evs+=air('Evening','Return &amp; departure','Dinner at 6 PM, then transfer for the onward journey.');
+    if(d===3) evs+=air('Evening','Return &amp; departure','Dinner at the hotel (7 PM), then transfer for the onward journey.');
     const tot=d===3
       ?'<div class="tot"><div><b>'+STOPS.length+'</b><span>Experiences</span></div>'+
         '<div><b>~'+TOTAL_KM+' km</b><span>Total driving</span></div></div>'
       :'';
     html+='<div class="ovc" style="--c:'+DAY_HEX[d]+'">'+
       '<div class="dh"><b>'+DAYS[d].key+' <small>· '+DAYS[d].name+'</small></b>'+
-        '<span>'+list.length+' stops · ~'+dayKm(d)+' km driving</span></div>'+
+        '<span>Suggested Day '+d+' · '+list.length+' stops · ~'+dayKm(d)+' km driving</span></div>'+
       '<div class="lane">'+evs+'</div>'+tot+'</div>';
   });
   cols.innerHTML=html;
-  document.getElementById('ovSub').textContent=STOPS.length+' experiences · 3 days · ~'+TOTAL_KM+' km';
+  document.getElementById('ovSub').textContent=STOPS.length+' experiences · 3 one-day options — pick any option each day · ~'+TOTAL_KM+' km';
 })();
 
 /* ================= SLIDES 4–6 · DAY PAGES (list + photo grid) ============ */
@@ -1017,46 +1154,41 @@ function dayShots(d){
 
 /* ================= CONCEPT-NOTE SLIDES (data + build) ==================
    Content condensed from “Development of the Dimapur–Chumoukedima Twin
-   District Tourism Sector” — Dept. of Tourism, Govt. of Nagaland.       */
+   District Tourism Sector” — Dept. of Tourism, Govt. of Nagaland.
+   Revised to the ₹625 Cr (30:40:30) proposal — DoNER share ₹250 Cr.    */
 const CN={
   now:[
-    ["Nagaland’s front door","Principal entry to the State by air, rail and road — every domestic and international arrival passes through the twin districts."],
-    ["A ~1-day transit halt","Most visitors experience the districts only as a transit point en route to Kohima and the interior — a few hours, then gone."],
-    ["Assets exist, but dispersed","Kachari ruins, Diezephe weaving village, Triple Falls, civic waterbodies, Rangapahar zoo, the pineapple belt — real strengths, not yet connected."],
-    ["Value leaks at the gateway","Very high footfall, very little captured spend: no organised multi-day experience, wayfinding, interpretation or quality stays."]
+    ["A transit hub, not a destination","Dimapur is the airport plus one of the Northeast’s busiest railway stations — yet dwell time is minimal and travellers pass straight through."],
+    ["Rich but fragmented attractions","Heritage, markets, waterbodies, craft and nature sites all exist — but disconnected, so tourists and travellers move on quickly."],
+    ["The cost of doing nothing","Lost revenue, under-utilised potential and mounting tourism pressure on Kohima and other destinations."]
   ],
   need:[
-    ["The gap is conversion, not footfall","Turning arrivals into stays, and stays into local income, is what an integrated, well-serviced circuit delivers."],
-    ["First & last impression of the State","Presenting heritage, craft and nature well at the gateway shapes every visitor’s image of Nagaland."],
-    ["The most cost-effective unlock","Consolidating and connecting existing assets — with stays, wayfinding and community participation — beats building attractions from scratch."]
+    ["Assamese travellers don’t stop","Large volumes transit through Dimapur daily but do not halt — there are no compelling tourist facilities to hold them."],
+    ["Professionals pass through unseen","Technicians, engineers and professionals from outside frequently pass through without visiting any sites."],
+    ["Everything is 5–20 minutes away","All key spots sit very close to the railway station and the airport — the circuit is already physically compact."]
   ],
-  band:[["~1 day → 4 days","Target length of stay"],["2 hubs · 10 nodes","One gateway circuit"],["14 sectors","Year-round demand"],["~₹172 cr","Indicative outlay · phased"]],
+  band:[["₹625 Cr","Total project outlay"],["30 : 40 : 30","State · DoNER · PPP"],["₹250 Cr","DoNER share · fixed"],["+1 day dwell","Unlocks the gateway economy"]],
   objectives:[
-    ["Gateway destination","Position the twin districts as Nagaland’s gateway tourism destination and anchor of the wider State circuit."],
-    ["Transit → 4-day stay","Convert the transit halt into a full four-day stay — raising arrivals, spend and repeat visitation."],
-    ["Livelihoods first","Generate employment and entrepreneurship, especially for local youth, women and artisans."],
-    ["Heritage & craft","Strengthen heritage, culture, handloom and handicrafts through conservation, interpretation and market access."],
-    ["Community-based & sustainable","Promote community-based tourism using low-impact, eco-sensitive development."],
-    ["Investment & linkages","Attract public and private (PPP) investment; connect onward to the Kohima–Wokha–Mokokchung circuits."]
+    ["Transit → meaningful stays","Turn transit passengers into overnight visitors — raising dwell time, spend and repeat visitation."],
+    ["One integrated circuit","Integrate today’s fragmented sites with world-class amenities — promenades, skywalks, amenity centres and link roads."],
+    ["Kachari legacy · modern wellness","Celebrate the Kachari legacy while creating modern wellness and leisure options for every visitor."]
   ],
   sectors:[
     ["Heritage","Kachari ruins precinct"],["Cultural","Performances & attire"],["Shopping & Lifestyle","Hong Kong Market"],["Culinary","Naga cuisine & food streets"],["Handloom & Handicraft","Diezephe · Urban Haat"],
     ["Nature & Eco","Triple Falls · trails"],["Wildlife","Rangapahar Zoological Park"],["Adventure","2W/4W trails · zip line"],["Recreation & Family","Water park · learning zones"],["Rural & Agri","Ruzaphema pineapple farms"],
     ["Hospitality & Wellness","Chumou Hill retreat"],["Community-based","Homestays · SHGs · VDBs"],["Festival & Event","Annual craft & farm festivals"],["MICE","Conferences · amphitheatres"]
   ],
-  hubA:[
-    ["i","Gateway Cultural Experience","Super Market & Hong Kong Market","Souvenirs, handloom & traditional attire, bamboo & cane, organic products, Naga cuisine & food court, Tourist Information Centre, weekend flea market, cultural performances, evening shopping & food street.","₹12 cr · Public + PPP"],
-    ["ii","Kachari Heritage Precinct","medieval ruins","Conservation of the ruins, interpretation centre & museum, guided heritage walks, sound & light show, amphitheatre, landscaping, visitor amenities.","₹15 cr · Public"],
-    ["iii","Urban Haat","Dilli Haat model","Artisan stalls, traditional cuisine, handloom & handicrafts, live demonstrations, folk music, cultural performances, weekend festivals.","₹8 cr · Public"],
-    ["iv","Heritage Waterfront & Spiritual Circuit","Padum Pukhri · Raj Pukhri · Naharbari Temple","Waterfront promenade, landscaped gardens, boating, musical fountain, evening illumination, viewing decks, amphitheatre, pilgrim amenities, meditation spaces, food kiosks.","₹18 cr · Public"],
-    ["v","Rangapahar Zoological Park","Forest Department","Visitor-facility enhancement, nature interpretation centre, wildlife education, children’s learning zone.","₹6 cr · Public"]
+  adv:[
+    ["i","Reduces stress on Kohima","balances the load","Diverts and retains visitor traffic at the gateway, easing pressure on Kohima and spreading the tourism load across destinations.","Strategic"],
+    ["ii","Leverages private investment","already on the ground","Concentrated private capital in Dimapur–Chumu — the Merryland water park, hotels near the airport and ongoing hospitality projects — multiplies every public rupee.","Economic"],
+    ["iii","Plugs into ready synergies","no cold starts","Bamboo & Honey Mission, Diezephe Craft Village, Chumu Viewpoint (Swadesh Darshan), Sovima Naga Heirloom and Bambusa Nagaland Coffee.","Convergence"]
   ],
-  hubB:[
-    ["i","Diezephe Craft & Creative Village","handloom & handicraft","Live weaving demonstrations, bamboo & cane crafts, pottery & wood carving, textile showcases, village café, homestays, craft market, annual festival.","₹10 cr · Public + PPP"],
-    ["ii","Triple Falls, Seithekema","community land","Nature-trail development, trekking, viewing platforms, camping & picnic facilities, eco café, photography points, dedicated sunrise & sunset viewpoints.","₹7 cr · Public"],
-    ["iii","Adventure Trail (2W & 4W)","Seithekema · New Chümoukedima · Mengu","Guided rides & drives, camping, scenic viewpoints, adventure rallies, village experience, safety & rescue, trail signage.","₹6 cr · Public + PPP"],
-    ["iv","Chumou Hill Eco Adventure & Wellness","+ Merry Land Water Park · >300 acres","Boutique hotel, eco cottages & glamping, sky deck, glass bridge & skywalk, zip line, giant swing, rope course, rock climbing, adventure park, wellness retreat, MICE & amphitheatre, stargazing; water park for family recreation.","₹60 cr · largely PPP"],
-    ["v","Ruzaphema Pineapple Agri-Tourism","private farms on community land","Farm visits & harvesting, farm-to-table lunch, farmer interaction, processing demonstrations, farm café, seasonal Pineapple Festival.","₹5 cr · Public + PPP"]
+  interventions:[
+    ["i","Kachari Ruins","heritage anchor","Museum, heritage park and light-&-sound shows on the medieval Kachari capital.","₹100 Cr"],
+    ["ii","Ancient Ponds → Promenades","Padum Pukhri · Raj Pukhri","Lakeside promenades with walkways for jogging, relaxation and meditation, plus educational tours on their engineering.","₹80 Cr"],
+    ["iii","Super Market Revamp","the gateway market","Integrated exotic local market, weekly flea market, open food court and amphitheatre.","₹50 Cr"],
+    ["iv","Skywalks · Amenity Centres · Link Roads","connectivity & comfort","Skywalks linking key precincts, tourist amenity centres and improved link roads across the circuit.","₹110 Cr"],
+    ["v","Private & Mission Integration","PPP","Fully integrate the private water park, hotels, Diezephe, Sovima, Bambusa and Bamboo & Honey Mission projects.","PPP-led"]
   ],
   principles:[
     ["Build on existing strengths","rather than create from scratch"],
@@ -1070,10 +1202,10 @@ const CN={
   ],
   infra:[
     ["Information & Services","Tourist information centres · unified branding · signage & interpretation · tourist-friendly police · guide training · tourist-point development"],
-    ["Access & Mobility","Roads with tourist amenities · tourist shuttle · tourist taxi (2W/4W) · trail development · parking"],
+    ["Access & Mobility","Roads with tourist amenities · tourist shuttle · tourist taxi (2W/4W) · trail development · multi-level parking at the Super Market"],
     ["On-Site & Digital","Viewing decks & food courts · homestays · night illumination · public conveniences · digital tourism portal · app with vector maps"]
   ],
-  outStats:[["1 → 4 days","Average length of stay"],["+100%","Arrivals · Yr-5 target"],["~₹172 cr","Indicative · phased · PPP-led"],["3 phases","~5 years · SLEC approved"]],
+  outStats:[["1 → 3 days","Average length of stay"],["+100%","Arrivals · Yr-5 target"],["₹625 cr","30 : 40 : 30 · State–DoNER–PPP"],["3 phases","~5 years · SLEC approved"]],
   outcomes:[
     ["Gateway destination positioned","Nagaland’s premier gateway; anchor of the State circuit."],
     ["Jobs & entrepreneurship","Hospitality, guiding, transport, crafts, F&B — youth & women focused."],
@@ -1101,8 +1233,8 @@ const CN={
   const nrow=n=>'<div class="nrow"><span class="b">'+n[0]+'</span><div class="tx">'+
     '<div class="top"><span class="nm">'+n[1]+' <small>· '+n[2]+'</small></span><span class="tm">'+n[4]+'</span></div>'+
     '<div class="nt">'+n[3]+'</div></div></div>';
-  document.getElementById('hubARows').innerHTML=CN.hubA.map(nrow).join('');
-  document.getElementById('hubBRows').innerHTML=CN.hubB.map(nrow).join('');
+  document.getElementById('advRows').innerHTML=CN.adv.map(nrow).join('');
+  document.getElementById('intRows').innerHTML=CN.interventions.map(nrow).join('');
   document.getElementById('planRows').innerHTML=CN.principles.map((p,i)=>
     '<div class="prow"><i>'+String(i+1).padStart(2,'0')+'</i><div><b>'+p[0]+'</b> <span>— '+p[1]+'</span></div></div>').join('');
   document.getElementById('planCards').innerHTML=CN.infra.map(c=>
@@ -1323,11 +1455,11 @@ async function exportPPT(){
     const pptx=new PptxGenJS();
     pptx.defineLayout({name:'W',width:13.33,height:7.5}); pptx.layout='W';
     pptx.author='Nagaland Circuit Planner';
-    pptx.title='Dimapur–Chümoukedima Circuit · 3D/2N';
+    pptx.title='Dimapur–Chümoukedima Tourist Circuit · ₹625 Cr Proposal';
     const F='Segoe UI';
     const C={ink:'12211D',teal:'0E6E62',teald:'0A4F47',muted:'5F7370',line:'E0E7E4',mint:'E7F2F0'};
     const DC={1:'0E6E62',2:'B45309',3:'6D28D9'};
-    const NSLIDES=14;
+    const NSLIDES=17;
     const foot=(s,n)=>{
       s.addText('Nagaland Circuit · Dimapur–Chümoukedima · 3D/2N',
         {x:.5,y:7.12,w:9,h:.28,fontFace:F,fontSize:8.5,color:C.muted});
@@ -1354,21 +1486,21 @@ async function exportPPT(){
       s.addShape(pptx.ShapeType.roundRect,{x:10.9,y:.55,w:1.9,h:.78,fill:{color:C.teal},rectRadius:.08});
       s.addText('Nagaland',{x:10.9,y:.58,w:1.9,h:.42,fontFace:F,fontSize:15,bold:true,color:'FFFFFF',align:'center'});
       s.addText('T O U R I S M',{x:10.9,y:.97,w:1.9,h:.3,fontFace:F,fontSize:7.5,bold:true,color:'C9ECE4',align:'center'});
-      s.addText('TOURIST CIRCUIT · 3 DAYS / 2 NIGHTS · GROUP OF 4',
-        {x:.75,y:4.35,w:11,h:.4,fontFace:F,fontSize:11.5,color:'8FD0C2',charSpacing:4,bold:true});
+      s.addText('DEVELOPING THE DIMAPUR–CHÜMOUKEDIMA (CHUMU) TOURIST CIRCUIT',
+        {x:.75,y:4.35,w:11.5,h:.4,fontFace:F,fontSize:11.5,color:'8FD0C2',charSpacing:3,bold:true});
       s.addText([
-        {text:'Dimapur–',options:{color:'FFFFFF'}},
-        {text:'Chümoukedima',options:{color:'8FD0C2'}},
-        {text:' Circuit',options:{color:'FFFFFF'}}],
-        {x:.72,y:4.7,w:12.2,h:.95,fontFace:F,fontSize:38,bold:true});
-      s.addText('Naga food & markets  ·  megalithic heritage  ·  forest waterfalls  ·  a working pineapple valley',
+        {text:'From Transit Gateway to ',options:{color:'FFFFFF'}},
+        {text:'Heritage, Nature & Wellness Hub',options:{color:'8FD0C2'}}],
+        {x:.72,y:4.7,w:12.35,h:.95,fontFace:F,fontSize:28,bold:true});
+      s.addText('Activating Economic Potential  ·  Relieving Kohima  ·  Leveraging Private Investments',
         {x:.75,y:5.62,w:11.5,h:.4,fontFace:F,fontSize:13,color:'E8F4F0'});
-      const stats=[['3D / 2N','DURATION'],['12 stops','EXPERIENCES'],['Group of 4','ALL TOURISTS'],['~'+TOTAL_KM+' km','DRIVING']];
+      const stats=[['₹625 Cr','TOTAL BUDGET'],['30 : 40 : 30','STATE · DONER · PPP'],['₹250 Cr','DONER SHARE'],['3D/2N · ~'+TOTAL_KM+' km','CIRCUIT ITINERARY']];
       stats.forEach((st,i)=>{
         const x=.75+i*2.6;
         s.addText(st[0],{x,y:6.15,w:2.4,h:.42,fontFace:F,fontSize:16,bold:true,color:'FFFFFF'});
         s.addText(st[1],{x,y:6.55,w:2.4,h:.3,fontFace:F,fontSize:8,color:'BFE3D9',charSpacing:2});
       });
+      s.addText('Presented by: [Your Name] · [Date]',{x:.75,y:6.92,w:8,h:.3,fontFace:F,fontSize:9,color:'BFE3D9'});
     }
 
     /* numbered fact rows (concept slides) */
@@ -1383,20 +1515,39 @@ async function exportPPT(){
     };
     const seclab=(s,x,y,t,color)=>s.addText(t.toUpperCase(),
       {x,y,w:6,h:.28,fontFace:F,fontSize:9,bold:true,color:color||C.teal,charSpacing:2.5});
+    /* hub-style node-row slide (advantages · interventions) */
+    const nodeSlide=(em,rest,color,sub,items,pageNo)=>{
+      const s=pptx.addSlide();
+      band(s,em,rest,color,sub);
+      const top=1.5,HH=5.45,gap=.12,rowH=(HH-(items.length-1)*gap)/items.length;
+      items.forEach((n,i)=>{
+        const y=top+i*(rowH+gap);
+        s.addShape(pptx.ShapeType.rect,{x:.5,y,w:12.35,h:rowH,fill:{color:'FAFCFB'},line:{color:C.line,width:1}});
+        s.addShape(pptx.ShapeType.rect,{x:.5,y:y+.09,w:.06,h:rowH-.18,fill:{color}});
+        s.addText(n[0],{shape:pptx.ShapeType.ellipse,fill:{color},
+          x:.72,y:y+rowH/2-.19,w:.38,h:.38,align:'center',valign:'middle',fontFace:F,fontSize:10.5,bold:true,color:'FFFFFF'});
+        s.addText([{text:n[1],options:{bold:true,fontSize:12,color:C.ink}},
+                   {text:'  · '+n[2],options:{fontSize:9,color:C.muted}}],
+          {x:1.26,y:y+.05,w:9.2,h:.36,fontFace:F,valign:'middle'});
+        s.addText(n[4],{x:10.4,y:y+.08,w:2.35,h:.3,fontFace:F,fontSize:9,bold:true,color,align:'right',valign:'middle'});
+        s.addText(n[3],{x:1.26,y:y+.4,w:11.4,h:rowH-.46,fontFace:F,fontSize:8.5,color:C.muted,valign:'top'});
+      });
+      foot(s,pageNo);
+    };
 
     /* --- Slide 2 · The Gateway Today (situation & rationale) --- */
     {
       const s=pptx.addSlide();
-      band(s,'The Gateway ','Today',C.teal,'Situation & rationale — from the Tourism Dept. concept note');
-      seclab(s,.5,1.42,'Where we stand today');
-      cnRows(s,.5,6.15,1.78,CN.now,1.02,C.teal);
-      seclab(s,7.05,1.42,'Why the project is needed');
+      band(s,'Current Challenges ','— Why Now?',C.teal,'The transit gateway today · the untapped opportunity');
+      seclab(s,.5,1.42,'Current challenges');
+      cnRows(s,.5,6.15,1.78,CN.now,1.3,C.teal);
+      seclab(s,7.05,1.42,'Untapped transit traffic — the opportunity');
       cnRows(s,7.05,5.8,1.78,CN.need,.86,C.teal);
       /* core idea callout */
       s.addShape(pptx.ShapeType.rect,{x:7.05,y:4.42,w:5.8,h:1.38,fill:{color:'FDF8F2'},line:{color:C.line,width:1}});
       s.addShape(pptx.ShapeType.rect,{x:7.05,y:4.42,w:.06,h:1.38,fill:{color:'B45309'}});
-      s.addText([{text:'Core idea — ',options:{bold:true,color:'B45309'}},
-        {text:'stitch the dispersed assets of the two districts into one legible, safe and marketed circuit — the Gateway Circuit — so a traveller who today passes through in a few hours instead stays for four days.',options:{color:C.ink}}],
+      s.addText([{text:'Actionable potential — ',options:{bold:true,color:'B45309'}},
+        {text:'converting even one extra day of dwell for a portion of this transit traffic unlocks massive economic gains in hotels, food, shopping and services.',options:{color:C.ink}}],
         {x:7.22,y:4.52,w:5.5,h:1.2,fontFace:F,fontSize:9.5,valign:'top'});
       /* stat band */
       s.addShape(pptx.ShapeType.rect,{x:.5,y:6.0,w:12.35,h:.92,fill:{color:C.teal}});
@@ -1409,25 +1560,63 @@ async function exportPPT(){
       foot(s,2);
     }
 
-    /* --- Slide 3 · Vision & objectives --- */
+    /* --- Slide 3 · Heritage & engineering marvels --- */
     {
       const s=pptx.addSlide();
-      band(s,'Vision ','& Objectives',C.teal,'“Discover Nagaland — The Gateway Circuit”');
-      s.addText([{text:'Position the twin districts as ',options:{color:C.ink}},
-        {text:'Nagaland’s premier gateway tourism destination',options:{color:C.teal}},
-        {text:' — where heritage, culture and nature meet — and the anchor of the wider State circuit.',options:{color:C.ink}}],
-        {x:.5,y:1.42,w:12.3,h:.75,fontFace:F,fontSize:15,bold:true});
-      CN.objectives.forEach((o,i)=>{
-        const x=.5+(i%3)*4.28, y=2.4+Math.floor(i/3)*2.25;
-        s.addShape(pptx.ShapeType.rect,{x,y,w:4.08,h:2.05,fill:{color:'FAFCFB'},line:{color:C.line,width:1}});
-        s.addText(String(i+1).padStart(2,'0'),{x:x+.2,y:y+.12,w:1,h:.42,fontFace:F,fontSize:17,bold:true,color:'B9D8D2'});
-        s.addText(o[0],{x:x+.2,y:y+.55,w:3.7,h:.4,fontFace:F,fontSize:13,bold:true,color:C.ink});
-        s.addText(o[1],{x:x+.2,y:y+.95,w:3.7,h:1.0,fontFace:F,fontSize:9.5,color:C.muted,valign:'top'});
+      band(s,'Heritage ','& Engineering Marvels',C.teal,'Kachari legacy · living hydro-engineering');
+      const rows=[
+        ['Rich Kachari (Dimasa) history','Dimapur was the ancient Kachari capital — megalithic ruins dating to the 10th century survive at its heart. A powerful, authentic branding platform for the circuit.'],
+        ['Ancient ponds — engineering that still works','The historic waterbodies neither dry up in winter nor flood in the monsoon — superior early hydro-engineering, ideal for education, wellness and leisure tourism.']];
+      rows.forEach((r,i)=>{
+        const y=1.9+i*2.3;
+        s.addShape(pptx.ShapeType.rect,{x:.5,y,w:7.3,h:1.9,fill:{color:'FAFCFB'},line:{color:C.line,width:1}});
+        s.addShape(pptx.ShapeType.rect,{x:.5,y,w:.06,h:1.9,fill:{color:C.teal}});
+        s.addText(String(i+1),{shape:pptx.ShapeType.ellipse,fill:{color:C.teal},
+          x:.72,y:y+.2,w:.38,h:.38,align:'center',valign:'middle',fontFace:F,fontSize:12,bold:true,color:'FFFFFF'});
+        s.addText(r[0],{x:1.28,y:y+.14,w:6.3,h:.4,fontFace:F,fontSize:13.5,bold:true,color:C.ink});
+        s.addText(r[1],{x:1.28,y:y+.6,w:6.2,h:1.2,fontFace:F,fontSize:10,color:C.muted,valign:'top'});
       });
+      const pics=[['assets/Kachari ruins.jpg','01  Kachari Ruins — the medieval capital'],
+                  ['assets/Padumpukhuri.jpg','02  Padum Pukhuri — ancient pond'],
+                  ['assets/Raj pukhuri.jpg','02  Raj Pukhuri — never dries, never floods']];
+      const px=8.1,pw=4.78,py=1.5,ph=5.45,pg=.13,ih=(ph-2*pg)/3;
+      for(let k=0;k<pics.length;k++){
+        const y=py+k*(ih+pg);
+        const d0=await imgToData(pics[k][0],1400);
+        if(d0){
+          s.addShape(pptx.ShapeType.rect,{x:px,y,w:pw,h:ih,fill:{color:'EEF2F0'},line:{color:C.line,width:1}});
+          s.addImage({data:d0.data,x:px,y,w:pw,h:ih,sizing:{type:'cover',w:pw,h:ih}});
+          s.addShape(pptx.ShapeType.rect,{x:px,y:y+ih-.32,w:Math.min(pw,.35+pics[k][1].length*.085),h:.32,fill:{color:'0E1A16',transparency:16}});
+          s.addText(pics[k][1],{x:px+.08,y:y+ih-.32,w:pw-.1,h:.32,fontFace:F,fontSize:8.5,bold:true,color:'FFFFFF',valign:'middle'});
+        }
+      }
       foot(s,3);
     }
 
-    /* --- Slide 4 · Tourism potential (14 sectors) --- */
+    /* --- Slide 4 · Strategic & economic advantages --- */
+    nodeSlide('Strategic ','& Economic Advantages',C.teal,
+      'Relieve Kohima · multiply private capital · plug into what exists',CN.adv,4);
+
+    /* --- Slide 5 · Vision & objectives --- */
+    {
+      const s=pptx.addSlide();
+      band(s,'Vision ','& Objectives',C.teal,'“Dimapur–Chumu Circuit”');
+      s.addText([{text:'“Dimapur–Chumu Circuit” — ',options:{color:C.teal}},
+        {text:'one seamless ',options:{color:C.ink}},
+        {text:'Heritage–Nature–Culture–Adventure',options:{color:C.teal}},
+        {text:' experience at the gateway of Nagaland.',options:{color:C.ink}}],
+        {x:.5,y:1.42,w:12.3,h:.75,fontFace:F,fontSize:15,bold:true});
+      CN.objectives.forEach((o,i)=>{
+        const x=.5+(i%3)*4.28, y=2.4+Math.floor(i/3)*2.25;
+        s.addShape(pptx.ShapeType.rect,{x,y,w:4.08,h:2.6,fill:{color:'FAFCFB'},line:{color:C.line,width:1}});
+        s.addText(String(i+1).padStart(2,'0'),{x:x+.2,y:y+.12,w:1,h:.42,fontFace:F,fontSize:17,bold:true,color:'B9D8D2'});
+        s.addText(o[0],{x:x+.2,y:y+.55,w:3.7,h:.4,fontFace:F,fontSize:13,bold:true,color:C.ink});
+        s.addText(o[1],{x:x+.2,y:y+.95,w:3.7,h:1.5,fontFace:F,fontSize:9.5,color:C.muted,valign:'top'});
+      });
+      foot(s,5);
+    }
+
+    /* --- Slide 6 · Tourism potential (14 sectors) --- */
     {
       const s=pptx.addSlide();
       band(s,'Tourism ','Potential',C.teal,'14 sectors · one destination · year-round demand');
@@ -1442,35 +1631,79 @@ async function exportPPT(){
         s.addText(t[0],{x:x+.16,y:y+.18,w:w-.3,h:.62,fontFace:F,fontSize:11.5,bold:true,color:hi?'FFFFFF':C.ink,valign:'top'});
         s.addText(t[1],{x:x+.16,y:y+.78,w:w-.3,h:.6,fontFace:F,fontSize:8,color:hi?'C9ECE4':C.muted,valign:'top'});
       });
-      foot(s,4);
+      foot(s,6);
     }
 
-    /* --- Slides 5–6 · Tourism hubs --- */
-    [['Dimapur ','Tourism Hub',C.teal,'5 signature nodes · indicative ₹59 cr · Public + PPP',CN.hubA,5],
-     ['Chümoukedima ','Tourism Hub','B45309','5 signature nodes · indicative ₹88 cr · largely PPP',CN.hubB,6]].forEach(hub=>{
-      const s=pptx.addSlide();
-      const hc=hub[2];
-      band(s,hub[0],hub[1],hc,hub[3]);
-      const top=1.5,HH=5.45,gap=.12,rowH=(HH-4*gap)/5;
-      hub[4].forEach((n,i)=>{
-        const y=top+i*(rowH+gap);
-        s.addShape(pptx.ShapeType.rect,{x:.5,y,w:12.35,h:rowH,fill:{color:'FAFCFB'},line:{color:C.line,width:1}});
-        s.addShape(pptx.ShapeType.rect,{x:.5,y:y+.09,w:.06,h:rowH-.18,fill:{color:hc}});
-        s.addText(n[0],{shape:pptx.ShapeType.ellipse,fill:{color:hc},
-          x:.72,y:y+rowH/2-.19,w:.38,h:.38,align:'center',valign:'middle',fontFace:F,fontSize:10.5,bold:true,color:'FFFFFF'});
-        s.addText([{text:n[1],options:{bold:true,fontSize:12,color:C.ink}},
-                   {text:'  · '+n[2],options:{fontSize:9,color:C.muted}}],
-          {x:1.26,y:y+.05,w:9.2,h:.36,fontFace:F,valign:'middle'});
-        s.addText(n[4],{x:10.4,y:y+.08,w:2.35,h:.3,fontFace:F,fontSize:9,bold:true,color:hc,align:'right',valign:'middle'});
-        s.addText(n[3],{x:1.26,y:y+.4,w:11.4,h:rowH-.46,fontFace:F,fontSize:8.5,color:C.muted,valign:'top'});
-      });
-      foot(s,hub[5]);
-    });
+    /* --- Slide 7 · Proposed key interventions --- */
+    nodeSlide('Proposed ','Key Interventions',C.teal,
+      'Five integrated moves · ₹625 Cr programme',CN.interventions,7);
 
-    /* --- Slide 7 · Itinerary overview (3 timeline columns) --- */
+    /* --- Slide 8 · Funding structure (30:40:30) --- */
     {
       const s=pptx.addSlide();
-      band(s,'Itinerary ','Overview',C.teal,STOPS.length+' experiences · 3 days · ~'+TOTAL_KM+' km total driving');
+      band(s,'Funding ','Structure',C.teal,'₹625 Cr total · 30 : 40 : 30 · DoNER share fixed at ₹250 Cr');
+      const cw=[2.2,1.3,2.0,6.85], hx=[.5]; for(let i=1;i<4;i++)hx[i]=hx[i-1]+cw[i-1];
+      ['Partner','Ratio','Amount','Focus areas'].forEach((h,i)=>{
+        s.addShape(pptx.ShapeType.rect,{x:hx[i],y:1.6,w:cw[i],h:.5,fill:{color:C.teal},line:{color:'FFFFFF',width:1}});
+        s.addText(h,{x:hx[i]+.15,y:1.6,w:cw[i]-.2,h:.5,fontFace:F,fontSize:11.5,bold:true,color:'FFFFFF',valign:'middle'});
+      });
+      const frows=[
+        ['State','30%','₹187.5 Cr','Land acquisition, link roads, coordination & basic infrastructure',0],
+        ['DoNER','40%','₹250 Cr','Major heritage & tourism infrastructure — Kachari ruins, ancient ponds, Super Market, skywalks',1],
+        ['PPP / Private','30%','₹187.5 Cr','Hotel & water-park expansions, transport fleet, commercial operations & maintenance',0]];
+      frows.forEach((r,ri)=>{
+        const y=2.1+ri*.9;
+        for(let i=0;i<4;i++)
+          s.addShape(pptx.ShapeType.rect,{x:hx[i],y,w:cw[i],h:.9,fill:{color:r[4]?C.mint:'FAFCFB'},line:{color:C.line,width:1}});
+        s.addText(r[0],{x:hx[0]+.15,y,w:cw[0]-.2,h:.9,fontFace:F,fontSize:12,bold:true,color:C.ink,valign:'middle'});
+        s.addText(r[1],{x:hx[1]+.15,y,w:cw[1]-.2,h:.9,fontFace:F,fontSize:12,color:C.ink,valign:'middle'});
+        s.addText(r[2],{x:hx[2]+.15,y,w:cw[2]-.2,h:.9,fontFace:F,fontSize:13,bold:true,color:C.teal,valign:'middle'});
+        s.addText(r[3],{x:hx[3]+.15,y,w:cw[3]-.25,h:.9,fontFace:F,fontSize:10,color:C.muted,valign:'middle'});
+      });
+      s.addShape(pptx.ShapeType.rect,{x:.5,y:5.15,w:12.35,h:1.05,fill:{color:'FAFCFB'},line:{color:C.line,width:1}});
+      s.addShape(pptx.ShapeType.rect,{x:.5,y:5.15,w:.06,h:1.05,fill:{color:C.teal}});
+      s.addText([{text:'Rationale — ',options:{bold:true,color:C.teal}},
+        {text:'a scaled-up project with stronger DoNER support for core components while maintaining the original proportional contributions — allowing more ambitious development and faster private-sector returns.',options:{color:C.ink}}],
+        {x:.7,y:5.28,w:11.9,h:.85,fontFace:F,fontSize:10.5,valign:'top'});
+      foot(s,8);
+    }
+
+    /* --- Slide 9 · Detailed budget breakup --- */
+    {
+      const s=pptx.addSlide();
+      band(s,'Detailed ','Budget Breakup',C.teal,'₹625 Crore · four programme heads');
+      const cards=[
+        ['Heritage & Conservation','₹230 Cr','DONER LEAD',[['Kachari Ruins upgrade — museum, park, light & sound','₹100 Cr'],['Ponds → Promenades + skywalks','₹80 Cr'],['Interpretation centres & signage','₹50 Cr']]],
+        ['Infrastructure & Amenities','₹160 Cr','STATE + DONER',[['Link roads & connectivity (State)','₹70 Cr'],['Super Market revamp — market, amphitheatre, food court','₹50 Cr'],['Tourist amenity centres','₹40 Cr']]],
+        ['Experiential & Operations','₹145 Cr','CONVERGENCE',[['Diezephe, Bamboo/Honey, Sovima & Bambusa integrations','₹55 Cr'],['Cultural programmes, viewpoint, wellness zones','₹60 Cr'],['Training, marketing & digital app','₹30 Cr']]],
+        ['Private Sector & Contingency','₹90 Cr','PPP-LED',[['Hotel & water-park synergies, transport fleet, commercial outlets & project buffer','']]]
+      ];
+      cards.forEach((cd,i)=>{
+        const x=.5+i*3.24, y=1.55, w=3.06, h=4.45;
+        s.addShape(pptx.ShapeType.rect,{x,y,w,h,fill:{color:'FAFCFB'},line:{color:C.line,width:1}});
+        s.addShape(pptx.ShapeType.rect,{x,y,w,h:.07,fill:{color:C.teal}});
+        s.addText(cd[0],{x:x+.18,y:y+.18,w:w-.36,h:.6,fontFace:F,fontSize:12.5,bold:true,color:C.ink,valign:'top'});
+        s.addText(cd[1],{x:x+.18,y:y+.78,w:w-.36,h:.42,fontFace:F,fontSize:16,bold:true,color:C.teal});
+        s.addText(cd[2],{x:x+.18,y:y+1.2,w:w-.36,h:.28,fontFace:F,fontSize:7.5,color:C.muted,charSpacing:1.5});
+        cd[3].forEach((li,k)=>{
+          const ly=y+1.65+k*.9;
+          s.addText(li[0],{x:x+.18,y:ly,w:w-.36,h:.62,fontFace:F,fontSize:9,color:C.muted,valign:'top'});
+          if(li[1]) s.addText(li[1],{x:x+.18,y:ly+.55,w:w-.36,h:.3,fontFace:F,fontSize:10.5,bold:true,color:C.teal});
+          if(k<cd[3].length-1) s.addShape(pptx.ShapeType.rect,{x:x+.18,y:ly+.85,w:w-.36,h:.008,fill:{color:C.line}});
+        });
+      });
+      s.addShape(pptx.ShapeType.rect,{x:.5,y:6.2,w:12.35,h:.6,fill:{color:C.teal}});
+      s.addText([{text:'Total programme   ',options:{fontSize:11,bold:true}},
+        {text:'₹625 Crore',options:{fontSize:14,bold:true}},
+        {text:'     State ₹187.5 Cr · DoNER ₹250 Cr · PPP ₹187.5 Cr',options:{fontSize:9,color:'C9ECE4'}}],
+        {x:.75,y:6.2,w:11.9,h:.6,fontFace:F,color:'FFFFFF',valign:'middle'});
+      foot(s,9);
+    }
+
+    /* --- Slide 10 · Itinerary overview (3 timeline columns) --- */
+    {
+      const s=pptx.addSlide();
+      band(s,'Itinerary ','Options',C.teal,STOPS.length+' experiences · 3 one-day options — pick any option each day · ~'+TOTAL_KM+' km total driving');
       for(let d=1;d<=3;d++){
         const x0=.5+(d-1)*4.35, w=4.1;
         const list=STOPS.filter(st=>st.day===d);
@@ -1499,13 +1732,13 @@ async function exportPPT(){
           if(e.nt) s.addText(e.nt,{x:x0+.45,y:y+.3,w:w-.45,h:Math.max(.3,eh-.36),fontFace:F,fontSize:8,color:C.muted,valign:'top'});
         });
       }
-      foot(s,7);
+      foot(s,10);
     }
 
-    /* --- Slide 8 · Route map --- */
+    /* --- Slide 11 · Route map --- */
     {
       const s=pptx.addSlide();
-      band(s,'Route ','Map',C.teal,'All 12 stops · Dimapur & Chümoukedima region · ~'+TOTAL_KM+' km total driving');
+      band(s,'Route ','Map',C.teal,'All '+STOPS.length+' stops · Dimapur–Chümoukedima & the NH-29 corridor · ~'+TOTAL_KM+' km total driving');
       const bx=.5,by=1.5,bw=8.55,bh=5.4;
       let w=bw,h=w/ratio; if(h>bh){h=bh;w=h*ratio;}
       s.addShape(pptx.ShapeType.rect,{x:bx-.04,y:by-.04,w:w+.08,h:h+.08,fill:{color:C.line}});
@@ -1513,7 +1746,7 @@ async function exportPPT(){
       s.addShape(pptx.ShapeType.rect,{x:9.35,y:1.5,w:3.5,h:.38,fill:{color:C.teal}});
       s.addText('STOP INDEX',{x:9.5,y:1.5,w:3.2,h:.38,fontFace:F,fontSize:9.5,bold:true,color:'FFFFFF',charSpacing:2,valign:'middle'});
       STOPS.forEach((st,i)=>{
-        const y=2.02+i*.41;
+        const y=2.02+i*.37;
         s.addText(String(st.n),{shape:pptx.ShapeType.ellipse,fill:{color:DC[st.day]},
           x:9.38,y,w:.29,h:.29,align:'center',valign:'middle',fontFace:F,fontSize:9,bold:true,color:'FFFFFF'});
         s.addText([
@@ -1521,15 +1754,15 @@ async function exportPPT(){
           {text:'   '+st.time,options:{fontSize:8,color:C.muted}}],
           {x:9.74,y:y-.05,w:3.35,h:.4,fontFace:F,valign:'middle'});
       });
-      foot(s,8);
+      foot(s,11);
     }
 
-    /* --- Slides 9–11 · Day pages (stop list + photo panel) --- */
+    /* --- Slides 12–14 · Day pages (stop list + photo panel) --- */
     for(let di=0;di<3;di++){
       const d=di+1;
       const s=pptx.addSlide();
       const list=STOPS.filter(x=>x.day===d);
-      band(s,DAYS[d].key+' ','— '+DAYS[d].name,DC[d],
+      band(s,'Day '+d+' · '+DAYS[d].key+' ','— '+DAYS[d].name,DC[d],
         list.length+' stops · ~'+dayKm(d)+' km driving'+(d===1?' · starts at Dimapur Airport (3:30 PM)':''));
       const shots=dayShots(d);
       const hasPhotos=shots.length>0;
@@ -1561,10 +1794,10 @@ async function exportPPT(){
           }
         }
       }
-      foot(s,9+di);
+      foot(s,12+di);
     }
 
-    /* --- Slide 12 · Principles & infrastructure --- */
+    /* --- Slide 15 · Principles & infrastructure --- */
     {
       const s=pptx.addSlide();
       band(s,'Principles ','& Infrastructure',C.teal,'How the circuit is planned · what supports it');
@@ -1584,10 +1817,10 @@ async function exportPPT(){
         s.addText(c[0],{x:7.25,y:y+.1,w:5.4,h:.34,fontFace:F,fontSize:11.5,bold:true,color:C.teal});
         s.addText(c[1],{x:7.25,y:y+.46,w:5.45,h:1.0,fontFace:F,fontSize:9,color:C.muted,valign:'top'});
       });
-      foot(s,12);
+      foot(s,15);
     }
 
-    /* --- Slide 13 · Outcomes & way forward --- */
+    /* --- Slide 16 · Outcomes & way forward --- */
     {
       const s=pptx.addSlide();
       band(s,'Outcomes ','& Way Forward',C.teal,'Targets indicative · to be firmed up in the DPR');
@@ -1610,10 +1843,10 @@ async function exportPPT(){
       });
       s.addText('Further planning: SLEC prioritisation · funding convergence (PM-DevINE / NESIDS, Swadesh Darshan 2.0, PRASHAD) · PPP structuring · Tourism Master Plan & DPR · tourist-taxi service & certified guides.',
         {x:7.05,y:6.4,w:5.8,h:.6,fontFace:F,fontSize:8,italic:true,color:C.muted,valign:'top'});
-      foot(s,13);
+      foot(s,16);
     }
 
-    /* --- Slide 14 · Inclusions & pricing --- */
+    /* --- Slide 17 · Inclusions & pricing --- */
     {
       const s=pptx.addSlide();
       band(s,'Inclusions ','& Pricing',C.teal,'What the circuit covers · pricing placeholders for your operator quote');
@@ -1621,7 +1854,7 @@ async function exportPPT(){
         ['Stay','2 nights at Zone Niathu Resort, Chümoukedima — one base for the whole circuit.','0E6E62'],
         ['Naga Cuisine','Food-court dinner at Urban Haat, Naga Heirloom lunch, resort & local meals.','12796B'],
         ['Craft & Culture','Urban Haat cultural show, live weaving, cane-craft & wood-carving demos.','0A5A50'],
-        ['Adventure','4×4 trail, zip-line, boating, fishing, sunrise deck & pineapple plucking.','0E4F47']];
+        ['Sunrise & Farm','Seithekema sunrise, Triple Falls breakfast, Sechü Zubza heritage halt, pineapple plucking & Unity Mall shopping.','0E4F47']];
       inc.forEach((it,i)=>{
         const x=.5+i*3.24;
         s.addShape(pptx.ShapeType.rect,{x,y:1.55,w:3.06,h:2.0,fill:{color:it[2]}});
@@ -1645,11 +1878,11 @@ async function exportPPT(){
         {x:.5,y:5.45,w:11.8,h:.35,fontFace:F,fontSize:9.5,italic:true,color:C.muted});
       s.addText('Built from the “Tourist Circuit” brief · Nagaland Tourism · Map © Carto / Esri / OpenStreetMap · Photos: on-location & Wikimedia Commons',
         {x:.5,y:6.5,w:12.3,h:.35,fontFace:F,fontSize:8.5,color:C.muted});
-      foot(s,14);
+      foot(s,17);
     }
 
-    await pptx.writeFile({fileName:'Nagaland-Circuit-Dimapur-Chumoukedima-3D2N.pptx'});
-    toast('PowerPoint exported — 14 slides, map & photos included ✓');
+    await pptx.writeFile({fileName:'Dimapur-Chumoukedima-Tourist-Circuit-625Cr.pptx'});
+    toast('PowerPoint exported — 17 slides, map & photos included ✓');
   }catch(err){
     console.error(err);
     toast('Export failed: '+(err&&err.message?err.message:'unknown error'));
