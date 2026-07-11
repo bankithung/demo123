@@ -324,9 +324,13 @@
   .vis .lead{font:600 19px/1.5 "Sora";max-width:1080px;margin:4px 0 20px}
   .vis .lead em{font-style:normal;color:var(--teal)}
   .vis .ogrid{flex:1;display:grid;grid-template-columns:repeat(3,1fr);grid-auto-rows:1fr;gap:14px;min-height:0}
-  .vis .oc{border:1px solid var(--line);background:#fafcfb;padding:16px 18px 14px;display:flex;flex-direction:column}
-  .vis .oc i{font:800 24px "Sora";font-style:normal;color:var(--teal);opacity:.32}
-  .vis .oc b{font:700 16px "Sora";margin-top:6px}
+  .vis .oc{border:1px solid var(--line);background:#fafcfb;display:flex;flex-direction:column;overflow:hidden;min-height:0}
+  .vis .oc .vimg{position:relative;flex:1;min-height:0;margin:0;background:var(--mint)}
+  .vis .oc .vimg img{width:100%;height:100%;object-fit:cover}
+  .vis .oc .vimg figcaption{position:absolute;right:0;bottom:0;background:rgba(14,26,22,.72);color:#fff;font:600 9px "Inter";letter-spacing:.08em;text-transform:uppercase;padding:4px 9px}
+  .vis .oc .octx{padding:14px 18px 14px;flex:none}
+  .vis .oc i{font:800 22px "Sora";font-style:normal;color:var(--teal);opacity:.32}
+  .vis .oc b{display:block;font:700 16px "Sora";margin-top:4px}
   .vis .oc p{font:450 12px/1.5 "Inter";color:var(--muted);margin-top:5px}
 
   /* tourism sectors */
@@ -389,6 +393,18 @@
   .out .phase b{font:700 13px "Sora";color:var(--teal);display:block;margin-bottom:3px}
   .out .phase p{font:450 11.5px/1.55 "Inter";color:var(--muted)}
   .out .fine{font:450 11px/1.5 "Inter";color:var(--muted);margin-top:2px}
+
+  /* full-page intervention concept slides (AI renders) */
+  .intv{background:#0b1a16}
+  .intv .bgimg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .intv .iscrim{position:absolute;inset:0;background:linear-gradient(90deg,rgba(8,16,13,.9) 0%,rgba(8,16,13,.58) 38%,rgba(8,16,13,.04) 66%)}
+  .intv .ipanel{position:absolute;left:56px;bottom:56px;width:560px;color:#fff;z-index:2}
+  .intv .ikick{font:700 12px "Inter";letter-spacing:.26em;text-transform:uppercase;color:#8fd0c2;margin-bottom:12px}
+  .intv h2{font:800 38px/1.12 "Sora";letter-spacing:-.01em;text-shadow:0 2px 24px rgba(0,0,0,.5)}
+  .intv .isub{font:600 14px "Inter";color:#c9ece4;margin-top:8px}
+  .intv p{font:450 14.5px/1.65 "Inter";color:rgba(255,255,255,.92);margin-top:14px;max-width:520px}
+  .intv .icost{display:inline-block;margin-top:18px;background:var(--teal);color:#fff;font:800 16px "Sora";padding:10px 18px;border-radius:6px}
+  .intv .itag{position:absolute;right:14px;bottom:12px;z-index:2;background:rgba(14,26,22,.72);color:#fff;font:600 9px "Inter";letter-spacing:.08em;text-transform:uppercase;padding:4px 9px}
 
   /* funding structure (30:40:30) */
   .fund .body{justify-content:center}
@@ -655,18 +671,12 @@
     </div>
   </section>
 
-  <!-- 7 · PROPOSED KEY INTERVENTIONS -->
-  <section class="slide" id="s-int" data-title="Key interventions">
-    <div class="stage con hub" style="--acc:var(--teal)">
-      <header class="hd">
-        <span class="dash"></span>
-        <h2>Proposed <em>Key Interventions</em></h2>
-        <span class="rule"></span>
-        <span class="meta">Five integrated moves · ₹625 Cr programme</span>
-      </header>
-      <div class="body"><div class="rows" id="intRows"></div></div>
-    </div>
-  </section>
+  <!-- 7·i–v · PROPOSED KEY INTERVENTIONS — one concept page per move (AI renders) -->
+  <section class="slide" id="s-int1" data-title="Intervention i · Kachari"><div class="stage intv" id="intv-1"></div></section>
+  <section class="slide" id="s-int2" data-title="Intervention ii · Ponds"><div class="stage intv" id="intv-2"></div></section>
+  <section class="slide" id="s-int3" data-title="Intervention iii · Market"><div class="stage intv" id="intv-3"></div></section>
+  <section class="slide" id="s-int4" data-title="Intervention iv · Skywalks"><div class="stage intv" id="intv-4"></div></section>
+  <section class="slide" id="s-int5" data-title="Intervention v · PPP"><div class="stage intv" id="intv-5"></div></section>
 
   <!-- 8 · FUNDING STRUCTURE (30:40:30) -->
   <section class="slide" id="s-fund" data-title="Funding structure">
@@ -1104,10 +1114,10 @@ const CN={
     ["Everything is 5–20 minutes away","All key spots sit very close to the railway station and the airport — the circuit is already physically compact."]
   ],
   band:[["₹625 Cr","Total project outlay"],["30 : 40 : 30","State · DoNER · PPP"],["₹250 Cr","DoNER share · fixed"],["+1 day dwell","Unlocks the gateway economy"]],
-  objectives:[
-    ["Transit → meaningful stays","Turn transit passengers into overnight visitors — raising dwell time, spend and repeat visitation."],
-    ["One integrated circuit","Integrate today’s fragmented sites with world-class amenities — promenades, skywalks, amenity centres and link roads."],
-    ["Kachari legacy · modern wellness","Celebrate the Kachari legacy while creating modern wellness and leisure options for every visitor."]
+  objectives:[   /* [title, desc, AI concept render (GPT Image 2 via Higgsfield)] */
+    ["Transit → meaningful stays","Turn transit passengers into overnight visitors — raising dwell time, spend and repeat visitation.","assets/vision-stays.jpg"],
+    ["One integrated circuit","Integrate today’s fragmented sites with world-class amenities — promenades, skywalks, amenity centres and link roads.","assets/vision-circuit.jpg"],
+    ["Kachari legacy · modern wellness","Celebrate the Kachari legacy while creating modern wellness and leisure options for every visitor.","assets/vision-wellness.jpg"]
   ],
   sectors:[   /* [name, sub, real bg photo from assets/] */
     ["Heritage","Kachari ruins precinct","assets/Kachari ruins.jpg"],
@@ -1130,12 +1140,12 @@ const CN={
     ["ii","Leverages private investment","already on the ground","Concentrated private capital in Dimapur–Chumu — the Merryland water park, hotels near the airport and ongoing hospitality projects — multiplies every public rupee.","Economic"],
     ["iii","Plugs into ready synergies","no cold starts","Bamboo & Honey Mission, Diezephe Craft Village, Chumu Viewpoint (Swadesh Darshan), Sovima Naga Heirloom and Bambusa Nagaland Coffee.","Convergence"]
   ],
-  interventions:[
-    ["i","Kachari Ruins","heritage anchor","Museum, heritage park and light-&-sound shows on the medieval Kachari capital.","₹100 Cr"],
-    ["ii","Ancient Ponds → Promenades","Padum Pukhri · Raj Pukhri","Lakeside promenades with walkways for jogging, relaxation and meditation, plus educational tours on their engineering.","₹80 Cr"],
-    ["iii","Super Market Revamp","the gateway market","Integrated exotic local market, weekly flea market, open food court and amphitheatre.","₹50 Cr"],
-    ["iv","Skywalks · Amenity Centres · Link Roads","connectivity & comfort","Skywalks linking key precincts, tourist amenity centres and improved link roads across the circuit.","₹110 Cr"],
-    ["v","Private & Mission Integration","PPP","Fully integrate the private water park, hotels, Diezephe, Sovima, Bambusa and Bamboo & Honey Mission projects.","PPP-led"]
+  interventions:[   /* [no, name, small, note, tag, AI concept render (GPT Image 2)] */
+    ["i","Kachari Ruins","heritage anchor","Museum, heritage park and light-&-sound shows on the medieval Kachari capital.","₹100 Cr","assets/int-kachari.jpg"],
+    ["ii","Ancient Ponds → Promenades","Padum Pukhri · Raj Pukhri","Lakeside promenades with walkways for jogging, relaxation and meditation, plus educational tours on their engineering.","₹80 Cr","assets/int-ponds.jpg"],
+    ["iii","Super Market Revamp","the gateway market","Integrated exotic local market, weekly flea market, open food court and amphitheatre.","₹50 Cr","assets/int-market.jpg"],
+    ["iv","Skywalks · Amenity Centres · Link Roads","connectivity & comfort","Skywalks linking key precincts, tourist amenity centres and improved link roads across the circuit.","₹110 Cr","assets/int-skywalk.jpg"],
+    ["v","Private & Mission Integration","PPP","Fully integrate the private water park, hotels, Diezephe, Sovima, Bambusa and Bamboo & Honey Mission projects.","PPP-led","assets/int-ppp.jpg"]
   ],
   principles:[
     ["Build on existing strengths","rather than create from scratch"],
@@ -1173,7 +1183,9 @@ const CN={
   document.getElementById('whyNeed').innerHTML=CN.need.map((r,i)=>frow(r[0],r[1],i+1)).join('');
   document.getElementById('whyBand').innerHTML=CN.band.map(b=>'<div><b>'+b[0]+'</b><span>'+b[1]+'</span></div>').join('');
   document.getElementById('visGrid').innerHTML=CN.objectives.map((o,i)=>
-    '<div class="oc"><i>'+String(i+1).padStart(2,'0')+'</i><b>'+o[0]+'</b><p>'+o[1]+'</p></div>').join('');
+    '<div class="oc"><figure class="vimg"><img src="'+o[2]+'" alt="'+o[0]+' — concept render" loading="lazy">'+
+    '<figcaption>AI concept render</figcaption></figure>'+
+    '<div class="octx"><i>'+String(i+1).padStart(2,'0')+'</i><b>'+o[0]+'</b><p>'+o[1]+'</p></div></div>').join('');
   document.getElementById('sectGrid').innerHTML=
     CN.sectors.map(s=>'<div class="tile" style="background-image:linear-gradient(rgba(10,22,18,.38),rgba(8,18,15,.78)),url(\''+s[2]+'\')"><b>'+s[0]+'</b><span>'+s[1]+'</span></div>').join('')+
     '<div class="tile hi"><b>Year-round</b><span>One circuit, every season & motivation</span></div>';
@@ -1181,7 +1193,16 @@ const CN={
     '<div class="top"><span class="nm">'+n[1]+' <small>· '+n[2]+'</small></span><span class="tm">'+n[4]+'</span></div>'+
     '<div class="nt">'+n[3]+'</div></div></div>';
   document.getElementById('advRows').innerHTML=CN.adv.map(nrow).join('');
-  document.getElementById('intRows').innerHTML=CN.interventions.map(nrow).join('');
+  /* full-page concept slide per intervention (AI renders) */
+  CN.interventions.forEach((n,idx)=>{
+    const el=document.getElementById('intv-'+(idx+1)); if(!el) return;
+    el.innerHTML='<img class="bgimg" src="'+n[5]+'" alt="'+n[1]+' — concept render" loading="lazy">'+
+      '<div class="iscrim"></div>'+
+      '<div class="ipanel"><div class="ikick">Key intervention '+n[0]+' of v · ₹625 Cr programme</div>'+
+      '<h2>'+n[1]+'</h2><div class="isub">'+n[2]+'</div>'+
+      '<p>'+n[3]+'</p><span class="icost">'+n[4]+'</span></div>'+
+      '<span class="itag">AI concept render</span>';
+  });
   document.getElementById('planRows').innerHTML=CN.principles.map((p,i)=>
     '<div class="prow"><i>'+String(i+1).padStart(2,'0')+'</i><div><b>'+p[0]+'</b> <span>— '+p[1]+'</span></div></div>').join('');
   document.getElementById('planCards').innerHTML=CN.infra.map(c=>
@@ -1397,7 +1418,7 @@ function imgToData(src,maxW){
    when printing, which ballooned the PDF to ~90 MB. Swap each deck image
    for a downscaled JPEG data-URL — visually identical at slide size. */
 async function compressDeckImages(){
-  const els=[...document.querySelectorAll('.ph img,.ptile img,.pcard-ph img,.cover img.bg')];
+  const els=[...document.querySelectorAll('.ph img,.ptile img,.pcard-ph img,.vimg img,.intv .bgimg,.cover img.bg')];
   await Promise.allSettled(els.map(async el=>{
     if(el.dataset.comp) return;
     const maxW=el.classList.contains('bg')?1600:1100;
@@ -1409,7 +1430,7 @@ window.addEventListener('load',()=>setTimeout(compressDeckImages,600));
 
 /* ================= PDF EXPORT — 16:9 pages identical to the screen ======= */
 async function eagerImages(){
-  const imgs=[...document.querySelectorAll('.ph img,.ptile img,.pcard-ph img,.cover img.bg')];
+  const imgs=[...document.querySelectorAll('.ph img,.ptile img,.pcard-ph img,.vimg img,.intv .bgimg,.cover img.bg')];
   imgs.forEach(i=>{i.loading='eager'});
   await Promise.all(imgs.map(i=>i.decode?i.decode().catch(()=>{}):Promise.resolve()));
 }
@@ -1449,11 +1470,13 @@ async function exportPPT(){
     const F='Segoe UI';
     const C={ink:'12211D',teal:'0E6E62',teald:'0A4F47',muted:'5F7370',line:'E0E7E4',mint:'E7F2F0'};
     const DC={1:'0E6E62',2:'B45309',3:'6D28D9'};
-    const NSLIDES=19;
-    const foot=(s,n)=>{
+    const NSLIDES=23;
+    let PAGE=1;                                  // cover is page 1 (no footer)
+    const foot=(s)=>{                            // auto-numbers in call order
+      PAGE++;
       s.addText('Nagaland Circuit · Dimapur–Chümoukedima · 3D/2N',
         {x:.5,y:7.12,w:9,h:.28,fontFace:F,fontSize:8.5,color:C.muted});
-      s.addText(n+' / '+NSLIDES,{x:12.2,y:7.12,w:.7,h:.28,fontFace:F,fontSize:8.5,color:C.muted,align:'right'});
+      s.addText(PAGE+' / '+NSLIDES,{x:12.2,y:7.12,w:.7,h:.28,fontFace:F,fontSize:8.5,color:C.muted,align:'right'});
     };
     /* reference-style header: colored dash · two-tone title · hairline rule */
     const band=(s,em,rest,color,sub)=>{
@@ -1596,13 +1619,19 @@ async function exportPPT(){
         {text:'Heritage–Nature–Culture–Adventure',options:{color:C.teal}},
         {text:' experience at the gateway of Nagaland.',options:{color:C.ink}}],
         {x:.5,y:1.42,w:12.3,h:.75,fontFace:F,fontSize:15,bold:true});
-      CN.objectives.forEach((o,i)=>{
-        const x=.5+(i%3)*4.28, y=2.4+Math.floor(i/3)*2.25;
-        s.addShape(pptx.ShapeType.rect,{x,y,w:4.08,h:2.6,fill:{color:'FAFCFB'},line:{color:C.line,width:1}});
-        s.addText(String(i+1).padStart(2,'0'),{x:x+.2,y:y+.12,w:1,h:.42,fontFace:F,fontSize:17,bold:true,color:'B9D8D2'});
-        s.addText(o[0],{x:x+.2,y:y+.55,w:3.7,h:.4,fontFace:F,fontSize:13,bold:true,color:C.ink});
-        s.addText(o[1],{x:x+.2,y:y+.95,w:3.7,h:1.5,fontFace:F,fontSize:9.5,color:C.muted,valign:'top'});
-      });
+      for(let i=0;i<CN.objectives.length;i++){
+        const o=CN.objectives[i], x=.5+(i%3)*4.28, y=2.35;
+        s.addShape(pptx.ShapeType.rect,{x,y,w:4.08,h:4.55,fill:{color:'FAFCFB'},line:{color:C.line,width:1}});
+        const d0=await imgToData(o[2],900);      // AI concept render (GPT Image 2)
+        if(d0){
+          s.addImage({data:d0.data,x:x+.06,y:y+.06,w:3.96,h:2.6,sizing:{type:'cover',w:3.96,h:2.6}});
+          s.addShape(pptx.ShapeType.rect,{x:x+2.56,y:y+2.38,w:1.46,h:.28,fill:{color:'0E1A16',transparency:25}});
+          s.addText('AI CONCEPT RENDER',{x:x+2.56,y:y+2.38,w:1.46,h:.28,fontFace:F,fontSize:6.5,color:'FFFFFF',align:'center',valign:'middle',charSpacing:1});
+        }
+        s.addText(String(i+1).padStart(2,'0'),{x:x+.2,y:y+2.78,w:1,h:.4,fontFace:F,fontSize:16,bold:true,color:'B9D8D2'});
+        s.addText(o[0],{x:x+.2,y:y+3.18,w:3.7,h:.4,fontFace:F,fontSize:13,bold:true,color:C.ink});
+        s.addText(o[1],{x:x+.2,y:y+3.58,w:3.7,h:.9,fontFace:F,fontSize:9.5,color:C.muted,valign:'top'});
+      }
       foot(s,5);
     }
 
@@ -1630,9 +1659,22 @@ async function exportPPT(){
       foot(s,6);
     }
 
-    /* --- Slide 7 · Proposed key interventions --- */
-    nodeSlide('Proposed ','Key Interventions',C.teal,
-      'Five integrated moves · ₹625 Cr programme',CN.interventions,7);
+    /* --- Slides 7·i–v · proposed key interventions (full-page concept renders) --- */
+    for(const n of CN.interventions){
+      const s=pptx.addSlide(); s.background={color:'0B1A16'};
+      const d0=await imgToData(n[5],1920);
+      if(d0) s.addImage({data:d0.data,x:0,y:0,w:13.33,h:7.5,sizing:{type:'cover',w:13.33,h:7.5}});
+      s.addShape(pptx.ShapeType.rect,{x:0,y:0,w:6.9,h:7.5,fill:{color:'081410',transparency:34}});
+      s.addText('KEY INTERVENTION '+n[0].toUpperCase()+' OF V · ₹625 CR PROGRAMME',
+        {x:.6,y:4.5,w:6,h:.3,fontFace:F,fontSize:9.5,bold:true,color:'8FD0C2',charSpacing:2.2});
+      s.addText(n[1],{x:.58,y:4.8,w:6.1,h:.85,fontFace:F,fontSize:25,bold:true,color:'FFFFFF'});
+      s.addText(n[2],{x:.6,y:5.58,w:5.8,h:.3,fontFace:F,fontSize:11,bold:true,color:'C9ECE4'});
+      s.addText(n[3],{x:.6,y:5.9,w:5.9,h:.72,fontFace:F,fontSize:10.5,color:'F0FAF7',valign:'top'});
+      s.addShape(pptx.ShapeType.roundRect,{x:.6,y:6.66,w:1.75,h:.46,fill:{color:C.teal},rectRadius:.06});
+      s.addText(n[4],{x:.6,y:6.66,w:1.75,h:.46,fontFace:F,fontSize:12,bold:true,color:'FFFFFF',align:'center',valign:'middle'});
+      s.addText('AI CONCEPT RENDER',{x:11.2,y:7.12,w:1.95,h:.25,fontFace:F,fontSize:6.5,color:'FFFFFF',align:'right',charSpacing:1});
+      foot(s);
+    }
 
     /* --- Slide 8 · Funding structure (30:40:30) --- */
     {
@@ -1862,7 +1904,7 @@ async function exportPPT(){
     }
 
     await pptx.writeFile({fileName:'Dimapur-Chumoukedima-Tourist-Circuit-625Cr.pptx'});
-    toast('PowerPoint exported — 19 slides, live maps & photos ✓');
+    toast('PowerPoint exported — 23 slides, maps, photos & concept renders ✓');
   }catch(err){
     console.error(err);
     toast('Export failed: '+(err&&err.message?err.message:'unknown error'));
