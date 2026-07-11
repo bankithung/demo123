@@ -470,6 +470,32 @@
   .ix .pkhead b{display:block;font:800 14px "Sora";color:var(--c);line-height:1.15}
   .ix .pkhead span{font:600 10.5px "Inter";color:var(--muted)}
 
+  /* ============ ANALYTICS SLIDES (SVG charts · dataviz-validated palette) == */
+  .an .body{position:absolute;inset:92px 46px 24px;display:flex;flex-direction:column;min-height:0}
+  .an .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:13px}
+  .an .kpi{border:1px solid var(--line);background:#fafcfb;padding:11px 14px 9px;border-top:3px solid var(--teal)}
+  .an .kpi b{display:block;font:800 21px "Sora";letter-spacing:-.01em;white-space:nowrap}
+  .an .kpi b small{font:800 12px "Sora";color:var(--muted)}
+  .an .kpi span{font:600 9.5px "Inter";letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+  .an .kpi .sub{display:block;font:500 9.5px "Inter";color:var(--muted);margin-top:2px;text-transform:none;letter-spacing:0}
+  .an .cgrid{flex:1;display:grid;gap:13px;min-height:0}
+  .an .cgrid.two{grid-template-columns:1.16fr 1fr}
+  .an .chart{border:1px solid var(--line);background:#fff;padding:11px 14px 8px;display:flex;flex-direction:column;min-height:0}
+  .an .chart .ct{font:700 13px "Sora"}
+  .an .chart .cs{font:500 10px "Inter";color:var(--muted);margin-top:2px}
+  .an .chart .leg{display:flex;gap:14px;margin-top:5px;flex-wrap:wrap}
+  .an .chart .leg span{display:inline-flex;align-items:center;gap:6px;font:600 10px "Inter";color:var(--ink)}
+  .an .chart .leg i{width:10px;height:10px;border-radius:3px}
+  .an .chart figure{flex:1;margin:5px 0 0;min-height:0}
+  .an .chart svg{width:100%;height:100%;display:block}
+  .an .src{font:450 9px/1.5 "Inter";color:var(--muted);margin-top:9px}
+  .an .assume{border:1px solid var(--line);border-left:4px solid var(--d2);background:#fdf8f2;padding:9px 13px;font:450 10.5px/1.5 "Inter";margin-top:11px}
+  .an .assume b{color:#b45309;font:700 10.5px "Sora"}
+  .an .fgrid{flex:1;display:grid;grid-template-columns:repeat(3,1fr);grid-auto-rows:1fr;gap:12px;min-height:0}
+  .an .fcard{border:1px solid var(--line);background:#fafcfb;border-top:3px solid var(--teal);padding:12px 14px}
+  .an .fcard b{font:700 13px "Sora"}
+  .an .fcard p{font:450 10.5px/1.5 "Inter";color:var(--muted);margin-top:4px}
+
   /* toast */
   .toast{
     position:fixed;left:50%;bottom:22px;transform:translate(-50%,14px);z-index:1500;opacity:0;pointer-events:none;
@@ -851,6 +877,74 @@
     </div>
   </section>
 
+  <!-- ANALYTICS · A1–A6 (real data · sources on each slide) -->
+  <section class="slide" id="s-an1" data-title="Analytics · Economy today">
+    <div class="stage con an">
+      <header class="hd">
+        <span class="dash"></span>
+        <h2>The Economy <em>Today</em></h2>
+        <span class="rule"></span>
+        <span class="meta">Nagaland macro snapshot · real figures</span>
+      </header>
+      <div class="body" id="anb-1"></div>
+    </div>
+  </section>
+  <section class="slide" id="s-an2" data-title="Analytics · Tourism gap">
+    <div class="stage con an">
+      <header class="hd" style="--acc:var(--d2)">
+        <span class="dash"></span>
+        <h2>The Tourism <em style="color:var(--d2)">Gap</em></h2>
+        <span class="rule"></span>
+        <span class="meta">Where Nagaland stands in the North-East · why the upside is real</span>
+      </header>
+      <div class="body" id="anb-2"></div>
+    </div>
+  </section>
+  <section class="slide" id="s-an3" data-title="Analytics · Dimapur gateway">
+    <div class="stage con an">
+      <header class="hd">
+        <span class="dash"></span>
+        <h2>Dimapur — <em>Footfall Without Capture</em></h2>
+        <span class="rule"></span>
+        <span class="meta">The gateway already carries the volume · the circuit converts it</span>
+      </header>
+      <div class="body" id="anb-3"></div>
+    </div>
+  </section>
+  <section class="slide" id="s-an4" data-title="Analytics · Impact of ₹625 Cr">
+    <div class="stage con an">
+      <header class="hd">
+        <span class="dash"></span>
+        <h2>Projected Impact of <em>₹625 Cr</em></h2>
+        <span class="rule"></span>
+        <span class="meta">Arrivals · visitor spend · jobs — indicative, assumptions shown</span>
+      </header>
+      <div class="body" id="anb-4"></div>
+    </div>
+  </section>
+  <section class="slide" id="s-an5" data-title="Analytics · Local livelihoods">
+    <div class="stage con an">
+      <header class="hd" style="--acc:var(--d3)">
+        <span class="dash"></span>
+        <h2>Local Livelihoods — <em style="color:var(--d3)">Who Earns</em></h2>
+        <span class="rule"></span>
+        <span class="meta">Vendors · homestays · artisans · farmers — the community dividend</span>
+      </header>
+      <div class="body" id="anb-5"></div>
+    </div>
+  </section>
+  <section class="slide" id="s-an6" data-title="Digital backbone · Circuit app">
+    <div class="stage con an">
+      <header class="hd">
+        <span class="dash"></span>
+        <h2>Digital Backbone — <em>One Circuit App</em></h2>
+        <span class="rule"></span>
+        <span class="meta">Book · pay · review · monitor — live data for government, one front door for visitors</span>
+      </header>
+      <div class="body" id="anb-6"></div>
+    </div>
+  </section>
+
   <!-- 13 · EXPECTED OUTCOMES & WAY FORWARD -->
   <section class="slide" id="s-out" data-title="Outcomes & way forward">
     <div class="stage con out">
@@ -1097,6 +1191,192 @@ document.getElementById('placesGrid').innerHTML=PLACES.map(pl=>
   '<div class="ptile"><img src="'+pl.img+'" alt="'+pl.name+'" loading="lazy">'+
   (pl.local?'':'<span class="rep">rep.</span>')+
   '<div class="cap"><b>'+pl.name+'</b><span>'+pl.desc+'</span></div></div>').join('');
+
+/* ================= ANALYTICS — sourced data + tiny SVG chart kit =========
+   Palette #0d9488/#b45309/#6d28d9/#be123c validated (dataviz six checks:
+   lightness band, chroma, CVD separation, contrast — all PASS, light mode). */
+const CK={c1:'#0d9488',c2:'#b45309',c3:'#6d28d9',c4:'#be123c',c5:'#475569',ink:'#12211d',mut:'#5f7370',grid:'#e0e7e4'};
+const ECON={
+  gsdp:[['2018-19',26527],['2021-22',31913],['2022-23',35934],['2023-24',41222],['2024-25',45198]],
+  ne2024:[['Assam',76.08],['Meghalaya',15.86],['Sikkim',15.40],['Nagaland',1.26],['Manipur',0.32]],
+  hornbill:{fest:58.7,rest:73.3},
+  gateway:[['Airport passengers, FY 2024-25',3.37],['Tourist visits — whole state, 2024',1.32]],
+  scenYears:['2024','2025','2026','2027','2028','2029','2030'],
+  scenBase:[1.32,1.43,1.54,1.66,1.80,1.94,2.10],
+  scenProj:[1.32,1.45,1.70,2.00,2.30,2.60,2.90],
+  spend:[['2024 · today',50],['2030 · with circuit',218]],
+  split:[['Stay',30],['Food',25],['Shopping & crafts',20],['Transport',15],['Activities & guides',10]]
+};
+function ckGrid(x0,x1,y0,y1,n,vmax,fmt){
+  let s='';for(let i=0;i<=n;i++){const t=i/n,y=y1-(y1-y0)*t;
+    s+='<line x1="'+x0+'" y1="'+y+'" x2="'+x1+'" y2="'+y+'" stroke="'+CK.grid+'" stroke-width="1"/>'+
+       '<text x="'+(x0-6)+'" y="'+(y+3)+'" text-anchor="end" font-size="9" fill="'+CK.mut+'" font-family="Inter">'+fmt(vmax*t)+'</text>';}
+  return s;}
+function ckRoundTop(x,y,w,h,r){r=Math.min(r,w/2,h);
+  return 'M'+x+' '+(y+h)+' L'+x+' '+(y+r)+' Q'+x+' '+y+' '+(x+r)+' '+y+' L'+(x+w-r)+' '+y+' Q'+(x+w)+' '+y+' '+(x+w)+' '+(y+r)+' L'+(x+w)+' '+(y+h)+' Z';}
+function ckVBars(o){
+  const W=o.w,H=o.h,x0=48,x1=W-8,y0=16,y1=H-22;
+  const max=(o.ymax||Math.max(...o.data.map(d=>d[1])))*1.12;
+  const n=o.data.length,slot=(x1-x0)/n,bw=Math.min(44,slot*.56);
+  let s='<svg viewBox="0 0 '+W+' '+H+'" xmlns="http://www.w3.org/2000/svg">'+ckGrid(x0,x1,y0,y1,3,max,o.fmt||(v=>Math.round(v)));
+  o.data.forEach((d,i)=>{const bh=(y1-y0)*d[1]/max,x=x0+slot*i+(slot-bw)/2,y=y1-bh;
+    s+='<path d="'+ckRoundTop(x,y,bw,bh,4)+'" fill="'+(o.colors?o.colors[i]:CK.c1)+'"><title>'+d[0]+': '+(o.vfmt?o.vfmt(d[1]):d[1])+'</title></path>'+
+       '<text x="'+(x+bw/2)+'" y="'+(y-5)+'" text-anchor="middle" font-size="10.5" font-weight="700" fill="'+CK.ink+'" font-family="Inter">'+(o.vfmt?o.vfmt(d[1]):d[1])+'</text>'+
+       '<text x="'+(x+bw/2)+'" y="'+(y1+14)+'" text-anchor="middle" font-size="9.5" fill="'+CK.mut+'" font-family="Inter">'+d[0]+'</text>';});
+  return s+'<line x1="'+x0+'" y1="'+y1+'" x2="'+x1+'" y2="'+y1+'" stroke="'+CK.mut+'" stroke-width="1"/></svg>';}
+function ckHBars(o){
+  const W=o.w,H=o.h,x0=o.lpad||88,x1=W-58,y0=6,y1=H-6;
+  const max=Math.max(...o.data.map(d=>d[1]));
+  const n=o.data.length,slot=(y1-y0)/n,bh=Math.min(26,slot*.6);
+  let s='<svg viewBox="0 0 '+W+' '+H+'" xmlns="http://www.w3.org/2000/svg">';
+  o.data.forEach((d,i)=>{const bw=(x1-x0)*d[1]/max,y=y0+slot*i+(slot-bh)/2;
+    const c=o.colorFn?o.colorFn(d,i):CK.c1;
+    s+='<rect x="'+x0+'" y="'+y+'" width="'+Math.max(bw,3)+'" height="'+bh+'" rx="4" fill="'+c+'"><title>'+d[0]+': '+(o.vfmt?o.vfmt(d[1]):d[1])+'</title></rect>'+
+       '<text x="'+(x0-8)+'" y="'+(y+bh/2+3.5)+'" text-anchor="end" font-size="10" font-weight="600" fill="'+CK.ink+'" font-family="Inter">'+d[0]+'</text>'+
+       '<text x="'+(x0+Math.max(bw,3)+7)+'" y="'+(y+bh/2+3.5)+'" font-size="10.5" font-weight="700" fill="'+CK.ink+'" font-family="Inter">'+(o.vfmt?o.vfmt(d[1]):d[1])+'</text>';});
+  return s+'</svg>';}
+function ckLines(o){
+  const W=o.w,H=o.h,x0=42,x1=W-16,y0=14,y1=H-20;
+  const max=Math.max(...o.series.flatMap(se=>se.vals))*1.15;
+  const X=i=>x0+(x1-x0)*i/(o.labels.length-1), Y=v=>y1-(y1-y0)*v/max;
+  let s='<svg viewBox="0 0 '+W+' '+H+'" xmlns="http://www.w3.org/2000/svg">'+ckGrid(x0,x1,y0,y1,3,max,o.fmt||(v=>v.toFixed(1)));
+  o.labels.forEach((l,i)=>{s+='<text x="'+X(i)+'" y="'+(y1+14)+'" text-anchor="middle" font-size="9.5" fill="'+CK.mut+'" font-family="Inter">'+l+'</text>';});
+  o.series.forEach(se=>{
+    s+='<polyline points="'+se.vals.map((v,i)=>X(i)+','+Y(v)).join(' ')+'" fill="none" stroke="'+se.color+'" stroke-width="2"'+(se.dash?' stroke-dasharray="5 4"':'')+' stroke-linecap="round"/>';
+    se.vals.forEach((v,i)=>{s+='<circle cx="'+X(i)+'" cy="'+Y(v)+'" r="3.5" fill="'+se.color+'" stroke="#fff" stroke-width="1.6"><title>'+se.name+' '+o.labels[i]+': '+v+' lakh</title></circle>';});
+    const li=se.vals.length-1;
+    s+='<text x="'+(X(li)-6)+'" y="'+(Y(se.vals[li])-8)+'" text-anchor="end" font-size="10" font-weight="700" fill="'+CK.ink+'" font-family="Inter">'+se.vals[li]+'</text>';});
+  return s+'<line x1="'+x0+'" y1="'+y1+'" x2="'+x1+'" y2="'+y1+'" stroke="'+CK.mut+'" stroke-width="1"/></svg>';}
+function ckDonut(o){
+  const W=o.w,H=o.h,cx=W/2,cy=H/2,R=Math.min(W,H)/2-6,r=R*.62,total=o.parts.reduce((a,p)=>a+p[1],0);
+  let a0=-Math.PI/2,s='<svg viewBox="0 0 '+W+' '+H+'" xmlns="http://www.w3.org/2000/svg">';
+  o.parts.forEach(p=>{const a1=a0+2*Math.PI*p[1]/total,big=(a1-a0)>Math.PI?1:0;
+    s+='<path d="M'+(cx+R*Math.cos(a0))+' '+(cy+R*Math.sin(a0))+' A'+R+' '+R+' 0 '+big+' 1 '+(cx+R*Math.cos(a1))+' '+(cy+R*Math.sin(a1))+
+       ' L'+(cx+r*Math.cos(a1))+' '+(cy+r*Math.sin(a1))+' A'+r+' '+r+' 0 '+big+' 0 '+(cx+r*Math.cos(a0))+' '+(cy+r*Math.sin(a0))+' Z" fill="'+p[2]+'" stroke="#fff" stroke-width="2"><title>'+p[0]+': '+p[1]+'</title></path>';
+    a0=a1;});
+  s+='<text x="'+cx+'" y="'+(cy-1)+'" text-anchor="middle" font-size="19" font-weight="800" fill="'+CK.ink+'" font-family="Sora">'+o.center[0]+'</text>'+
+     '<text x="'+cx+'" y="'+(cy+14)+'" text-anchor="middle" font-size="8.5" fill="'+CK.mut+'" font-family="Inter">'+o.center[1]+'</text>';
+  return s+'</svg>';}
+function ckStack100(o){
+  const W=o.w,H=o.h,y=12,bh=36,x0=6,x1=W-6;let x=x0,s='<svg viewBox="0 0 '+W+' '+H+'" xmlns="http://www.w3.org/2000/svg">';
+  o.parts.forEach((p,i)=>{const bw=(x1-x0)*p[1]/100;
+    s+='<rect x="'+x+'" y="'+y+'" width="'+(bw-2)+'" height="'+bh+'" rx="4" fill="'+o.colors[i]+'"><title>'+p[0]+': '+p[1]+'%</title></rect>'+
+       '<text x="'+(x+bw/2)+'" y="'+(y+bh/2+4)+'" text-anchor="middle" font-size="11" font-weight="700" fill="#fff" font-family="Inter">'+p[1]+'%</text>'+
+       '<text x="'+(x+bw/2)+'" y="'+(y+bh+15)+'" text-anchor="middle" font-size="9.5" fill="'+CK.ink+'" font-family="Inter">'+p[0]+'</text>';
+    x+=bw;});
+  return s+'</svg>';}
+const ckKpi=(v,l,sub,acc)=>'<div class="kpi"'+(acc?' style="border-top-color:'+acc+'"':'')+'><b>'+v+'</b><span>'+l+'</span>'+(sub?'<span class="sub">'+sub+'</span>':'')+'</div>';
+const ckChart=(t,sub,fig,leg)=>'<div class="chart"><div class="ct">'+t+'</div><div class="cs">'+sub+'</div>'+(leg||'')+'<figure>'+fig+'</figure></div>';
+const ckLeg=items=>'<div class="leg">'+items.map(it=>'<span><i style="background:'+it[1]+'"></i>'+it[0]+'</span>').join('')+'</div>';
+
+/* ---- A1 · economy today ---- */
+document.getElementById('anb-1').innerHTML=
+  '<div class="kpis">'+
+  ckKpi('₹45,198 cr','GSDP · 2024-25 AE','≈ $5.3 B · current prices')+
+  ckKpi('5.59%','Real GSDP growth 2024-25','12.25% in 2023-24')+
+  ckKpi('₹1.78 lakh','Per-capita income 2024-25','+11.6% over 2023-24')+
+  ckKpi('$10 B','State target by 2029-30','needs ~12.5% CAGR')+
+  '</div><div class="cgrid two">'+
+  ckChart('GSDP, current prices (₹ crore)','Nagaland · 2018-19 → 2024-25 AE · 2019-21 omitted (COVID break; FY21 real growth −7.25%)',
+    ckVBars({w:640,h:300,data:ECON.gsdp,vfmt:v=>(v/1000).toFixed(1)+'k',fmt:v=>Math.round(v/1000)+'k'}))+
+  ckChart('Why tourism, why now','The structural argument',
+    '<div style="font:450 12px/1.7 Inter;color:#3d4f4b;padding:6px 2px">'+
+    '<p style="margin-bottom:10px"><b style="color:#0d9488">High growth, narrow base.</b> Growth decelerated from 12.25% to 5.59% in one year — the base is thin and transfer-dependent; the Economic Survey itself flags the need for new own-revenue engines.</p>'+
+    '<p style="margin-bottom:10px"><b style="color:#0d9488">Tourism is the under-used lever.</b> Nagaland attracts ~1.3 lakh visits a year against a 2nd-busiest-in-NE gateway at Dimapur — conversion, not footfall, is the gap.</p>'+
+    '<p><b style="color:#0d9488">₹625 Cr buys compounding revenue,</b> not one-off assets: every extra visitor-day is recurring private income that feeds GST, jobs and the $10 B-by-2030 target.</p></div>')+
+  '</div><div class="src">Sources: Nagaland Economic Survey 2024-25 (GSDP ₹45,198 cr AE · 5.59% real · PCI ₹1,78,304 · $10 B/2030 target) · CAG State Finances (GSDP series; FY21 −7.25%) · MorungExpress 17 Feb 2025.</div>';
+
+/* ---- A2 · tourism gap ---- */
+document.getElementById('anb-2').innerHTML=
+  '<div class="kpis">'+
+  ckKpi('1.32 lakh','Tourist visits · 2024','1.26 L domestic + 6k foreign','#b45309')+
+  ckKpi('+25.9%','Domestic growth · 2024','off a very small base','#b45309')+
+  ckKpi('2nd-least','Visited state in NE','ahead of only Manipur','#b45309')+
+  ckKpi('12×','Meghalaya vs Nagaland','similar terrain & access','#b45309')+
+  '</div><div class="cgrid two">'+
+  ckChart('Domestic tourist visits, 2024 (lakh)','North-East comparison — the gap is the opportunity',
+    ckHBars({w:640,h:280,data:ECON.ne2024,vfmt:v=>v+' L',colorFn:d=>d[0]==='Nagaland'?CK.c2:CK.c1}),
+    ckLeg([['Peer states',CK.c1],['Nagaland',CK.c2]]))+
+  ckChart('One festival carries the year','Tourist arrivals split, 2024 (thousand)',
+    ckDonut({w:300,h:250,parts:[['Hornbill 10 days',ECON.hornbill.fest,CK.c2],['Rest of the year',ECON.hornbill.rest,CK.c1]],center:['45%','of arrivals in 10 days']})+
+    '<div class="leg" style="justify-content:center"><span><i style="background:'+CK.c2+'"></i>Hornbill · 58.7k</span><span><i style="background:'+CK.c1+'"></i>Rest of year · 73.3k</span></div>')+
+  '</div><div class="src">Sources: MoT / state inflow statistics via MorungExpress (2024: 1.26 L DTV + 0.06 L FTV; 2023: 1.05 L; +25.87% dom) · NE 2024 DTVs: Assam 76.08 L, Meghalaya 15.86 L, Sikkim 15.40 L, Manipur 0.32 L (Highland Post / MoT) · Hornbill 2024: 56,217 dom + 2,527 foreign in 10 days. The circuit sells the other 355 days.</div>';
+
+/* ---- A3 · Dimapur gateway ---- */
+document.getElementById('anb-3').innerHTML=
+  '<div class="kpis">'+
+  ckKpi('3,36,870','Airport passengers FY 2024-25','+5.4% YoY · ~10%/yr 5-yr trend')+
+  ckKpi('Only','Airport in Nagaland','expansion Phase-I under way (AAI)')+
+  ckKpi('Principal','Railhead of the state','one of the busiest in the NE corridor')+
+  ckKpi('Commercial','Capital of Nagaland','trade & logistics hub for the state')+
+  '</div><div class="cgrid two">'+
+  ckChart('People already at the gateway vs tourists captured (lakh, annual)','Airport throughput alone is 2.5× the whole state’s recorded tourist visits',
+    ckHBars({w:640,h:200,lpad:230,data:ECON.gateway,vfmt:v=>v+' L',colorFn:(d,i)=>i?CK.c2:CK.c1}))+
+  ckChart('The conversion argument','What the circuit changes',
+    '<div style="font:450 12px/1.7 Inter;color:#3d4f4b;padding:6px 2px">'+
+    '<p style="margin-bottom:10px"><b style="color:#0d9488">The demand already lands here.</b> ~3.4 lakh air passengers plus rail and NH-29 road traffic pass through Dimapur every year — multiples of the 1.32 lakh tourists the whole state records.</p>'+
+    '<p style="margin-bottom:10px"><b style="color:#0d9488">They leave in hours.</b> No packaged product, no evening economy, no reason to stay — the spend walks out of the state.</p>'+
+    '<p><b style="color:#0d9488">Converting a fraction is transformative:</b> if just 1 in 4 gateway passengers adds one circuit day, visitor-days more than double.</p></div>')+
+  '</div><div class="src">Sources: AAI traffic data FY 2024-25 (3,36,870 pax, +5.4%; ~10%/yr 5-yr trend) · AAI Dimapur expansion notices · Dimapur = state’s commercial hub (Govt. of Nagaland). Air pax counts arrivals + departures; comparison is directional, not like-for-like.</div>';
+
+/* ---- A4 · impact of ₹625 Cr ---- */
+document.getElementById('anb-4').innerHTML=
+  '<div class="kpis">'+
+  ckKpi('2.9 lakh','Visits by 2030 · with circuit','vs ~2.1 L on current trend')+
+  ckKpi('₹218 cr/yr','Direct visitor spend by 2030','vs ~₹50 cr today')+
+  ckKpi('≈4,900','Direct jobs by Yr-5','≈8,800 with indirect')+
+  ckKpi('+0.9%','Of GSDP · total impact/yr','with 1.8× output multiplier')+
+  '</div><div class="cgrid two">'+
+  ckChart('Tourist visits — current trend vs with circuit (lakh/yr)','Project case reaches the deck’s +100% target by Yr-5/6',
+    ckLines({w:640,h:250,labels:ECON.scenYears,series:[{name:'Current trend',color:CK.c1,vals:ECON.scenBase},{name:'With ₹625 Cr circuit',color:CK.c2,vals:ECON.scenProj,dash:1}]}),
+    ckLeg([['Current trend (~8%/yr)',CK.c1],['With circuit (dashed = projection)',CK.c2]]))+
+  ckChart('Annual direct visitor spend (₹ crore)','Visits × dwell days × spend/day',
+    ckVBars({w:330,h:250,data:ECON.spend,colors:[CK.c1,CK.c2],vfmt:v=>'₹'+v+' cr'}))+
+  '</div>'+
+  '<div class="assume"><b>Assumptions (indicative, for DPR):</b> dwell 1.5 → 3 days · spend ₹2,500/visitor-day (mid-range domestic, NE) · 2030 project case 2.9 L visits × 3 d × ₹2,500 ≈ ₹218 cr direct; ×1.8 output multiplier ≈ ₹392 cr ≈ 0.9% of 2024-25 GSDP · jobs: MoT 2024 — 33.4 M direct tourism jobs on ≈5% of GDP ⇒ ≈22.6 direct jobs per ₹1 cr tourism output ⇒ ≈4,900 direct / ≈8,800 total.</div>'+
+  '<div class="src">Benchmarks: Ministry of Tourism India Tourism Statistics 2024 (employment & GDP share) · CII–EY tourism employment outlook · state 2024 arrivals as baseline. Projections are estimates, not commitments.</div>';
+
+/* ---- A5 · local livelihoods ---- */
+document.getElementById('anb-5').innerHTML=
+  '<div class="kpis">'+
+  ckKpi('₹139–200 cr','Hornbill 2024 in 10 days','proof local capture works','#6d28d9')+
+  ckKpi('“All-year Hornbill”','What the circuit builds','₹218 cr/yr spread over 365 days','#6d28d9')+
+  ckKpi('₹145 cr','Unity Mall (ODOP) sanctioned','circuit delivers its footfall','#6d28d9')+
+  ckKpi('5 channels','Vendors · homestays · taxis · artisans · farms','SHGs & VDBs as partners','#6d28d9')+
+  '</div><div class="cgrid" style="grid-template-rows:auto 1fr">'+
+  ckChart('Where each ₹100 of tourist spend lands (typical visitor basket)','Every segment is a local earning channel — stay, food and crafts alone put ₹75 of every ₹100 into local hands',
+    ckStack100({w:1140,h:76,parts:ECON.split,colors:[CK.c1,CK.c2,CK.c3,CK.c4,CK.c5]}))+
+  '<div class="cgrid two" style="flex:1">'+
+  ckChart('The beneficiary map','Who earns on each package day',
+    '<div style="font:450 11.5px/1.65 Inter;color:#3d4f4b;padding:4px 2px">'+
+    '<p style="margin-bottom:8px"><b style="color:#0d9488">Markets & vendors —</b> Hong Kong Market, Super Market & Urban Haat stalls sell to every Package-1 visitor; weekly flea market slots for small sellers.</p>'+
+    '<p style="margin-bottom:8px"><b style="color:#0d9488">Homestays & taxis —</b> community-run stays and a trained 2W/4W tourist-taxi fleet earn on all three packages.</p>'+
+    '<p style="margin-bottom:8px"><b style="color:#0d9488">Artisans & SHGs —</b> Diezephe weavers and carvers get direct-to-buyer sales (Hornbill shows orders continue year-round); Bamboo & Honey Mission SHGs supply cafés and souvenirs.</p>'+
+    '<p><b style="color:#0d9488">Farm families —</b> Medziphema & Ruzaphema pineapple tours pay growers a second, tourism income on the same crop.</p></div>')+
+  ckChart('Why this is credible','Evidence, not hope',
+    '<div style="font:450 11.5px/1.65 Inter;color:#3d4f4b;padding:4px 2px">'+
+    '<p style="margin-bottom:8px">Hornbill 2024 moved <b>₹139–200 cr through taxis, homestays, artisans and food vendors in 10 days</b> — the local supply chain already absorbs tourist demand when it exists.</p>'+
+    '<p style="margin-bottom:8px">The circuit’s 2030 case (≈₹218 cr/yr) is essentially <b>one Hornbill of local earnings, every year, spread across 12 months</b> — steadier cash-flow than a one-month spike, so businesses can hire permanently.</p>'+
+    '<p>Vendor onboarding, stall allotment and SHG supply contracts are built into the Super Market, Urban Haat and amenity-centre designs funded in this proposal.</p></div>')+
+  '</div></div>'+
+  '<div class="src">Sources: Hornbill 2024 economic coverage (₹139 cr revenue estimate; ₹189–200 cr incl. taxis/homestays/artisans; 2.05 L festival footfall) · Unity Mall ₹145 cr central sanction (Chümoukedima) · spend-basket split is an indicative visitor-expenditure pattern for DPR calibration.</div>';
+
+/* ---- A6 · digital backbone (the circuit app) ---- */
+document.getElementById('anb-6').innerHTML=
+  '<div class="kpis">'+
+  ckKpi('1 app','Book · pay · review · navigate','all 3 packages, 27 stops')+
+  ckKpi('100%','Digital vendor payments','every stall, homestay & taxi on UPI')+
+  ckKpi('Live','CM / DoNER dashboard','arrivals · revenue · milestones, real-time')+
+  ckKpi('₹625 cr','Tracked to the rupee','phase & milestone monitoring built-in')+
+  '</div><div class="fgrid">'+
+  '<div class="fcard"><b>Bookings & itineraries</b><p>Package booking, homestay & guide reservations, event tickets (light-&-sound, festivals), dynamic 3-day itineraries with the live route map.</p></div>'+
+  '<div class="fcard"><b>Vendor & SHG marketplace</b><p>Onboard every stall, artisan and farm; UPI payments, digital ledgers, ODOP storefront that keeps earning after the tourist goes home.</p></div>'+
+  '<div class="fcard"><b>Reviews & quality control</b><p>Ratings on every stop, homestay and taxi; poor scores trigger inspection — quality stays high without heavy enforcement.</p></div>'+
+  '<div class="fcard"><b>Government analytics</b><p>Live arrivals, dwell time, spend estimates, occupancy and package-mix — the charts in this deck, permanently on the CM’s screen, not rebuilt yearly.</p></div>'+
+  '<div class="fcard"><b>Project & fund monitoring</b><p>₹625 Cr milestone tracker per intervention with geo-tagged photo evidence — clean reporting to DoNER, SLEC and CAG.</p></div>'+
+  '<div class="fcard"><b>Safety & facilitation</b><p>SOS with location, verified taxi IDs, ILP/permit integration, offline maps — removes the friction that keeps first-time visitors away.</p></div>'+
+  '</div>'+
+  '<div class="src">Funded within the sanctioned “training, marketing & digital app” head (₹30 cr) — no new money. Every transaction the app processes becomes the data that measures this project’s ROI.</div>';
 
 /* ================= CONCEPT-NOTE SLIDES (data + build) ==================
    Content condensed from “Development of the Dimapur–Chumoukedima Twin
@@ -1470,7 +1750,7 @@ async function exportPPT(){
     const F='Segoe UI';
     const C={ink:'12211D',teal:'0E6E62',teald:'0A4F47',muted:'5F7370',line:'E0E7E4',mint:'E7F2F0'};
     const DC={1:'0E6E62',2:'B45309',3:'6D28D9'};
-    const NSLIDES=23;
+    const NSLIDES=29;
     let PAGE=1;                                  // cover is page 1 (no footer)
     const foot=(s)=>{                            // auto-numbers in call order
       PAGE++;
@@ -1877,6 +2157,106 @@ async function exportPPT(){
       foot(s,18);
     }
 
+    /* --- Analytics A1–A6 (native PPT charts from ECON data) --- */
+    const AC=['0D9488','B45309','6D28D9','BE123C','475569'];
+    const anKpis=(s,items,acc)=>{ items.forEach((it,i)=>{
+      const x=.5+i*3.24;
+      s.addShape(pptx.ShapeType.rect,{x,y:1.42,w:3.06,h:.92,fill:{color:'FAFCFB'},line:{color:C.line,width:1}});
+      s.addShape(pptx.ShapeType.rect,{x,y:1.42,w:3.06,h:.05,fill:{color:acc||'0D9488'}});
+      s.addText(it[0],{x:x+.14,y:1.5,w:2.8,h:.38,fontFace:F,fontSize:14,bold:true,color:C.ink});
+      s.addText(it[1],{x:x+.14,y:1.88,w:2.8,h:.4,fontFace:F,fontSize:7.5,color:C.muted,charSpacing:.5,valign:'top'});
+    });};
+    const anSrc=(s,t)=>s.addText(t,{x:.5,y:6.72,w:12.35,h:.38,fontFace:F,fontSize:7.5,italic:true,color:C.muted,valign:'top'});
+    { /* A1 economy */
+      const s=pptx.addSlide();
+      band(s,'The Economy ','Today',C.teal,'Nagaland macro snapshot · real figures');
+      anKpis(s,[['₹45,198 cr','GSDP 2024-25 AE · ≈$5.3 B'],['5.59%','REAL GROWTH 2024-25 (12.25% IN 2023-24)'],['₹1.78 lakh','PER-CAPITA INCOME 2024-25 · +11.6%'],['$10 B','STATE TARGET BY 2029-30 · ~12.5% CAGR']]);
+      s.addChart(pptx.ChartType.bar,[{name:'GSDP (₹ cr)',labels:ECON.gsdp.map(d=>d[0]),values:ECON.gsdp.map(d=>d[1])}],
+        {x:.5,y:2.55,w:7.2,h:4.0,barDir:'col',chartColors:[AC[0]],showValue:true,dataLabelFontSize:8,dataLabelColor:C.ink,catAxisLabelFontSize:8,valAxisLabelFontSize:8,valGridLine:{color:'E0E7E4',size:1},chartColorsOpacity:100,showLegend:false,showTitle:false});
+      s.addText([{text:'High growth, narrow base — ',options:{bold:true,color:AC[0]}},{text:'growth fell 12.25% → 5.59% in a year; the Survey flags the need for own-revenue engines.\n\n',options:{color:C.ink}},
+                 {text:'Tourism is the under-used lever — ',options:{bold:true,color:AC[0]}},{text:'~1.3 lakh visits/yr against a busy gateway: conversion, not footfall, is the gap.\n\n',options:{color:C.ink}},
+                 {text:'₹625 Cr buys compounding revenue — ',options:{bold:true,color:AC[0]}},{text:'every extra visitor-day is recurring income toward the $10 B target.',options:{color:C.ink}}],
+        {x:8.0,y:2.6,w:4.85,h:3.9,fontFace:F,fontSize:10,valign:'top'});
+      anSrc(s,'Sources: Nagaland Economic Survey 2024-25 · CAG State Finances (series; FY21 −7.25%) · MorungExpress 17 Feb 2025. 2019-21 omitted (COVID break).');
+      foot(s);
+    }
+    { /* A2 tourism gap */
+      const s=pptx.addSlide();
+      band(s,'The Tourism ','Gap','B45309','Where Nagaland stands in the North-East · why the upside is real');
+      anKpis(s,[['1.32 lakh','TOURIST VISITS 2024 · 1.26 L DOM + 6K FOREIGN'],['+25.9%','DOMESTIC GROWTH 2024 · SMALL BASE'],['2nd-least','VISITED IN NE · AHEAD OF ONLY MANIPUR'],['12×','MEGHALAYA VS NAGALAND · SIMILAR ACCESS']],'B45309');
+      s.addChart(pptx.ChartType.bar,[{name:'DTVs 2024 (lakh)',labels:ECON.ne2024.map(d=>d[0]).reverse(),values:ECON.ne2024.map(d=>d[1]).reverse()}],
+        {x:.5,y:2.55,w:7.2,h:4.0,barDir:'bar',chartColors:[AC[0]],showValue:true,dataLabelFontSize:9,dataLabelColor:C.ink,catAxisLabelFontSize:9,valAxisHidden:true,showLegend:false,showTitle:false});
+      s.addChart(pptx.ChartType.doughnut,[{name:'2024 arrivals',labels:['Hornbill 10 days','Rest of year'],values:[ECON.hornbill.fest,ECON.hornbill.rest]}],
+        {x:8.0,y:2.6,w:4.85,h:3.5,chartColors:['B45309','0D9488'],showPercent:true,dataLabelFontSize:9,showLegend:true,legendPos:'b',legendFontSize:8,holeSize:60,showTitle:false});
+      s.addText('45% of a year’s arrivals land in 10 festival days — the circuit sells the other 355.',{x:8.0,y:6.15,w:4.85,h:.5,fontFace:F,fontSize:9,bold:true,color:C.ink,valign:'top'});
+      anSrc(s,'Sources: state inflow stats via MorungExpress (2024: 1.26 L + 0.06 L; 2023: 1.05 L) · NE 2024 DTVs: Assam 76.08 L · Meghalaya 15.86 L · Sikkim 15.40 L · Manipur 0.32 L · Hornbill 2024: 56,217 + 2,527 in 10 days.');
+      foot(s);
+    }
+    { /* A3 gateway */
+      const s=pptx.addSlide();
+      band(s,'Dimapur — ','Footfall Without Capture',C.teal,'The gateway already carries the volume · the circuit converts it');
+      anKpis(s,[['3,36,870','AIRPORT PAX FY 2024-25 · +5.4% YOY'],['Only','AIRPORT IN NAGALAND · AAI EXPANSION UNDER WAY'],['Principal','RAILHEAD OF THE STATE · NE CORRIDOR'],['Commercial','CAPITAL OF NAGALAND · TRADE & LOGISTICS HUB']]);
+      s.addChart(pptx.ChartType.bar,[{name:'Annual (lakh)',labels:['Airport passengers FY25','Tourist visits, state 2024'],values:[3.37,1.32]}],
+        {x:.5,y:2.7,w:7.2,h:3.4,barDir:'bar',chartColors:[AC[0],AC[1]],varyColors:true,showValue:true,dataLabelFontSize:10,dataLabelColor:C.ink,catAxisLabelFontSize:9,valAxisHidden:true,showLegend:false,showTitle:false});
+      s.addText([{text:'The demand already lands here — ',options:{bold:true,color:AC[0]}},{text:'~3.4 L air pax + rail + NH-29 traffic pass through Dimapur yearly, multiples of the 1.32 L tourists the whole state records.\n\n',options:{color:C.ink}},
+                 {text:'They leave in hours — ',options:{bold:true,color:AC[0]}},{text:'no packaged product, no evening economy; the spend exits the state.\n\n',options:{color:C.ink}},
+                 {text:'Converting a fraction is transformative — ',options:{bold:true,color:AC[0]}},{text:'1 in 4 gateway passengers adding one circuit day would more than double visitor-days.',options:{color:C.ink}}],
+        {x:8.0,y:2.7,w:4.85,h:3.7,fontFace:F,fontSize:10,valign:'top'});
+      anSrc(s,'Sources: AAI traffic data FY 2024-25 (+5.4%; ~10%/yr 5-yr trend) · AAI expansion notices. Air pax = arrivals + departures; comparison directional.');
+      foot(s);
+    }
+    { /* A4 impact */
+      const s=pptx.addSlide();
+      band(s,'Projected Impact of ','₹625 Cr',C.teal,'Arrivals · visitor spend · jobs — indicative, assumptions shown');
+      anKpis(s,[['2.9 lakh','VISITS BY 2030 WITH CIRCUIT · VS ~2.1 L TREND'],['₹218 cr/yr','DIRECT VISITOR SPEND 2030 · VS ~₹50 CR TODAY'],['≈4,900','DIRECT JOBS BY YR-5 · ≈8,800 WITH INDIRECT'],['+0.9%','OF GSDP TOTAL IMPACT/YR · 1.8× MULTIPLIER']]);
+      s.addChart(pptx.ChartType.line,[
+        {name:'Current trend',labels:ECON.scenYears,values:ECON.scenBase},
+        {name:'With ₹625 Cr circuit',labels:ECON.scenYears,values:ECON.scenProj}],
+        {x:.5,y:2.55,w:7.4,h:3.4,chartColors:[AC[0],AC[1]],lineSize:2,lineDataSymbol:'circle',lineDataSymbolSize:5,showLegend:true,legendPos:'b',legendFontSize:8,catAxisLabelFontSize:8,valAxisLabelFontSize:8,valGridLine:{color:'E0E7E4',size:1},showTitle:false});
+      s.addChart(pptx.ChartType.bar,[{name:'₹ cr/yr',labels:['2024 today','2030 with circuit'],values:[50,218]}],
+        {x:8.15,y:2.55,w:4.7,h:3.4,barDir:'col',chartColors:[AC[0],AC[1]],varyColors:true,showValue:true,dataLabelFontSize:10,dataLabelColor:C.ink,catAxisLabelFontSize:8,valAxisHidden:true,showLegend:false,showTitle:false});
+      s.addText('Assumptions (for DPR): dwell 1.5→3 days · ₹2,500/visitor-day · 2.9 L × 3 d × ₹2,500 ≈ ₹218 cr direct; ×1.8 ≈ ₹392 cr ≈ 0.9% of GSDP · jobs via MoT 2024 benchmark (33.4 M direct jobs on ≈5% of GDP ⇒ ≈22.6 direct jobs / ₹1 cr output).',
+        {x:.5,y:6.1,w:12.35,h:.6,fontFace:F,fontSize:8.5,color:C.ink,fill:{color:'FDF8F2'},line:{color:C.line,width:1},valign:'middle'});
+      anSrc(s,'Benchmarks: MoT India Tourism Statistics 2024 · CII–EY employment outlook. Projections are estimates, not commitments.');
+      foot(s);
+    }
+    { /* A5 livelihoods */
+      const s=pptx.addSlide();
+      band(s,'Local Livelihoods — ','Who Earns','6D28D9','Vendors · homestays · artisans · farmers — the community dividend');
+      anKpis(s,[['₹139–200 cr','HORNBILL 2024 IN 10 DAYS — LOCAL CAPTURE WORKS'],['All-year Hornbill','₹218 CR/YR SPREAD OVER 365 DAYS'],['₹145 cr','UNITY MALL (ODOP) SANCTIONED — CIRCUIT FEEDS IT'],['5 channels','VENDORS · HOMESTAYS · TAXIS · ARTISANS · FARMS']],'6D28D9');
+      s.addChart(pptx.ChartType.pie,[{name:'₹100 of tourist spend',labels:ECON.split.map(d=>d[0]),values:ECON.split.map(d=>d[1])}],
+        {x:.5,y:2.6,w:5.4,h:3.9,chartColors:AC,showPercent:true,dataLabelFontSize:9,dataLabelColor:'FFFFFF',showLegend:true,legendPos:'b',legendFontSize:8,showTitle:false});
+      s.addText([{text:'Markets & vendors — ',options:{bold:true,color:AC[0]}},{text:'Hong Kong Market, Super Market & Urban Haat stalls sell to every Package-1 visitor; weekly flea-market slots for small sellers.\n',options:{color:C.ink}},
+                 {text:'Homestays & taxis — ',options:{bold:true,color:AC[0]}},{text:'community stays and a trained 2W/4W fleet earn on all three packages.\n',options:{color:C.ink}},
+                 {text:'Artisans & SHGs — ',options:{bold:true,color:AC[0]}},{text:'Diezephe weavers sell direct-to-buyer; Bamboo & Honey Mission SHGs supply cafés and souvenirs.\n',options:{color:C.ink}},
+                 {text:'Farm families — ',options:{bold:true,color:AC[0]}},{text:'Medziphema & Ruzaphema pineapple tours add a second income on the same crop.\n\n',options:{color:C.ink}},
+                 {text:'Evidence: ',options:{bold:true,color:'6D28D9'}},{text:'Hornbill 2024 moved ₹139–200 cr through this exact local supply chain in 10 days — the 2030 case is one Hornbill of earnings, every year, all year.',options:{color:C.ink}}],
+        {x:6.3,y:2.6,w:6.55,h:3.95,fontFace:F,fontSize:9.5,valign:'top'});
+      anSrc(s,'Sources: Hornbill 2024 economic coverage (₹139 cr revenue est.; ₹189–200 cr incl. taxis/homestays/artisans; 2.05 L footfall) · Unity Mall ₹145 cr sanction. Spend split indicative for DPR calibration.');
+      foot(s);
+    }
+    { /* A6 app */
+      const s=pptx.addSlide();
+      band(s,'Digital Backbone — ','One Circuit App',C.teal,'Book · pay · review · monitor — live data for government, one front door for visitors');
+      anKpis(s,[['1 app','BOOK · PAY · REVIEW · NAVIGATE — 3 PACKAGES, 27 STOPS'],['100%','DIGITAL VENDOR PAYMENTS — UPI FOR EVERY STALL & STAY'],['Live','CM / DONER DASHBOARD — ARRIVALS · REVENUE · MILESTONES'],['₹625 cr','TRACKED TO THE RUPEE — PHASE & MILESTONE MONITORING']]);
+      const feats=[
+        ['Bookings & itineraries','Packages, homestays, guides, event tickets; dynamic 3-day itineraries on the live route map.'],
+        ['Vendor & SHG marketplace','Onboard every stall, artisan and farm; UPI payments, digital ledgers, ODOP storefront that earns after the visit.'],
+        ['Reviews & quality control','Ratings on every stop and taxi; poor scores trigger inspection — quality without heavy enforcement.'],
+        ['Government analytics','Live arrivals, dwell, spend, occupancy and package-mix — this deck’s charts, always current.'],
+        ['Project & fund monitoring','₹625 Cr milestone tracker per intervention, geo-tagged evidence — clean DoNER/SLEC/CAG reporting.'],
+        ['Safety & facilitation','SOS with location, verified taxi IDs, ILP/permit integration, offline maps.']];
+      feats.forEach((f,i)=>{
+        const x=.5+(i%3)*4.28, y=2.6+Math.floor(i/3)*1.95;
+        s.addShape(pptx.ShapeType.rect,{x,y,w:4.08,h:1.8,fill:{color:'FAFCFB'},line:{color:C.line,width:1}});
+        s.addShape(pptx.ShapeType.rect,{x,y,w:4.08,h:.05,fill:{color:C.teal}});
+        s.addText(f[0],{x:x+.16,y:y+.1,w:3.76,h:.34,fontFace:F,fontSize:11,bold:true,color:C.ink});
+        s.addText(f[1],{x:x+.16,y:y+.46,w:3.76,h:1.25,fontFace:F,fontSize:8.5,color:C.muted,valign:'top'});
+      });
+      anSrc(s,'Funded within the sanctioned “training, marketing & digital app” head (₹30 cr) — no new money. Every transaction becomes the data that measures this project’s ROI.');
+      foot(s);
+    }
+
     /* --- Slide 19 · Outcomes & way forward --- */
     {
       const s=pptx.addSlide();
@@ -1904,7 +2284,7 @@ async function exportPPT(){
     }
 
     await pptx.writeFile({fileName:'Dimapur-Chumoukedima-Tourist-Circuit-625Cr.pptx'});
-    toast('PowerPoint exported — 23 slides, maps, photos & concept renders ✓');
+    toast('PowerPoint exported — 29 slides incl. analytics charts ✓');
   }catch(err){
     console.error(err);
     toast('Export failed: '+(err&&err.message?err.message:'unknown error'));
