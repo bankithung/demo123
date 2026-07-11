@@ -441,6 +441,13 @@
   .ix .pkrow.all b{font:700 12.5px "Sora";color:#fff}
   .ix .pkrow.all span{font:500 10px "Inter";color:#9db3ac}
   .ix .pkrow.all.on{background:var(--ink)}
+  .ix .pkrow.backrow{justify-content:space-between;background:#fff;border-color:var(--line);padding:9px 12px;margin-bottom:6px}
+  .ix .pkrow.backrow b{font:700 11.5px "Sora";color:var(--ink)}
+  .ix .pkrow.backrow span{font:500 10px "Inter";color:var(--muted)}
+  .ix .pkrow.backrow:hover{border-color:var(--teal)}
+  .ix .pkhead{padding:2px 8px 8px;border-bottom:1px solid var(--line);margin-bottom:2px}
+  .ix .pkhead b{display:block;font:800 14px "Sora";color:var(--c);line-height:1.15}
+  .ix .pkhead span{font:600 10.5px "Inter";color:var(--muted)}
 
   /* toast */
   .toast{
@@ -1065,7 +1072,7 @@ function applyFilter(day){
   drawRoute(day);
   fitCurrent();
   document.querySelectorAll('#seg button').forEach(x=>x.classList.toggle('on',x.dataset.day==day));
-  document.querySelectorAll('#ixList .pkrow').forEach(b=>b.classList.toggle('on',b.dataset.day==day));
+  renderMapPanel(day);
   const shown=STOPS.filter(s=>day==='all'||s.day==Number(day));
   document.getElementById('ixCount').textContent = day==='all'
     ? STOPS.length+' stops · 3 packages'
@@ -1073,24 +1080,47 @@ function applyFilter(day){
 }
 document.querySelectorAll('#seg button').forEach(c=>c.addEventListener('click',()=>applyFilter(c.dataset.day)));
 
-/* map side panel: pick a package to filter its route */
+/* map side panel — 'all': 3-package summary; a package: its full day-by-day stops */
 const ixList=document.getElementById('ixList');
-(function buildMapPanel(){
-  let html='<button class="pkrow all on" data-day="all"><b>All packages</b><span>3 × 3-day itineraries</span></button>';
-  [1,2,3].forEach(d=>{
-    const list=STOPS.filter(s=>s.day===d);
-    html+='<button class="pkrow" data-day="'+d+'" style="--c:'+DAY_HEX[d]+'">'+
-      '<span class="pkdot"></span>'+
-      '<span class="pktx"><b>'+DAYS[d].key+' · '+DAYS[d].name+'</b>'+
-      '<span>'+list.length+' stops · ~'+dayKm(d)+' km · '+PACKAGES[d-1].tag+'</span></span></button>';
-  });
+function renderMapPanel(day){
+  let html='';
+  if(day==='all'){
+    html='<button class="pkrow all on" data-day="all"><b>All packages</b><span>3 × 3-day itineraries</span></button>';
+    [1,2,3].forEach(d=>{
+      const list=STOPS.filter(s=>s.day===d);
+      html+='<button class="pkrow" data-day="'+d+'" style="--c:'+DAY_HEX[d]+'">'+
+        '<span class="pkdot"></span>'+
+        '<span class="pktx"><b>'+DAYS[d].key+' · '+DAYS[d].name+'</b>'+
+        '<span>'+list.length+' stops · ~'+dayKm(d)+' km · '+PACKAGES[d-1].tag+'</span></span></button>';
+    });
+  }else{
+    const d=Number(day), color=DAY_HEX[d], list=STOPS.filter(s=>s.day===d);
+    html='<button class="pkrow backrow" data-day="all"><b>← All packages</b><span>back</span></button>';
+    html+='<div class="pkhead" style="--c:'+color+'"><b>'+DAYS[d].key+' · '+DAYS[d].name+'</b>'+
+      '<span>'+list.length+' stops · ~'+dayKm(d)+' km · 3D / 2N</span></div>';
+    [1,2,3].forEach(wd=>{
+      const ds=list.filter(s=>s.wd===wd); if(!ds.length) return;
+      html+='<div class="dh" style="color:'+color+'">Day '+wd+'</div>';
+      ds.forEach(s=>{
+        html+='<button class="ix-row" data-n="'+s.n+'" data-day="'+d+'">'+
+          '<span class="num" style="background:'+color+'">'+s.n+'</span>'+
+          '<span><span class="nm">'+s.name+'</span><br><span class="tm">'+s.time+'</span></span></button>';
+      });
+    });
+  }
   ixList.innerHTML=html;
-})();
+}
+renderMapPanel('all');
 ixList.addEventListener('click',e=>{
-  const r=e.target.closest('.pkrow'); if(!r) return;
-  applyFilter(r.dataset.day);
+  const pk=e.target.closest('.pkrow');
+  if(pk){ applyFilter(pk.dataset.day); return; }
+  const r=e.target.closest('.ix-row');
+  if(r&&r.dataset.n) focusStop(Number(r.dataset.n));
 });
+ixList.addEventListener('mouseover',e=>{const r=e.target.closest('.ix-row');if(r&&r.dataset.n)highlight(Number(r.dataset.n));});
+ixList.addEventListener('mouseout',()=>highlight(null));
 function highlight(n){
+  document.querySelectorAll('.ix-row').forEach(i=>i.classList.toggle('hl',i.dataset.n==n));
   document.querySelectorAll('.pin').forEach(p=>p.classList.toggle('hl',p.dataset.n==n));
 }
 
