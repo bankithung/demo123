@@ -982,9 +982,9 @@ function packagePanel(p){
 }
 function buildPackageMap(p){
   const color=DAY_HEX[p], list=STOPS.filter(s=>s.day===p);
-  const m=L.map('map'+p,{scrollWheelZoom:false,zoomControl:true});
+  const m=L.map('map'+p,{scrollWheelZoom:false,zoomControl:true,fadeAnimation:false});
   m.zoomControl.setPosition('bottomright');
-  L.tileLayer(TILE,{maxZoom:20,crossOrigin:true,subdomains:'abcd',attribution:'© OpenStreetMap © CARTO'}).addTo(m);
+  m._tiles=L.tileLayer(TILE,{maxZoom:20,crossOrigin:true,subdomains:'abcd',attribution:'© OpenStreetMap © CARTO'}).addTo(m);
   L.marker([AIRPORT.lat,AIRPORT.lng],{icon:L.divIcon({className:'',html:'<div class="pin air" title="Dimapur Airport">✈</div>',iconSize:[30,30],iconAnchor:[15,15]})}).addTo(m)
     .bindPopup('<div class="pop-t">'+AIRPORT.name+'</div><div class="pop-note">Arrival gateway — pickup 3:30 PM.</div>');
   L.polyline([[AIRPORT.lat,AIRPORT.lng],...list.map(s=>[s.lat,s.lng])],{renderer:L.canvas({padding:.6}),color,weight:3.5,opacity:.85,dashArray:'2,9',lineCap:'round'}).addTo(m);
@@ -1289,12 +1289,16 @@ const pkgMapImg={};   // cached {img,ratio} per package, reused by PPT
 /* snapshot one package's map div (the slide must be active so it has size) */
 async function snapshotMapImage(p){
   const m=maps[p], divId='map'+p;
-  m.invalidateSize(); m.fitBounds(mapBounds[p],MAP_PAD); m.closePopup();
-  await wait(1000);                        // let tiles settle
+  m.closePopup(); m.invalidateSize();
+  m.fitBounds(mapBounds[p],Object.assign({animate:false},MAP_PAD));   // no anim → tiles load for the final view
+  /* wait for the Carto tiles to actually finish loading (else the snapshot is blank) */
+  await new Promise(res=>{ let done=false; const fin=()=>{if(!done){done=true;res();}};
+    m._tiles.once('load',fin); setTimeout(fin,2600); });
+  await wait(400);                         // small buffer after tiles settle
   let img=null, ratio=1.5;
   try{
     const canvas=await html2canvas(document.getElementById(divId),
-      {useCORS:true,allowTaint:false,scale:1.5,logging:false,backgroundColor:'#eef3f0',
+      {useCORS:true,allowTaint:false,scale:1.6,logging:false,backgroundColor:'#eef3f0',
        ignoreElements:el=>el.classList&&(el.classList.contains('leaflet-control-zoom')||el.classList.contains('leaflet-control-attribution')||el.classList.contains('ovl')||el.classList.contains('printmap'))});
     img=canvas.toDataURL('image/jpeg',.92); ratio=canvas.width/canvas.height;
   }catch(err){ console.warn('Live map capture failed → schematic fallback',err); }
