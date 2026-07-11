@@ -7,6 +7,7 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"
   integrity="sha384-c6Rcwz4e4CITMbu/NBmnNS8yN2sC3cUElMEMfP3vqqKFp7GOYaaBBCqmaWBjmkjb" crossorigin="anonymous" />
+<script>window.L_DISABLE_3D=true;/* 2D transforms → html2canvas captures tiles & pins correctly */</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"
   integrity="sha384-NElt3Op+9NBMCYaef5HxeJmU4Xeard/Lku8ek6hoPTvYkQPh3zLIrJP7KiRocsxO" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" defer
@@ -228,12 +229,10 @@
   .pop-time{font:600 11.5px "Inter";color:var(--teal);margin-bottom:5px}
   .pop-note{color:var(--muted);font-size:12px;max-width:230px}
   .pop-link{display:inline-block;margin-top:7px;font:600 11.5px "Inter"}
-  .pin{
-    width:28px;height:28px;border-radius:50%;display:grid;place-items:center;color:#fff;
-    font:700 12.5px "Sora";border:2px solid #fff;transition:transform var(--speed);
-  }
-  .pin[data-day="1"]{background:var(--d1)} .pin[data-day="2"]{background:var(--d2)} .pin[data-day="3"]{background:var(--d3)}
-  .pin.air{background:var(--ink);border-radius:var(--r);font-size:13px}
+  /* map pins are inline SVG (circle + centred number) — pixel-identical on
+     screen and in html2canvas capture, where HTML text centring drifts */
+  .pin{width:30px;height:30px;display:block;transition:transform var(--speed)}
+  .pin svg{display:block}
   .pin.hl{transform:scale(1.28)}
 
   /* ============ SLIDES 4–6 · DAY PAGES (reference: clean list +
@@ -333,10 +332,13 @@
   /* tourism sectors */
   .sect .intro{font:450 13.5px/1.55 "Inter";color:var(--muted);max-width:1000px;margin:2px 0 18px}
   .sect .sgrid{flex:1;display:grid;grid-template-columns:repeat(5,1fr);grid-auto-rows:1fr;gap:12px;min-height:0}
-  .sect .tile{background:var(--mint);border-left:3px solid var(--teal);padding:12px 15px;display:flex;flex-direction:column;justify-content:center}
-  .sect .tile b{font:700 14px "Sora";line-height:1.2}
-  .sect .tile span{font:500 10.5px "Inter";color:var(--muted);margin-top:4px}
-  .sect .tile.hi{background:var(--teal);border-left-color:var(--teal-d);color:#fff}
+  .sect .tile{
+    position:relative;background:var(--mint) center/cover no-repeat;border-left:3px solid var(--teal);
+    padding:12px 15px;display:flex;flex-direction:column;justify-content:flex-end;color:#fff;overflow:hidden;
+  }
+  .sect .tile b{font:700 14px "Sora";line-height:1.2;text-shadow:0 1px 8px rgba(0,0,0,.55)}
+  .sect .tile span{font:500 10.5px "Inter";color:rgba(255,255,255,.9);margin-top:4px;text-shadow:0 1px 6px rgba(0,0,0,.55)}
+  .sect .tile.hi{background:var(--teal);border-left-color:var(--teal-d);justify-content:center}
   .sect .tile.hi span{color:#c9ece4}
 
   /* hub slides */
@@ -897,7 +899,7 @@ const PACKAGES = [
       {name:"Naga Heirloom, Sovima", time:"12:30 PM", icon:"i-fork", note:"Heritage lunch with cane-craft demonstration.", lat:25.8580, lng:93.7690},
       {name:"Diezephe Craft Village", time:"2:00 PM", icon:"i-weave", note:"Weaving, wood carving & artisan interaction.", lat:25.837434, lng:93.702913, img:"assets/diezephe-hut.jpg", rep:1},
       {name:"Chumu View Point", time:"4:30 PM", icon:"i-camera", note:"Sunset skyline walk & photography over the hills.", lat:25.8150, lng:93.7720, img:"assets/chumu-sunset.jpg", rep:1} ],
-    [ {name:"Sechü Zubza Historical Site", time:"9:00 AM", icon:"i-landmark", note:"Foothill historical site on NH-29 towards Kohima.", lat:25.7150, lng:94.0365},
+    [ {name:"Sechü Zubza Historical Site", time:"9:00 AM", icon:"i-landmark", note:"Sechü mountain-top historical site above Zubza, off NH-29 towards Kohima.", lat:25.7150, lng:94.0365},
       {name:"Naharbari Temple", time:"12:00 PM", icon:"i-landmark", note:"Spiritual-circuit stop with quiet gardens.", lat:25.9125, lng:93.7360},
       {name:"Unity Mall, Chümoukedima", time:"3:00 PM", icon:"i-bag", note:"ODOP shopping; hotel dinner (7 PM), then departure.", lat:25.8660, lng:93.7760} ]
   ]},
@@ -980,17 +982,26 @@ function packagePanel(p){
     '<div class="ovl legend"><span><i style="background:'+color+'"></i>'+DAYS[p].name+'</span>'+
       '<span><i class="sq" style="background:var(--ink)"></i>Dimapur Airport</span></div>';
 }
+/* SVG pin builders — circle/rounded-square with perfectly centred glyph */
+const pinHtml=(n,color)=>'<div class="pin" data-n="'+n+'">'+
+  '<svg width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">'+
+  '<circle cx="15" cy="15" r="12.5" fill="'+color+'" stroke="#fff" stroke-width="2.4"/>'+
+  '<text x="15" y="15" text-anchor="middle" dominant-baseline="central" font-family="Sora,Segoe UI,Arial,sans-serif" font-size="12" font-weight="700" fill="#fff">'+n+'</text></svg></div>';
+const airHtml='<div class="pin" title="Dimapur Airport">'+
+  '<svg width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">'+
+  '<rect x="2" y="2" width="26" height="26" rx="6" fill="#12211d" stroke="#fff" stroke-width="2"/>'+
+  '<text x="15" y="15" text-anchor="middle" dominant-baseline="central" font-size="13" fill="#fff">✈</text></svg></div>';
 function buildPackageMap(p){
   const color=DAY_HEX[p], list=STOPS.filter(s=>s.day===p);
   const m=L.map('map'+p,{scrollWheelZoom:false,zoomControl:true,fadeAnimation:false});
   m.zoomControl.setPosition('bottomright');
   m._tiles=L.tileLayer(TILE,{maxZoom:20,crossOrigin:true,subdomains:'abcd',attribution:'© OpenStreetMap © CARTO'}).addTo(m);
-  L.marker([AIRPORT.lat,AIRPORT.lng],{icon:L.divIcon({className:'',html:'<div class="pin air" title="Dimapur Airport">✈</div>',iconSize:[30,30],iconAnchor:[15,15]})}).addTo(m)
+  L.marker([AIRPORT.lat,AIRPORT.lng],{icon:L.divIcon({className:'',html:airHtml,iconSize:[30,30],iconAnchor:[15,15]})}).addTo(m)
     .bindPopup('<div class="pop-t">'+AIRPORT.name+'</div><div class="pop-note">Arrival gateway — pickup 3:30 PM.</div>');
   L.polyline([[AIRPORT.lat,AIRPORT.lng],...list.map(s=>[s.lat,s.lng])],{renderer:L.canvas({padding:.6}),color,weight:3.5,opacity:.85,dashArray:'2,9',lineCap:'round'}).addTo(m);
   const mk={};
   list.forEach(s=>{
-    mk[s.n]=L.marker([s.lat,s.lng],{icon:L.divIcon({className:'',html:'<div class="pin" data-n="'+s.n+'" data-day="'+p+'">'+s.n+'</div>',iconSize:[30,30],iconAnchor:[15,15]})}).addTo(m)
+    mk[s.n]=L.marker([s.lat,s.lng],{icon:L.divIcon({className:'',html:pinHtml(s.n,color),iconSize:[30,30],iconAnchor:[15,15]})}).addTo(m)
       .bindPopup('<span class="pop-n" style="background:'+color+'">Stop '+s.n+' · '+DAYS[p].key+'</span>'+
         '<div class="pop-t">'+s.name+'</div><div class="pop-time">'+s.time+'</div><div class="pop-note">'+s.note+'</div>'+
         '<a class="pop-link" target="_blank" rel="noopener" href="'+gimg(s)+'">Photos on Google →</a>'+
@@ -1098,10 +1109,21 @@ const CN={
     ["One integrated circuit","Integrate today’s fragmented sites with world-class amenities — promenades, skywalks, amenity centres and link roads."],
     ["Kachari legacy · modern wellness","Celebrate the Kachari legacy while creating modern wellness and leisure options for every visitor."]
   ],
-  sectors:[
-    ["Heritage","Kachari ruins precinct"],["Cultural","Performances & attire"],["Shopping & Lifestyle","Hong Kong Market"],["Culinary","Naga cuisine & food streets"],["Handloom & Handicraft","Diezephe · Urban Haat"],
-    ["Nature & Eco","Triple Falls · trails"],["Wildlife","Rangapahar Zoological Park"],["Adventure","2W/4W trails · zip line"],["Recreation & Family","Water park · learning zones"],["Rural & Agri","Ruzaphema pineapple farms"],
-    ["Hospitality & Wellness","Chumou Hill retreat"],["Community-based","Homestays · SHGs · VDBs"],["Festival & Event","Annual craft & farm festivals"],["MICE","Conferences · amphitheatres"]
+  sectors:[   /* [name, sub, real bg photo from assets/] */
+    ["Heritage","Kachari ruins precinct","assets/Kachari ruins.jpg"],
+    ["Cultural","Performances & attire","assets/morung-cover.jpg"],
+    ["Shopping & Lifestyle","Hong Kong Market","assets/Super market1.jpg"],
+    ["Culinary","Naga cuisine & food streets","assets/Urban haat.jpg"],
+    ["Handloom & Handicraft","Diezephe · Urban Haat","assets/diezephe-hut.jpg"],
+    ["Nature & Eco","Triple Falls · trails","assets/triple-falls.jpg"],
+    ["Wildlife","Rangapahar Zoological Park","assets/zoo-hornbill.jpg"],
+    ["Adventure","2W/4W trails · zip line","assets/chumu-sunset.jpg"],
+    ["Recreation & Family","Water park · learning zones","assets/Padumpukhuri.jpg"],
+    ["Rural & Agri","Ruzaphema pineapple farms","assets/pineapple-farm.jpg"],
+    ["Hospitality & Wellness","Chumou Hill retreat","assets/Raj pukhuri.jpg"],
+    ["Community-based","Homestays · SHGs · VDBs","assets/Urban haat1.jpg"],
+    ["Festival & Event","Annual craft & farm festivals","assets/morung-cover.jpg"],
+    ["MICE","Conferences · amphitheatres","assets/Super market2.jpg"]
   ],
   adv:[
     ["i","Reduces stress on Kohima","balances the load","Diverts and retains visitor traffic at the gateway, easing pressure on Kohima and spreading the tourism load across destinations.","Strategic"],
@@ -1153,7 +1175,7 @@ const CN={
   document.getElementById('visGrid').innerHTML=CN.objectives.map((o,i)=>
     '<div class="oc"><i>'+String(i+1).padStart(2,'0')+'</i><b>'+o[0]+'</b><p>'+o[1]+'</p></div>').join('');
   document.getElementById('sectGrid').innerHTML=
-    CN.sectors.map(s=>'<div class="tile"><b>'+s[0]+'</b><span>'+s[1]+'</span></div>').join('')+
+    CN.sectors.map(s=>'<div class="tile" style="background-image:linear-gradient(rgba(10,22,18,.38),rgba(8,18,15,.78)),url(\''+s[2]+'\')"><b>'+s[0]+'</b><span>'+s[1]+'</span></div>').join('')+
     '<div class="tile hi"><b>Year-round</b><span>One circuit, every season & motivation</span></div>';
   const nrow=n=>'<div class="nrow"><span class="b">'+n[0]+'</span><div class="tx">'+
     '<div class="top"><span class="nm">'+n[1]+' <small>· '+n[2]+'</small></span><span class="tm">'+n[4]+'</span></div>'+
@@ -1286,23 +1308,51 @@ function schematicMap(){
 /* ================= MAP CAPTURE (per package, shared by PPT + PDF) ========= */
 const wait=ms=>new Promise(r=>setTimeout(r,ms));
 const pkgMapImg={};   // cached {img,ratio} per package, reused by PPT
-/* snapshot one package's map div (the slide must be active so it has size) */
+/* snapshot one package's map (the slide must be active so it has size).
+   The stage is pinned to an exact 1280×720 box for the capture, so the
+   snapshot maps 1:1 onto the printed page — no crop, no reframing.      */
 async function snapshotMapImage(p){
-  const m=maps[p], divId='map'+p;
+  const m=maps[p], stage=document.getElementById('mapStage-'+p);
+  const prevCss=stage.style.cssText;
+  stage.style.cssText='position:fixed;left:0;top:0;width:1280px;height:720px;z-index:2000;transform:none;animation:none;background:#eef3f0';
   m.closePopup(); m.invalidateSize();
-  m.fitBounds(mapBounds[p],Object.assign({animate:false},MAP_PAD));   // no anim → tiles load for the final view
-  /* wait for the Carto tiles to actually finish loading (else the snapshot is blank) */
-  await new Promise(res=>{ let done=false; const fin=()=>{if(!done){done=true;res();}};
-    m._tiles.once('load',fin); setTimeout(fin,2600); });
-  await wait(400);                         // small buffer after tiles settle
-  let img=null, ratio=1.5;
+  m.fitBounds(mapBounds[p],Object.assign({animate:false},MAP_PAD));
+  /* wait until every Carto tile for this exact view has loaded (grey-grid guard) */
+  const t0=Date.now(); await wait(250);
+  while(m._tiles.isLoading() && Date.now()-t0<8000) await wait(200);
+  await wait(600);                         // decode & paint buffer
+  /* freeze pin positions NOW — html2canvas clones the DOM at call time, and
+     the live view can drift while it renders; stashed points always match   */
+  const K=2, color=DAY_HEX[p];
+  const apPt=m.latLngToContainerPoint([AIRPORT.lat,AIRPORT.lng]);
+  const stopPts=STOPS.filter(s=>s.day===p).map(s=>({n:s.n,pt:m.latLngToContainerPoint([s.lat,s.lng])}));
+  let img=null, ratio=1280/720;
   try{
-    const canvas=await html2canvas(document.getElementById(divId),
-      {useCORS:true,allowTaint:false,scale:1.6,logging:false,backgroundColor:'#eef3f0',
-       ignoreElements:el=>el.classList&&(el.classList.contains('leaflet-control-zoom')||el.classList.contains('leaflet-control-attribution')||el.classList.contains('ovl')||el.classList.contains('printmap'))});
+    /* capture tiles + route only — markers are hand-drawn below, because
+       html2canvas cannot reliably render Leaflet marker icons */
+    const canvas=await html2canvas(document.getElementById('map'+p),
+      {useCORS:true,allowTaint:false,scale:2,width:1280,height:720,logging:false,backgroundColor:'#eef3f0',
+       ignoreElements:el=>el.classList&&(el.classList.contains('leaflet-marker-pane')||el.classList.contains('leaflet-shadow-pane')||el.classList.contains('leaflet-control-zoom')||el.classList.contains('leaflet-control-attribution')||el.classList.contains('ovl')||el.classList.contains('printmap'))});
+    const g=canvas.getContext('2d');
+    g.setTransform(1,0,0,1,0,0);   // html2canvas leaves its 2× scale on the context — reset it
+    if(!g.roundRect) g.roundRect=function(x,y,w,h){this.rect(x,y,w,h);};
+    /* airport: dark rounded square + plane */
+    g.beginPath(); g.roundRect((apPt.x-13)*K,(apPt.y-13)*K,26*K,26*K,6*K);
+    g.fillStyle='#12211d'; g.fill(); g.lineWidth=2*K; g.strokeStyle='#fff'; g.stroke();
+    g.fillStyle='#fff'; g.font='700 '+(13*K)+'px "Segoe UI Symbol","Segoe UI",Arial';
+    g.textAlign='center'; g.textBaseline='middle'; g.fillText('✈',apPt.x*K,(apPt.y+.5)*K);
+    /* numbered stop pins */
+    stopPts.forEach(sp=>{
+      g.beginPath(); g.arc(sp.pt.x*K,sp.pt.y*K,12.5*K,0,7);
+      g.fillStyle=color; g.fill(); g.lineWidth=2.4*K; g.strokeStyle='#fff'; g.stroke();
+      g.fillStyle='#fff'; g.font='700 '+(12*K)+'px Sora,"Segoe UI",Arial';
+      g.textAlign='center'; g.textBaseline='middle'; g.fillText(String(sp.n),sp.pt.x*K,(sp.pt.y+.5)*K);
+    });
     img=canvas.toDataURL('image/jpeg',.92); ratio=canvas.width/canvas.height;
   }catch(err){ console.warn('Live map capture failed → schematic fallback',err); }
   if(!img){ const c=schematicMap(); img=c.toDataURL('image/png'); ratio=c.width/c.height; }
+  stage.style.cssText=prevCss;
+  m.invalidateSize(); m.fitBounds(mapBounds[p],Object.assign({animate:false},MAP_PAD));
   return {img,ratio};
 }
 /* capture all three package maps → their printmap <img> (and cache for PPT).
@@ -1562,15 +1612,21 @@ async function exportPPT(){
       band(s,'Tourism ','Potential',C.teal,'14 sectors · one destination · year-round demand');
       s.addText('The circuit is deliberately multi-sectoral — a single destination serving many visitor motivations sustains year-round demand and smooths seasonality.',
         {x:.5,y:1.42,w:12.3,h:.4,fontFace:F,fontSize:10.5,color:C.muted});
-      const tiles=CN.sectors.concat([['Year-round','One circuit, every season & motivation']]);
-      tiles.forEach((t,i)=>{
-        const c=i%5, r=Math.floor(i/5);
+      const tiles=CN.sectors.concat([['Year-round','One circuit, every season & motivation',null]]);
+      for(let i=0;i<tiles.length;i++){
+        const t=tiles[i], c=i%5, r=Math.floor(i/5);
         const x=.5+c*2.51, y=2.0+r*1.62, w=2.37, h=1.48, hi=i===14;
-        s.addShape(pptx.ShapeType.rect,{x,y,w,h,fill:{color:hi?C.teal:C.mint}});
+        if(hi){
+          s.addShape(pptx.ShapeType.rect,{x,y,w,h,fill:{color:C.teal}});
+        }else{
+          const d0=await imgToData(t[2],700);      // real photo behind each sector
+          if(d0) s.addImage({data:d0.data,x,y,w,h,sizing:{type:'cover',w,h}});
+          s.addShape(pptx.ShapeType.rect,{x,y,w,h,fill:{color:'0A1612',transparency:52}});
+        }
         s.addShape(pptx.ShapeType.rect,{x,y,w:.05,h,fill:{color:hi?C.teald:C.teal}});
-        s.addText(t[0],{x:x+.16,y:y+.18,w:w-.3,h:.62,fontFace:F,fontSize:11.5,bold:true,color:hi?'FFFFFF':C.ink,valign:'top'});
-        s.addText(t[1],{x:x+.16,y:y+.78,w:w-.3,h:.6,fontFace:F,fontSize:8,color:hi?'C9ECE4':C.muted,valign:'top'});
-      });
+        s.addText(t[0],{x:x+.16,y:y+.52,w:w-.3,h:.5,fontFace:F,fontSize:11.5,bold:true,color:'FFFFFF',valign:'bottom'});
+        s.addText(t[1],{x:x+.16,y:y+1.04,w:w-.3,h:.38,fontFace:F,fontSize:8,color:hi?'C9ECE4':'E7F5F1',valign:'top'});
+      }
       foot(s,6);
     }
 
