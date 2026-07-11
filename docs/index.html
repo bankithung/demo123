@@ -180,6 +180,10 @@
   #s-map .stage{width:100%;height:100%;transform:none;animation:none}
   #s-map .map-el{position:absolute;inset:0;z-index:1;background:#eef3f0}
   #printMapImg{display:none}
+  .mapprint{display:none}   /* per-package PDF map pages — print only */
+  .mapprint .printmap{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1}
+  .mapprint .ovl-head{max-width:560px}   /* room for full package names */
+  .mapprint .ovl-head h2{white-space:nowrap}
   .ovl{position:absolute;z-index:900;background:var(--paper);border:1px solid var(--line)}
   .ovl-head{left:26px;top:22px;padding:16px 18px;max-width:360px}
   .ovl-head .dash{display:block;width:38px;height:6px;border-radius:3px;background:var(--teal);margin-bottom:10px}
@@ -483,6 +487,10 @@
     /* map page: swap live map for the captured snapshot */
     #s-map .map-el{display:none!important}
     #printMapImg{display:block!important;position:absolute;inset:0;z-index:1;width:100%;height:100%;object-fit:cover}
+    /* PDF: three per-package map pages replace the single interactive map */
+    body.pdf3 #s-map{display:none!important}
+    body.pdf3 .mapprint{display:block;position:relative;width:1280px;height:720px;overflow:hidden;break-after:page;page-break-after:always}
+    body.pdf3 .mapprint .stage{width:1280px;height:720px;transform:none}
     .seg{display:none!important}
     /* no scrollbars on paper — compact the stop index so all rows fit the page */
     .ix .list{overflow:hidden!important;scrollbar-width:none;padding:6px}
@@ -546,7 +554,6 @@
           <div><b>₹250 Cr</b><span>DoNER Share</span></div>
           <div><b>3 packages</b><span>Each 3D / 2N</span></div>
         </div>
-        <p class="sub" style="font:600 12px 'Inter';margin-top:14px;color:rgba(255,255,255,.72)">Presented by: [Your Name] · [Date]</p>
       </div>
       <div class="cred">Naga morung · Wikimedia Commons</div>
     </div>
@@ -866,38 +873,6 @@
     </div>
   </section>
 
-  <!-- 14 · GOOD TO KNOW -->
-  <section class="slide" id="s-end" data-title="Inclusions & pricing">
-    <div class="stage end">
-      <header class="hd">
-        <span class="dash"></span>
-        <h2>Inclusions &amp; <em>Pricing</em></h2>
-        <span class="rule"></span>
-        <span class="meta">Fill pricing from your operator quote</span>
-      </header>
-      <div class="body">
-        <div class="cards">
-          <div class="card"><div class="ic"><svg class="ic"><use href="#i-bed"/></svg></div><h4>Stay</h4><p>2 nights at Zone Niathu Resort, Chümoukedima — one base for the whole circuit.</p></div>
-          <div class="card"><div class="ic"><svg class="ic"><use href="#i-fork"/></svg></div><h4>Naga Cuisine</h4><p>Food-court dinner at Urban Haat, Naga Heirloom lunch, resort &amp; local meals.</p></div>
-          <div class="card"><div class="ic"><svg class="ic"><use href="#i-weave"/></svg></div><h4>Craft &amp; Culture</h4><p>Urban Haat cultural show, live weaving, cane-craft &amp; wood-carving demos.</p></div>
-          <div class="card"><div class="ic"><svg class="ic"><use href="#i-sunrise"/></svg></div><h4>Sunrise &amp; Farm</h4><p>Seithekema sunrise, Triple Falls breakfast, Sechü Zubza heritage halt, pineapple plucking &amp; Unity Mall shopping.</p></div>
-        </div>
-        <table>
-          <tr><th style="width:34%">Package Pricing</th><th style="width:33%">Total Spend</th><th>Per Head (Group of 4)</th></tr>
-          <tr>
-            <td>3D/2N — stay, transport, activities, guides &amp; meals</td>
-            <td><span class="fill">Add your quote</span></td>
-            <td><span class="fill">Add your quote</span></td>
-          </tr>
-        </table>
-        <p class="note">The source itinerary did not include costs — pricing is left blank to fill from your operator quote.</p>
-        <div class="foot">
-          <span>Built from the “Tourist Circuit” brief · Nagaland Tourism · Dimapur–Chümoukedima</span>
-          <span>Map © Carto / Esri / OpenStreetMap · Photos: on-location &amp; Wikimedia Commons</span>
-        </div>
-      </div>
-    </div>
-  </section>
 </main>
 
 <nav class="dots" id="dots" aria-label="Slides"></nav>
@@ -1031,10 +1006,12 @@ function fitAll(list){
   const pts=list.map(s=>[s.lat,s.lng]).concat([[AIRPORT.lat,AIRPORT.lng]]);
   map.fitBounds(L.latLngBounds(pts).pad(0.12));
 }
+/* keep pins clear of the header (top-left), index panel (right) & legend (bottom-left) */
+const MAP_PAD={paddingTopLeft:[240,120],paddingBottomRight:[360,70]};
 function fitCurrent(){
   const shown=STOPS.filter(s=>activeDay==='all'||s.day==Number(activeDay));
   if(activeDay==='all') fitAll(shown);
-  else map.fitBounds(L.latLngBounds(shown.map(s=>[s.lat,s.lng])).pad(0.2));
+  else map.fitBounds(L.latLngBounds(shown.map(s=>[s.lat,s.lng]).concat([[AIRPORT.lat,AIRPORT.lng]])),MAP_PAD);
 }
 drawRoute('all'); fitAll(STOPS);
 map.on('click',()=>map.scrollWheelZoom.enable());
@@ -1373,9 +1350,9 @@ function schematicMap(){
 
 /* ================= MAP CAPTURE (shared by PPT + PDF) ================= */
 const wait=ms=>new Promise(r=>setTimeout(r,ms));
-async function captureMap(){
-  const prevDay=activeDay;
-  applyFilter('all'); map.closePopup(); map.invalidateSize(); fitAll(STOPS);
+/* snapshot the map exactly as it is right now (current filter + framing) */
+async function snapshotMapImage(){
+  map.closePopup(); map.invalidateSize();
   await wait(1200);                        // let tiles settle
   let img=null, ratio=1.5;
   try{
@@ -1385,8 +1362,62 @@ async function captureMap(){
     img=canvas.toDataURL('image/jpeg',.92); ratio=canvas.width/canvas.height;
   }catch(err){ console.warn('Live map capture failed → schematic fallback',err); }
   if(!img){ const c=schematicMap(); img=c.toDataURL('image/png'); ratio=c.width/c.height; }
-  applyFilter(prevDay);
   return {img,ratio};
+}
+async function captureMap(){               // 'all' view — used by the PPT export
+  const prevDay=activeDay;
+  applyFilter('all'); fitAll(STOPS);
+  const r=await snapshotMapImage();
+  applyFilter(prevDay);
+  return r;
+}
+
+/* PDF: build one map page per package (each filtered to its own route + stops) */
+let printMapPages=[];
+function removePrintMapPages(){ printMapPages.forEach(s=>s.remove()); printMapPages=[]; document.body.classList.remove('pdf3'); }
+function printMapPageHTML(p,img){
+  const color=DAY_HEX[p], list=STOPS.filter(s=>s.day===p);
+  let rows='';
+  [1,2,3].forEach(wd=>{
+    const ds=list.filter(s=>s.wd===wd); if(!ds.length) return;
+    rows+='<div class="dh" style="color:'+color+'">Day '+wd+'</div>';
+    ds.forEach(s=>{ rows+='<button class="ix-row"><span class="num" style="background:'+color+'">'+s.n+
+      '</span><span><span class="nm">'+s.name+'</span><br><span class="tm">'+s.time+'</span></span></button>'; });
+  });
+  return '<div class="stage">'+
+    '<img class="printmap" src="'+img+'" alt="Package '+p+' route">'+
+    '<div class="ovl ovl-head"><span class="dash" style="background:'+color+'"></span>'+
+      '<h2>'+DAYS[p].key+' · <em style="color:'+color+'">'+DAYS[p].name+'</em></h2>'+
+      '<div class="cnt">'+list.length+' stops · ~'+dayKm(p)+' km driving · 3 days / 2 nights</div></div>'+
+    '<div class="ovl ix"><h3 style="background:'+color+'">'+DAYS[p].key+' itinerary</h3>'+
+      '<div class="list">'+rows+'</div></div>'+
+    '<div class="ovl legend"><span><i style="background:'+color+'"></i>'+DAYS[p].name+'</span>'+
+      '<span><i class="sq" style="background:var(--ink)"></i>Dimapur Airport</span></div></div>';
+}
+async function buildPrintMapPages(){
+  removePrintMapPages();
+  const host=document.getElementById('s-map');
+  const wasActive=document.querySelector('.slide.active');
+  const prev=activeDay;
+  slides.forEach(s=>s.classList.remove('active'));
+  host.classList.add('active');            // make the map renderable for capture
+  map.invalidateSize();
+  let ref=host;
+  for(let p=1;p<=3;p++){
+    applyFilter(String(p));
+    map.fitBounds(L.latLngBounds(STOPS.filter(s=>s.day===p).map(s=>[s.lat,s.lng]).concat([[AIRPORT.lat,AIRPORT.lng]])),MAP_PAD);
+    await wait(500);
+    const {img}=await snapshotMapImage();
+    const sec=document.createElement('section');
+    sec.className='mapprint';
+    sec.innerHTML=printMapPageHTML(p,img);
+    host.parentNode.insertBefore(sec, ref.nextSibling); ref=sec;
+    printMapPages.push(sec);
+  }
+  applyFilter(prev);
+  slides.forEach(s=>s.classList.remove('active'));
+  if(wasActive) wasActive.classList.add('active');
+  document.body.classList.add('pdf3');
 }
 
 /* load an image and return {data,ratio} as a JPEG data URL for PptxGenJS */
@@ -1435,13 +1466,12 @@ async function exportPDF(){
     await compressDeckImages();
     await eagerImages();
     if(typeof html2canvas!=='undefined'){
-      const {img}=await captureMap();
-      document.getElementById('printMapImg').src=img;
+      await buildPrintMapPages();          // 3 map pages, one per package
     }
     await wait(200);
     window.print();
   }catch(err){ console.error(err); toast('PDF preparation failed: '+err.message); }
-  finally{ pdfBtn.classList.remove('busy'); }
+  finally{ pdfBtn.classList.remove('busy'); removePrintMapPages(); }
 }
 window.addEventListener('beforeprint',()=>{          // covers direct Ctrl+P too
   if(!document.getElementById('printMapImg').src){
@@ -1474,7 +1504,7 @@ async function exportPPT(){
     const F='Segoe UI';
     const C={ink:'12211D',teal:'0E6E62',teald:'0A4F47',muted:'5F7370',line:'E0E7E4',mint:'E7F2F0'};
     const DC={1:'0E6E62',2:'B45309',3:'6D28D9'};
-    const NSLIDES=17;
+    const NSLIDES=16;
     const foot=(s,n)=>{
       s.addText('Nagaland Circuit · Dimapur–Chümoukedima · 3D/2N',
         {x:.5,y:7.12,w:9,h:.28,fontFace:F,fontSize:8.5,color:C.muted});
@@ -1852,43 +1882,8 @@ async function exportPPT(){
       foot(s,16);
     }
 
-    /* --- Slide 17 · Inclusions & pricing --- */
-    {
-      const s=pptx.addSlide();
-      band(s,'Inclusions ','& Pricing',C.teal,'What the circuit covers · pricing placeholders for your operator quote');
-      const inc=[
-        ['Stay','2 nights at Zone Niathu Resort, Chümoukedima — one base for the whole circuit.','0E6E62'],
-        ['Naga Cuisine','Food-court dinner at Urban Haat, Naga Heirloom lunch, resort & local meals.','12796B'],
-        ['Craft & Culture','Urban Haat cultural show, live weaving, cane-craft & wood-carving demos.','0A5A50'],
-        ['Sunrise & Farm','Seithekema sunrise, Triple Falls breakfast, Sechü Zubza heritage halt, pineapple plucking & Unity Mall shopping.','0E4F47']];
-      inc.forEach((it,i)=>{
-        const x=.5+i*3.24;
-        s.addShape(pptx.ShapeType.rect,{x,y:1.55,w:3.06,h:2.0,fill:{color:it[2]}});
-        s.addText(it[0],{x:x+.2,y:1.72,w:2.7,h:.42,fontFace:F,fontSize:14.5,bold:true,color:'FFFFFF'});
-        s.addText(it[1],{x:x+.2,y:2.16,w:2.7,h:1.3,fontFace:F,fontSize:9.5,color:'E7F5F1'});
-      });
-      /* pricing table (teal header, reference style) */
-      const ty=4.0, cw=[4.6,3.9,3.93];
-      const hx=[.5,.5+cw[0],.5+cw[0]+cw[1]];
-      ['Package Pricing','Total Spend','Per Head (Group of 4)'].forEach((h,i)=>{
-        s.addShape(pptx.ShapeType.rect,{x:hx[i],y:ty,w:cw[i],h:.52,fill:{color:C.teal},line:{color:'FFFFFF',width:1}});
-        s.addText(h,{x:hx[i]+.15,y:ty,w:cw[i]-.2,h:.52,fontFace:F,fontSize:11.5,bold:true,color:'FFFFFF',valign:'middle'});
-      });
-      const cells=['3D/2N — stay, transport, activities, guides & meals','Add your quote','Add your quote'];
-      cells.forEach((cell,i)=>{
-        s.addShape(pptx.ShapeType.rect,{x:hx[i],y:ty+.52,w:cw[i],h:.75,fill:{color:'FAFCFB'},line:{color:C.line,width:1}});
-        s.addText(cell,{x:hx[i]+.15,y:ty+.52,w:cw[i]-.25,h:.75,fontFace:F,fontSize:i?12:10,bold:!!i,
-          color:i?C.teal:C.ink,valign:'middle',underline:i?{style:'dash',color:C.teal}:false});
-      });
-      s.addText('The source itinerary did not include costs — fill these from your operator quote.',
-        {x:.5,y:5.45,w:11.8,h:.35,fontFace:F,fontSize:9.5,italic:true,color:C.muted});
-      s.addText('Built from the “Tourist Circuit” brief · Nagaland Tourism · Map © Carto / Esri / OpenStreetMap · Photos: on-location & Wikimedia Commons',
-        {x:.5,y:6.5,w:12.3,h:.35,fontFace:F,fontSize:8.5,color:C.muted});
-      foot(s,17);
-    }
-
     await pptx.writeFile({fileName:'Dimapur-Chumoukedima-Tourist-Circuit-625Cr.pptx'});
-    toast('PowerPoint exported — 17 slides, map & photos included ✓');
+    toast('PowerPoint exported — 16 slides, map & photos included ✓');
   }catch(err){
     console.error(err);
     toast('Export failed: '+(err&&err.message?err.message:'unknown error'));
